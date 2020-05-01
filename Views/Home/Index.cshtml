@@ -1,0 +1,120 @@
+﻿<div class="jumbotron text-center">
+<h1>Dungeons and Dragons Random Character Generator</h1>
+<a class= "btn btn-danger" href="/">Generate Chracter</a>
+</div>
+
+@model Character
+
+
+@* Pull API from fantasy name generator for names *@
+<div class="cotnainer" style="background: beige; border: 2px solid black; border-radius:5px;  margin: 5px; padding: 20 px;">
+
+<div class="row">
+    <h4 class="col-sm-5 text-center" style = "margin-bottom: 5px;">Character Name the @Model.PlayerRace</h4>
+    <h4 class="col-sm-4 text-center" style = "margin-bottom: 5px;">@Model.PlayerClass and @Model.PlayerBG</h4>
+</div>
+<div class="row ">
+    <div class= "col-sm text-center" style="margin: 10px;">
+        <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px;  margin: 2px; background: white;">
+            <p>Strength</p>
+            <p>@Model.Strength</p>
+        </div>
+        <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
+            <p>Dexterity</p>
+            <p>@Model.Dexterity</p>
+        </div>
+        <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
+            <p>Constitution</p>
+            <p>@Model.Constitution</p>
+        </div>
+        <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
+            <p>Intelligence</p>
+            <p>@Model.Intelligence</p>
+        </div>
+        <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
+            <p>Wisdom</p>
+            <p>@Model.Wisdom</p>
+        </div>
+        <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
+            <p>Charisma</p>
+            <p>@Model.Charisma</p>
+        </div>
+    </div>
+    <div class = "col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 10px; text-align: left;  ">
+        <ul style ="list-style-type:none; text-align: left;">
+            <li>Acrobatics - @Model.Acrobatics</li>
+            <li>Animal Handling - @Model.AnimalHandling</li>
+            <li>Arcana - @Model.Arcana</li>
+            <li>Athletics - @Model.Athletics</li>
+            <li>Deception - @Model.Deception</li>
+            <li>History - @Model.History</li>
+            <li>Insight - @Model.Insight</li>
+            <li>Intimidation - @Model.Intimidation</li>
+            <li>Investigation - @Model.Investigation</li>
+            <li>Medicine - @Model.Medicine</li>
+            <li>Nature - @Model.Nature</li>
+            <li>Perception - @Model.Perception</li>
+            <li>Performance - @Model.Performance</li>
+            <li>Persuasion - @Model.Persuasion</li>
+            <li>Religion - @Model.Religion</li>
+            <li>Sleight of Hand - @Model.SleightofHand</li>
+            <li>Stealth - @Model.Stealth</li>
+            <li>Survival - @Model.Survival</li>
+
+        </ul>
+    </div>
+    <div class="col-sm" style="margin: 10px;">
+        <div class="row" >
+            <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <p>Level</p>
+                <p>@Model.Level</p>
+            </div>
+            <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <p>Hit Points</p>
+                <p>@Model.HitPoints</p>
+            </div>
+         </div>
+         <div class="row" >
+            <div class="col-5 text-center" style ="border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <span><br></span>
+            </div>
+            <div class="col-5 text-center" style ="border-radius:5px; background: white; margin:2px; text-align: left;">
+                <span><br></span>
+            </div>
+         </div>
+         <div class="row" >
+            <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <p>Strength Mod</p>
+                <p>@Model.StrMod</p>
+            </div>
+            <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <p>Dexterity Mod</p>
+                <p>@Model.DexMod</p>
+            </div>
+         </div>
+         <div class="row" >
+            <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <p>Constitution Mod</p>
+                <p>@Model.ConMod</p>
+            </div>
+            <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <p>Intelligence Mod</p>
+                <p>@Model.IntMod</p>
+            </div>
+         </div>
+         <div class="row" >
+            <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <p>Wisdom Mod</p>
+                <p>@Model.WisMod</p>
+            </div>
+            <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <p>Charisma Mod</p>
+                <p>@Model.ChaMod</p>
+            </div>
+         </div>
+    </div>
+    
+</div>
+</div>
+
+

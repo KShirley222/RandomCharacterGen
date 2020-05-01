@@ -1,0 +1,479 @@
+{
+  "ctjsVersion": "1.2.1",
+  "notes": "/* empty */",
+  "libs": {
+    "place": {
+      "gridX": 512,
+      "gridY": 512
+    },
+    "fittoscreen": {
+      "mode": "scaleFit"
+    },
+    "mouse": {},
+    "keyboard": {},
+    "keyboard.polyfill": {},
+    "sound.howler": {},
+    "akatemplate": {
+      "csscss": "body {\n    background: #000;\n}"
+    }
+  },
+  "textures": [
+    {
+      "name": "PlayerShip",
+      "untill": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "axis": [
+        49,
+        37
+      ],
+      "marginx": 0,
+      "marginy": 0,
+      "imgWidth": 99,
+      "imgHeight": 75,
+      "width": 99,
+      "height": 75,
+      "offx": 0,
+      "offy": 0,
+      "origname": "if61669e3-9f77-4f71-ac7e-3ec5ebb988fa.png",
+      "source": "C:\\Users\\Kyle Shirley\\Downloads\\spaceshooter\\PNG\\playerShip1_red.png",
+      "shape": "strip",
+      "left": 0,
+      "right": 99,
+      "top": 0,
+      "bottom": 75,
+      "uid": "f61669e3-9f77-4f71-ac7e-3ec5ebb988fa",
+      "stripPoints": [
+        {
+          "x": 8,
+          "y": -35.75
+        },
+        {
+          "x": 12,
+          "y": -9.75
+        },
+        {
+          "x": 37,
+          "y": 3.25
+        },
+        {
+          "x": 47.75,
+          "y": -6.25
+        },
+        {
+          "x": 46,
+          "y": 22.75
+        },
+        {
+          "x": 12.5,
+          "y": 28.25
+        },
+        {
+          "x": 0.5,
+          "y": 38.75
+        },
+        {
+          "x": -11.25,
+          "y": 29.75
+        },
+        {
+          "x": -45.25,
+          "y": 24.25
+        },
+        {
+          "x": -47.25,
+          "y": -4.75
+        },
+        {
+          "x": -36.25,
+          "y": 4
+        },
+        {
+          "x": -11.33810824528296,
+          "y": -10.10429675077345
+        },
+        {
+          "x": -6.5,
+          "y": -35.75
+        }
+      ],
+      "closedStrip": true,
+      "symmetryStrip": false,
+      "lastmod": 1588174555519
+    },
+    {
+      "name": "EnemyShip",
+      "untill": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "axis": [
+        49,
+        37
+      ],
+      "marginx": 0,
+      "marginy": 0,
+      "imgWidth": 98,
+      "imgHeight": 75,
+      "width": 98,
+      "height": 75,
+      "offx": 0,
+      "offy": 0,
+      "origname": "ia401f3d3-1202-41a6-a44d-3f26177be24e.png",
+      "source": "C:\\Users\\Kyle Shirley\\Downloads\\spaceshooter\\PNG\\playerShip3_blue.png",
+      "shape": "strip",
+      "left": 0,
+      "right": 98,
+      "top": 0,
+      "bottom": 75,
+      "uid": "a401f3d3-1202-41a6-a44d-3f26177be24e",
+      "stripPoints": [
+        {
+          "x": 0,
+          "y": -38
+        },
+        {
+          "x": 16,
+          "y": -14
+        },
+        {
+          "x": 52,
+          "y": 29
+        },
+        {
+          "x": 20,
+          "y": 28
+        },
+        {
+          "x": 8,
+          "y": 39
+        },
+        {
+          "x": -13,
+          "y": 36
+        },
+        {
+          "x": -26,
+          "y": 29
+        },
+        {
+          "x": -52,
+          "y": 28
+        }
+      ],
+      "closedStrip": true,
+      "symmetryStrip": false,
+      "lastmod": 1588174716946
+    },
+    {
+      "name": "laserRed09",
+      "untill": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "axis": [
+        24,
+        23
+      ],
+      "marginx": 0,
+      "marginy": 0,
+      "imgWidth": 48,
+      "imgHeight": 46,
+      "width": 48,
+      "height": 46,
+      "offx": 0,
+      "offy": 0,
+      "origname": "ib4cc6194-fc0f-4888-b7e5-43f65f88d37a.png",
+      "source": "C:\\Users\\Kyle Shirley\\Downloads\\spaceshooter\\PNG\\Lasers\\laserRed09.png",
+      "shape": "circle",
+      "left": 0,
+      "right": 48,
+      "top": 0,
+      "bottom": 46,
+      "uid": "b4cc6194-fc0f-4888-b7e5-43f65f88d37a",
+      "r": 23,
+      "lastmod": 1588174701891
+    },
+    {
+      "name": "laserBlue12",
+      "untill": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "axis": [
+        0,
+        0
+      ],
+      "marginx": 0,
+      "marginy": 0,
+      "imgWidth": 13,
+      "imgHeight": 57,
+      "width": 13,
+      "height": 57,
+      "offx": 0,
+      "offy": 0,
+      "origname": "i2b20d7db-49d6-4ed9-9e47-63bd809c8371.png",
+      "source": "C:\\Users\\Kyle Shirley\\Downloads\\spaceshooter\\PNG\\Lasers\\laserBlue12.png",
+      "shape": "rect",
+      "left": 0,
+      "right": 13,
+      "top": 0,
+      "bottom": 57,
+      "uid": "2b20d7db-49d6-4ed9-9e47-63bd809c8371",
+      "lastmod": 1588174699959
+    },
+    {
+      "name": "meteorGrey_big3",
+      "untill": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "axis": [
+        44,
+        41
+      ],
+      "marginx": 0,
+      "marginy": 0,
+      "imgWidth": 89,
+      "imgHeight": 82,
+      "width": 89,
+      "height": 82,
+      "offx": 0,
+      "offy": 0,
+      "origname": "i37bfa3fa-daa5-4942-ad5e-370405b80167.png",
+      "source": "C:\\Users\\Kyle Shirley\\Downloads\\spaceshooter\\PNG\\Meteors\\meteorGrey_big3.png",
+      "shape": "strip",
+      "left": 0,
+      "right": 89,
+      "top": 0,
+      "bottom": 82,
+      "uid": "37bfa3fa-daa5-4942-ad5e-370405b80167",
+      "stripPoints": [
+        {
+          "x": 29.5,
+          "y": -28
+        },
+        {
+          "x": 45.5,
+          "y": 0.75
+        },
+        {
+          "x": 21,
+          "y": 40.25
+        },
+        {
+          "x": -26,
+          "y": 33
+        },
+        {
+          "x": -41.25,
+          "y": 16
+        },
+        {
+          "x": -42.75,
+          "y": -18.75
+        },
+        {
+          "x": -10,
+          "y": -40.25
+        }
+      ],
+      "closedStrip": true,
+      "lastmod": 1588174697772
+    },
+    {
+      "name": "meteorGrey_med1",
+      "untill": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "axis": [
+        0,
+        0
+      ],
+      "marginx": 0,
+      "marginy": 0,
+      "imgWidth": 43,
+      "imgHeight": 43,
+      "width": 43,
+      "height": 43,
+      "offx": 0,
+      "offy": 0,
+      "origname": "i4342ae80-c5c2-4e37-a05c-b2dff31b2885.png",
+      "source": "C:\\Users\\Kyle Shirley\\Downloads\\spaceshooter\\PNG\\Meteors\\meteorGrey_med1.png",
+      "shape": "rect",
+      "left": 0,
+      "right": 43,
+      "top": 0,
+      "bottom": 43,
+      "uid": "4342ae80-c5c2-4e37-a05c-b2dff31b2885"
+    },
+    {
+      "name": "blue",
+      "untill": 0,
+      "grid": [
+        1,
+        1
+      ],
+      "axis": [
+        0,
+        0
+      ],
+      "marginx": 0,
+      "marginy": 0,
+      "imgWidth": 256,
+      "imgHeight": 256,
+      "width": 256,
+      "height": 256,
+      "offx": 0,
+      "offy": 0,
+      "origname": "iec2edee0-df8e-4a76-a503-8930ab64c30e.png",
+      "source": "C:\\Users\\Kyle Shirley\\Downloads\\spaceshooter\\Backgrounds\\blue.png",
+      "shape": "rect",
+      "left": 0,
+      "right": 256,
+      "top": 0,
+      "bottom": 256,
+      "uid": "ec2edee0-df8e-4a76-a503-8930ab64c30e"
+    }
+  ],
+  "skeletons": [],
+  "types": [
+    {
+      "name": "PlayerShip",
+      "depth": 0,
+      "oncreate": "",
+      "onstep": "this.move();",
+      "ondraw": "",
+      "ondestroy": "",
+      "uid": "32f073b8-4683-44c6-a659-058b6c86f74a",
+      "texture": "f61669e3-9f77-4f71-ac7e-3ec5ebb988fa",
+      "extends": {},
+      "lastmod": 1588174776225
+    },
+    {
+      "name": "EnemyShip",
+      "depth": 0,
+      "oncreate": "",
+      "onstep": "this.move();",
+      "ondraw": "",
+      "ondestroy": "",
+      "uid": "c345e722-280a-4dc4-882e-d3e19be05a53",
+      "texture": "a401f3d3-1202-41a6-a44d-3f26177be24e",
+      "extends": {},
+      "lastmod": 1588174784802
+    },
+    {
+      "name": "Astroid_Big",
+      "depth": 0,
+      "oncreate": "",
+      "onstep": "this.move();",
+      "ondraw": "",
+      "ondestroy": "",
+      "uid": "693aafe8-a2d6-4b3a-a679-ad8f8eb357e2",
+      "texture": "37bfa3fa-daa5-4942-ad5e-370405b80167",
+      "extends": {},
+      "lastmod": 1588174840518
+    },
+    {
+      "name": "Asteroid_Medium",
+      "depth": 0,
+      "oncreate": "",
+      "onstep": "this.move();",
+      "ondraw": "",
+      "ondestroy": "",
+      "uid": "c1aa5d22-a59e-4172-a6ec-c65b40c452eb",
+      "texture": "4342ae80-c5c2-4e37-a05c-b2dff31b2885",
+      "extends": {},
+      "lastmod": 1588174852959
+    },
+    {
+      "name": "Laser_Red",
+      "depth": 0,
+      "oncreate": "",
+      "onstep": "this.move();",
+      "ondraw": "",
+      "ondestroy": "",
+      "uid": "9b39ed4f-0d45-4756-b61d-8122e23d0762",
+      "texture": "b4cc6194-fc0f-4888-b7e5-43f65f88d37a",
+      "extends": {},
+      "lastmod": 1588174865462
+    },
+    {
+      "name": "Laser_Blue",
+      "depth": 0,
+      "oncreate": "",
+      "onstep": "this.move();",
+      "ondraw": "",
+      "ondestroy": "",
+      "uid": "77f5648a-397d-4bd9-946c-c45f205ba4a1",
+      "texture": "2b20d7db-49d6-4ed9-9e47-63bd809c8371",
+      "extends": {},
+      "lastmod": 1588174887242
+    }
+  ],
+  "sounds": [],
+  "styles": [],
+  "rooms": [
+    {
+      "name": "Main",
+      "oncreate": "",
+      "onstep": "",
+      "ondraw": "",
+      "onleave": "",
+      "width": 800,
+      "height": 600,
+      "backgrounds": [],
+      "copies": [
+        {
+          "x": 384,
+          "y": 512,
+          "uid": "32f073b8-4683-44c6-a659-058b6c86f74a"
+        }
+      ],
+      "tiles": [
+        {
+          "depth": -10,
+          "tiles": []
+        }
+      ],
+      "uid": "3bdafe37-9951-4000-b2ee-7c2394765319",
+      "thumbnail": "7c2394765319",
+      "gridX": 64,
+      "gridY": 64,
+      "lastmod": 1588174972713
+    }
+  ],
+  "actions": [],
+  "starting": 0,
+  "settings": {
+    "minifyhtmlcss": false,
+    "minifyjs": false,
+    "fps": 30,
+    "version": [
+      0,
+      1,
+      0
+    ],
+    "versionPostfix": "",
+    "export": {
+      "windows64": true,
+      "windows32": true,
+      "linux64": true,
+      "linux32": true,
+      "mac64": true,
+      "debug": false
+    },
+    "title": "Plane Game",
+    "author": "Kyle Shirley"
+  },
+  "scripts": [],
+  "fonts": []
+}
