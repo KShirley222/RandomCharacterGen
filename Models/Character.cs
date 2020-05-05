@@ -210,7 +210,7 @@ namespace CharacterGenerator.Models
 
         public int ModFunction(int mod)
         {
-            int Modifer = Math.Abs((mod-10)/2);
+            int Modifer = Math.Abs((mod)/2)-5;
             return Modifer;
         }
 
