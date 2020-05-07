@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace CharacterGenerator.Models
 {
@@ -87,6 +88,11 @@ namespace CharacterGenerator.Models
                 public bool LangPrimordial {get; set;} = false;
                 public bool LangSylvan {get; set;} = false;
                 public bool LangUndercommon {get; set;} = false;
+
+        //Trying to implement Features and Spells here
+
+        public List<Feature> Features {get; set;}
+        public List <Spell> SpellList {get; set;}
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;

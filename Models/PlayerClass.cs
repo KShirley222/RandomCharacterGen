@@ -609,8 +609,8 @@ namespace CharacterGenerator.Models
             return Stats; 
         }
         
-
-        public static void BarbSubGen(PlayerClass pc)
+        //passing in Playerclass to assign the subclassname, and the PlayerStat to assign features/spells once those are implemented in PlayerClass
+        public void BarbSubGen(PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
             int subclassnum = rand.Next(0,2);
@@ -626,7 +626,7 @@ namespace CharacterGenerator.Models
                 }
         }
 
-        public static void BardSubGen(PlayerClass pc)
+        public void BardSubGen(PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
             int subclassnum = rand.Next(0,2);
@@ -642,7 +642,7 @@ namespace CharacterGenerator.Models
                 }
         }
 
-        public static void ClericSubGen(PlayerClass pc)
+        public void ClericSubGen(PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
             int subclassnum = rand.Next(0,7);
@@ -660,7 +660,217 @@ namespace CharacterGenerator.Models
                     case 2:
                         pc.SubClassName = "Light Domain";
                         break;
+
+                    case 3:
+                        pc.SubClassName = "Nature Domain";
+                        break;
+
+                    case 4: 
+                        pc.SubClassName = "Tempest Domain";
+                        break;
+
+                    case 5:
+                        pc.SubClassName = "Trickery Domain";
+                        break;
+                    
+                    case 6:
+                        pc.SubClassName = "War Domain";
+                        break;
                 }
+        }
+        public void DruidSubGen(PlayerClass pc, PlayerStat ps)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,2);
+            switch(subclassnum)
+                {
+                    case 0:
+                        pc.SubClassName = "Circle of the Moon";
+                        break;
+
+                    case 1:
+                        int randruid = rand.Next(0,9);
+                        switch(randruid)
+                        {
+                            case 0:
+                                pc.SubClassName = "Circle of the Land: Arctic";
+                                break;
+                            case 1:
+                                pc.SubClassName = "Circle of the Land: Coast";
+                                break;
+                            case 2:
+                                pc.SubClassName = "Circle of the Land: Desert";
+                                break;
+                            case 3:
+                                pc.SubClassName = "Circle of the Land: Forest";
+                                break;
+                            case 4:
+                                pc.SubClassName = "Circle of the Land: Grassland";
+                                break;
+                            case 5:
+                                pc.SubClassName = "Circle of the Land: Mountain";
+                                break;
+                            case 7:
+                                pc.SubClassName = "Circle of the Land: Swamp";
+                                break;
+                            case 8:
+                                pc.SubClassName = "Circle of the Land: Underdark";
+                                break;
+                        }
+                        break;
+                }
+        }
+
+        public void FighterSubGen(PlayerClass pc,PlayerStat ps)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,3);
+            switch(subclassnum)
+            {
+                case 0:
+                    pc.SubClassName = "Champion";
+                    break;
+                case 1:
+                    pc.SubClassName = "Champion";
+                    break;
+                case 2:
+                    pc.SubClassName = "Eldritch Knight";
+                    break;
+            }
+        }
+        public void MonkSubGen (PlayerClass pc, PlayerStat ps)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,3);
+            switch(subclassnum)
+            {
+                case 0:
+                    pc.SubClassName = "Oath of the Open Hand";
+                    break;
+                case 1:
+                    pc.SubClassName = "Oath of the Four Elements";
+                    break;
+                case 2:
+                    pc.SubClassName = "Oath of Shadow";
+                    break;
+            }
+        }
+
+        public void PaladinSubGen (PlayerClass pc, PlayerStat ps)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,3);
+            switch(subclassnum)
+            {
+                case 0:
+                    pc.SubClassName = "Oath of Devotion";
+                    break;
+                case 1:
+                    pc.SubClassName = "Oath of Vengeance";
+                    break;
+                case 2:
+                    pc.SubClassName = "Oath of the Ancients";
+                    break;
+            }
+        }
+
+        public void RangerSubGen (PlayerClass pc, PlayerStat ps)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,2);
+            switch(subclassnum)
+            {
+                case 0:
+                    pc.SubClassName = "Hunter";
+                    break;
+                case 1:
+                    pc.SubClassName = "Beast Master";
+                    break;
+            }
+        }
+
+        public void RogueSubGen (PlayerClass pc, PlayerStat ps)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,3);
+            switch(subclassnum)
+            {
+                case 0:
+                    pc.SubClassName = "Thief";
+                    break;
+                case 1:
+                    pc.SubClassName = "Assassin";
+                    break;
+                case 2:
+                    pc.SubClassName = "Arcane Trickster";
+                    break;
+            }
+        }
+
+        public void SorcSubGen (PlayerClass pc, PlayerStat ps)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,2);
+            switch(subclassnum)
+            {
+                case 0:
+                    pc.SubClassName = "Draconic Bloodline";
+                    break;
+                case 1:
+                    pc.SubClassName = "Wild Magic";
+                    break;
+            }
+        }
+
+        public void WarlockSubGen (PlayerClass pc, PlayerStat ps)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,3);
+            switch(subclassnum)
+            {
+                case 0:
+                    pc.SubClassName = "The Archefey";
+                    break;
+                case 1:
+                    pc.SubClassName = "The Great Old One";
+                    break;
+                case 2:
+                    pc.SubClassName = "The Fiend";
+                    break;
+            }
+        }
+
+        public void WizSubGen (PlayerClass pc, PlayerStat ps)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,3);
+            switch(subclassnum)
+            {
+                case 0:
+                    pc.SubClassName = "School of Abjuration";
+                    break;
+                case 1:
+                    pc.SubClassName = "School of Conjuration";
+                    break;
+                case 2:
+                    pc.SubClassName = "School of Divination";
+                    break;
+                case 3:
+                    pc.SubClassName = "School of Enchantment";
+                    break;
+                case 4:
+                    pc.SubClassName = "School of Evocation";
+                    break;
+                case 5:
+                    pc.SubClassName = "School of Illusion";
+                    break;
+                case 6:
+                    pc.SubClassName = "School of Necromancy";
+                    break;
+                case 7:
+                    pc.SubClassName = "School of Transmutation";
+                    break;
+            }
         }
     }
 }
