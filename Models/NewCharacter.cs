@@ -8,8 +8,9 @@ namespace CharacterGenerator.Models
     {
         [Key]
         public int CharacterId { get; set; }
+        // Consider creating another class to hold connection between user and character. then characters will spawn without logged in user
         public User user { get; set; }
-        public int userId { get; set; }
+        public int UserId { get; set; }
         public int playerClassId { get; set; }
         public PlayerClass playerClass { get; set; }
         public int playerRaceId { get; set; }
@@ -26,7 +27,7 @@ namespace CharacterGenerator.Models
         {
             Level = level;
         }
-        public NewCharacter(int level, PlayerStat pStat,  PlayerRace pRace, PlayerClass pClass, PlayerBG pBG)
+        public NewCharacter(int level, PlayerStat pStat,  PlayerRace pRace, PlayerClass pClass, PlayerBG pBG, User pUser)
         {
             Level = level;
             playerStat = pStat;
@@ -37,6 +38,8 @@ namespace CharacterGenerator.Models
             playerRace = pRace;
             playerBGId = pBG.PlayerBGId;
             playerBG = pBG;
+            user = pUser;
+            UserId = pUser.UserId;
             
         }
     }

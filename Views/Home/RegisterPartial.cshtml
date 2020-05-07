@@ -2,7 +2,7 @@
 
 <div class="container">
     <h1>Register</h1>
-    <form action="register" method="post">
+    <form action="/register" method="post" class="form-container">
         <div class = "form-group">
             <label asp-for="UserName"></label>
             <input asp-for="UserName" class="form-control">
@@ -23,7 +23,8 @@
             <input asp-for="Confirm" class="form-control">
             <span asp-validation-for="Confirm" style="color:red"></span>
         </div>
-        <input type="submit" class= "btn btn-primary">
+        <button type="submit" class= "btn btn-primary">Register</button>
+        <button type="button" class="btn btn-danger" onclick = "closeRegistration()">Close</button>
     </form>
  
 </div>

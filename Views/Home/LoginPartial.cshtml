@@ -2,7 +2,7 @@
 
 <div class="container">
     <h1>Login</h1>
-    <form action="/login" method="post">
+    <form action="/login" method="post" class="form-container">
         <div class="form-group">
             <label asp-for="LoginEmail"></label>
             <input asp-for="LoginEmail" class="form-control">
@@ -13,6 +13,7 @@
             <input asp-for="LoginPassword" class="form-control">
             <span asp-validation-for="LoginPassword"></span>
         </div>
-        <input type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="button" class="btn btn-danger" onclick = "closeForm()">Close</button>
     </form>
 </div>

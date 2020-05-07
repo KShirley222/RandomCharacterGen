@@ -1,9 +1,60 @@
-<div class="jumbotron text-center">
-<h1>Dungeons and Dragons Random Character Generator</h1>
-<a class= "btn btn-danger" href="/">Generate Chracter</a>
-</div>
+<style>
+    .form-popup{
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 15px;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
+    }
+
+    .form-container .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:10px;
+        opacity: 0.8;
+    }
+
+    .form-container .btn:hover, .open-button:hover {
+        opacity: 1;
+    }
+    .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+</style>
 
 @model NewCharacter
+<div class="row header">
+    <h1 class= "col-sm-4"><a href="/">RPG Character Generator</a></h1>
+    <div class="col-sm-5">
+        @{
+            if(ViewBag.SessionId == null)
+            {
+                <button class= "register-form" onclick="openRegistration()">Register</button>
+                <div class="form-popup" id="register">
+                    <partial Name="RegisterPartial"></partial>
+                </div>
+                <h4>| </h4>
+                <button class = "login form" onclick="openLogin()">Login</button>
+                <div class="form-popup" id= "login">
+                    <partial Name="LoginPartial"></partial>
+                </div>
+            }
+            else
+            {
+                <h4><a href="">Profile</a></h4>
+                <h4>| </h4>
+                <h4><a href="">Logout</a></h4>
+            }
+        }
+    </div>
+</div>
+
 
 
 @* Pull API from fantasy name generator for names *@
@@ -153,3 +204,12 @@
 
 </div>
 
+<script>
+function openForm() {
+  document.getElementById("register").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("resgister").style.display = "none";
+}
+</script>

@@ -19,6 +19,24 @@ namespace CharacterGenerator.Controllers
             _context = context;
         }
         
+        [HttpGet("/test")]
+        public IActionResult Test()
+        {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+            return View ("test");
+        }
+
+        [HttpGet("/user")]
+        public IActionResult UserLogin()
+        {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+            return View();
+        }
+
         [HttpGet("")]
         public IActionResult Index()
         {
@@ -33,6 +51,7 @@ namespace CharacterGenerator.Controllers
             _context.SaveChanges();
             return View(newChar);
         }
+        
 
         [HttpGet("create/{level}/{classname}/{race}")]
         public IActionResult Specific(int level, string classname, string race)
@@ -53,6 +72,9 @@ namespace CharacterGenerator.Controllers
         [HttpGet("/class")]
         public IActionResult CharacterGenerator()
         {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
             Random rand = new Random();
             int Level = rand.Next(1,21);
 
@@ -83,7 +105,7 @@ namespace CharacterGenerator.Controllers
 
 
             // create connection to all character objects within the character
-            NewCharacter newPlayer = new NewCharacter(Level, playerStat,playerRace,playerClass, playerBG);
+            NewCharacter newPlayer = new NewCharacter(Level, playerStat,playerRace,playerClass, playerBG, SessionUser);
             _context.PlayerStats.Add(playerStat);
             _context.PlayerBGs.Add(playerBG);
             _context.PlayerClasses.Add(playerClass);
@@ -93,24 +115,22 @@ namespace CharacterGenerator.Controllers
 
             //LINQ query
 
-            return View(newPlayer);
+            return View("Classes",newPlayer);
         }
 
         [HttpPost("/class/save")]
-        public IActionResult SaveCharacter(NewCharacter newPlayer, PlayerStat playerStat, PlayerBG playerBG, PlayerRace playerRace, PlayerClass playerClass)
+        public IActionResult SaveCharacter(NewCharacter newPlayer)
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
-            if(userId == null)
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            if(SessionId == null)
                 {
                     return View("/login");
                 }
             else
                 {
-                    _context.PlayerStats.Add(playerStat);
-                    _context.PlayerBGs.Add(playerBG);
-                    _context.PlayerClasses.Add(playerClass);
-                    _context.PlayerRaces.Add(playerRace);
-                    _context.NewCharacter.Add(newPlayer);
+                    User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+                    // _context.NewCharacter.userId = SessionId;
+                    // _context.NewCharacter.User = SessionUser;
                     _context.SaveChanges();
                     return View("class", newPlayer);
                 }
@@ -126,12 +146,12 @@ namespace CharacterGenerator.Controllers
                 if(_context.Users.Any( u => u.Email == newUser.Email))
                 {
                     ModelState.AddModelError("Email", "Email is already in use.");
-                    return View("class");
+                    return View("/userLogin");
                 }
                 if(_context.Users.Any( u => u.UserName == newUser.UserName))
                 {
                     ModelState.AddModelError("UserName", "User Name is already in use.");
-                    return View("class");
+                    return View("/userLogin");
                 }
                 
                 PasswordHasher<User> Hasher = new PasswordHasher<User>();
@@ -142,12 +162,12 @@ namespace CharacterGenerator.Controllers
 
                 HttpContext.Session.SetInt32("UserId", newUser.UserId);
                 int id = newUser.UserId;
-                return View("class");
+                return RedirectToAction("CharacterGenerator");
             }
-            return View("class");
+            return RedirectToAction("CharacterGenerator");
         }
 
-        [HttpGet("/login")]
+        [HttpPost("/login")]
         public IActionResult Login(Login LoginUser)
         {
             if(ModelState.IsValid)
@@ -156,7 +176,7 @@ namespace CharacterGenerator.Controllers
                 if(userInDb == null)
                 {
                     ModelState.AddModelError("Email", "Invalid Email/Password");
-                    return View("class");
+                    return RedirectToAction("CharacterGenerator");
                 }
                 else{
                     var hasher = new PasswordHasher<Login>();
@@ -164,15 +184,22 @@ namespace CharacterGenerator.Controllers
                     if(result ==0)
                     {
                         ModelState.AddModelError("Email", "Invalid Email/Password");
-                        return View("class");
+                        return RedirectToAction("CharacterGenerator");
                     }
                     else{
                         HttpContext.Session.SetInt32("UserId", userInDb.UserId);
-                        return View("class");
+                        return RedirectToAction("CharacterGenerator");
                     }
                 }
             }
-            return View("class");
+            return Redirect("CharacterGenerator");
+        }
+
+        [HttpGet("/logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/");
         }
     }
 }

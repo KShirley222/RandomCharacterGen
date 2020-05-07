@@ -10,6 +10,7 @@ namespace CharacterGenerator.Models
         public int PlayerClassId { get; set; } 
         public string ClassName { get; set; }
         // Placeholder, may be useful for more purposeful generation
+        public string SubClassName {get; set;}
         public int ASI { get; set; }
         // simply tracks where the function has run to post pproficiencies bools. True will represent proficencies accounted for and the int will track the value
         public bool Proficiencies { get; set; }
@@ -385,6 +386,7 @@ namespace CharacterGenerator.Models
                     Barbarian(Level, Stats, pClass);
                     Name = "Barbarian";
                     pClass.ClassName = "Barbarian";
+
                     return Stats;
                 case 3:
                     Druid(Level, Stats, pClass);
@@ -608,6 +610,58 @@ namespace CharacterGenerator.Models
         }
         
 
+        public static void BarbSubGen(PlayerClass pc)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,2);
+            switch(subclassnum)
+                {
+                    case 0:
+                        pc.SubClassName = "Path of the Berserker";
+                        break;
+
+                    case 1:
+                        pc.SubClassName = "Path of the Totem Warrior";
+                        break;
+                }
+        }
+
+        public static void BardSubGen(PlayerClass pc)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,2);
+            switch(subclassnum)
+                {
+                    case 0:
+                        pc.SubClassName = "College of Lore";
+                        break;
+
+                    case 1:
+                        pc.SubClassName = "College of Valor";
+                        break;
+                }
+        }
+
+        public static void ClericSubGen(PlayerClass pc)
+        {
+            Random rand = new Random();
+            int subclassnum = rand.Next(0,7);
+            //KnowledgePHB LifePHB LightPHB NaturePHB TempestPHB TrickeryPHB WarPHB
+            switch(subclassnum)
+                {
+                    case 0:
+                        pc.SubClassName = "Knowledge Domain";
+                        break;
+
+                    case 1:
+                        pc.SubClassName = "Life Domain";
+                        break;
+
+                    case 2:
+                        pc.SubClassName = "Light Domain";
+                        break;
+                }
+        }
     }
 }
     
