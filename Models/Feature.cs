@@ -14,10 +14,11 @@ namespace CharacterGenerator.Models
 
         public Feature(){}
 
-        public Feature(string source, string name)
+        public Feature(string source, string name, PlayerStat playerStat)
         {
             FeatSource = source;
             FeatureName = name;
+            PlayerStatId = playerStat.PlayerStatId;
         }
     }
 }

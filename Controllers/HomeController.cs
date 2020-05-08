@@ -118,6 +118,55 @@ namespace CharacterGenerator.Controllers
             return View("Classes",newPlayer);
         }
 
+        [HttpGet("/class/{lvl}/{cls}")]
+        public IActionResult SpecCharGene(int lvl, string cls)
+        {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+            Random rand = new Random();
+            int Level = lvl;
+
+            //creating input for creation and modification of base in other functions
+            PlayerStat playerStat = new PlayerStat(Level);
+
+            // Run player stat through background
+            PlayerBG playerBG = new PlayerBG();
+            // Returns player Stat VVV
+            playerBG.BGSelector(playerStat, playerBG);
+            
+            // Determines player Race and then run stats
+            PlayerRace playerRace = new PlayerRace();
+            // Returns player Stat VVV
+            playerRace.RaceSelector(Level, playerStat, playerRace);
+
+            // Determine Player Class and run playerStat
+            PlayerClass playerClass = new PlayerClass(Level, playerStat);
+            // Returns player Stat VVV
+            playerClass.SpecClassSelector(Level, playerStat, playerClass, cls);
+
+
+            // reruns numbers based on updated proficiencies and skill increases
+            playerStat.UpdatePro(playerStat);
+
+
+            // Skills/Spells
+
+
+            // create connection to all character objects within the character
+            NewCharacter newPlayer = new NewCharacter(Level, playerStat,playerRace,playerClass, playerBG, SessionUser);
+            _context.PlayerStats.Add(playerStat);
+            _context.PlayerBGs.Add(playerBG);
+            _context.PlayerClasses.Add(playerClass);
+            _context.PlayerRaces.Add(playerRace);
+            _context.NewCharacter.Add(newPlayer);
+            _context.SaveChanges();
+
+            //LINQ query
+
+            return View("Classes",newPlayer);
+        }
+
         [HttpPost("/class/save")]
         public IActionResult SaveCharacter(NewCharacter newPlayer)
         {

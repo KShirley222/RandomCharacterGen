@@ -391,7 +391,41 @@ namespace CharacterGenerator.Models
                 case 3:
                     Druid(Level, Stats, pClass);
                     Name = "Druid";
+                    pClass.ClassName = "Druid";
+                    return Stats;
+                
+            }
+            return Stats;
+        }
+
+        public PlayerStat SpecClassSelector(int level, PlayerStat stats, PlayerClass playerClass, string selection)
+        {
+            int Level = level;
+            PlayerStat Stats = stats;
+            PlayerClass pClass = playerClass;
+            Random rand = new Random();
+            switch(selection)
+            {
+                case "Bard":
+                    Bard(Level, Stats, pClass);
+                    string Name = "Bard";
+                    pClass.ClassName = Name;
+                    return Stats;
+                case "Cleric":
+                    Cleric(Level, Stats, pClass);
+                    Name = "Cleric";
+                    pClass.ClassName = "Cleric";
+                    return Stats;
+                case "Barbarian":
+                    Barbarian(Level, Stats, pClass);
+                    Name = "Barbarian";
                     pClass.ClassName = "Barbarian";
+
+                    return Stats;
+                case "Druid":
+                    Druid(Level, Stats, pClass);
+                    Name = "Druid";
+                    pClass.ClassName = "Druid";
                     return Stats;
                 
             }
@@ -745,13 +779,13 @@ namespace CharacterGenerator.Models
             switch(subclassnum)
             {
                 case 0:
-                    pc.SubClassName = "Oath of the Open Hand";
+                    pc.SubClassName = "Way of the Open Hand";
                     break;
                 case 1:
-                    pc.SubClassName = "Oath of the Four Elements";
+                    pc.SubClassName = "Way of the Four Elements";
                     break;
                 case 2:
-                    pc.SubClassName = "Oath of Shadow";
+                    pc.SubClassName = "Way of Shadow";
                     break;
             }
         }
@@ -870,6 +904,73 @@ namespace CharacterGenerator.Models
                 case 7:
                     pc.SubClassName = "School of Transmutation";
                     break;
+            }
+        }
+
+        public void FeatureGen(int Level, string Class, PlayerStat playerStat)
+        {
+            switch(Class)
+            {
+                case "Barbarian":
+                Feature Rage = new Feature(Class, "Rage", playerStat);
+                Feature UnDef = new Feature(Class, "Unarmored Defense (Barbarian)", playerStat);
+                playerStat.Features.Add(Rage);
+                playerStat.Features.Add(UnDef);
+                if (Level >= 2)
+                    {
+                        Feature Reck = new Feature(Class, "Reckless Attack", playerStat);
+                        Feature DanSen = new Feature (Class, "Danger Sense", playerStat);
+                        playerStat.Features.Add(Reck);
+                        playerStat.Features.Add(DanSen);
+                    }
+                if (Level >= 5)
+                    {
+                        Feature EA = new Feature(Class, "Extra Attack", playerStat);
+                        Feature fast = new Feature(Class, "Fast Movement", playerStat);
+                        playerStat.Features.Add(EA);
+                        playerStat.Features.Add(fast);
+                    }
+                if (Level >= 7)
+                    {
+                        Feature fin = new Feature (Class, "Feral Instinct", playerStat);
+                        playerStat.Features.Add(fin);
+                    }
+                if (Level >= 9)
+                    {
+                        Feature crit = new Feature (Class, "Brutal Critical (1 Die)", playerStat);
+                        playerStat.Features.Add(crit);
+                    }
+                if (Level >= 11)
+                    {
+                        Feature rent = new Feature (Class, "Relentless Rage", playerStat);
+                        playerStat.Features.Add(rent);
+                    }
+                if (Level >= 13)
+                    {
+                        Feature bruh = new Feature (Class, "Brutal Critical (2 Dice)", playerStat);
+                        playerStat.Features.Add(bruh);
+                    }
+                if (Level >= 15)
+                    {
+                        Feature pers = new Feature (Class, "Persistent Rage", playerStat);
+                        playerStat.Features.Add(pers);
+                    }
+                if (Level >= 17)
+                    {
+                        Feature three = new Feature (Class, "Brutal Critical (3 Dice)", playerStat);
+                        playerStat.Features.Add(three);
+                    }
+                if (Level >=18)
+                    {
+                        Feature indom = new Feature (Class, "Indomitable Might", playerStat);
+                        playerStat.Features.Add(indom);
+                    }
+                if (Level >= 20)
+                    {
+                        Feature champ = new Feature (Class, "Primal Champion", playerStat);
+                        playerStat.Features.Add(champ);
+                    }
+                break;
             }
         }
     }

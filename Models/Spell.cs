@@ -14,11 +14,12 @@ namespace CharacterGenerator.Models
         public int SpellLevel {get; set;}
 
         public Spell(){}
-        public Spell(int SPL_LVL, string source, string name)
+        public Spell(int SPL_LVL, string source, string name, PlayerStat playerStat)
         {
             SpellLevel = SPL_LVL;
             SpellSource = source;
             SpellName = name;
+            PlayerStatId = playerStat.PlayerStatId;
         }
     }
 
