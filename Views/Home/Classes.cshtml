@@ -41,12 +41,12 @@
             if(ViewBag.SessionId == null)
             {
                 <div class="row">
-                    <button class= "register-form col-sm-5" onclick="openRegistration()" >Register</button>
+                    <button class= "register-form col-sm-5 btn btn-primary" onclick="openRegistration()" >Register</button>
                     <div class="form-popup" id="register">
                         <partial Name="RegisterPartial"></partial>
                     </div>
                     <h4 class="col-sm-1">|</h4>
-                    <button class = "login-form col-sm-5" onclick="openLogin()">Login</button>
+                    <button class = "login-form col-sm-5 btn btn-primary" onclick="openLogin()">Login</button>
                     <div class="form-popup" id= "login">
                         <partial Name="LoginPartial"></partial>
                     </div>
@@ -54,9 +54,12 @@
             }
             else
             {
-                <h4><a href="">Profile</a></h4>
-                <h4>|</h4>
-                <h4><a href="/logout">Logout</a></h4>
+                <div class="row">
+
+                    <a class="btn btn-primary col-sm-5" href="/profile">Profile</a>
+                    <h4 class="col-sm-1">|</h4>
+                    <a class="btn btn-danger col-sm-5" href="/logout">Logout</a>
+                </div>
             }
         }
     </div>

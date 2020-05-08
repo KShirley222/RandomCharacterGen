@@ -12,5 +12,12 @@ namespace CharacterGenerator.Models
         public string FeatSource {get; set;}
         public string FeatureName {get; set;}
 
+        public Feature(){}
+
+        public Feature(string source, string name)
+        {
+            FeatSource = source;
+            FeatureName = name;
+        }
     }
 }
