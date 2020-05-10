@@ -19,6 +19,10 @@ namespace CharacterGenerator.Models
         public PlayerBG playerBG { get; set; }
         public int playerStatId { get; set; }
         public PlayerStat playerStat { get; set; }
+        public List<int> playerSkillId { get; set; }
+        public List<PlayerSkill> SkillList { get; set; }
+        public List<int> FeatureId { get; set; }
+        public List<Feature> FeaturesList { get; set; }
         public int Level { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;

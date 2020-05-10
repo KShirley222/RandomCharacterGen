@@ -386,12 +386,52 @@ namespace CharacterGenerator.Models
                     Barbarian(Level, Stats, pClass);
                     Name = "Barbarian";
                     pClass.ClassName = "Barbarian";
-
+                    FeatureGen(Level, pClass.ClassName, Stats);
                     return Stats;
                 case 3:
                     Druid(Level, Stats, pClass);
                     Name = "Druid";
                     pClass.ClassName = "Druid";
+                    return Stats;
+                case 4:
+                    Fighter(Level, Stats, pClass);
+                    Name = "Fighter";
+                    pClass.ClassName = "Fighter";
+                    return Stats;
+                case 5:
+                    Monk(Level, Stats, pClass);
+                    Name = "Monk";
+                    pClass.ClassName = "Monk";
+                    return Stats;
+                case 6:
+                    Paladin(Level, Stats, pClass);
+                    Name = "Paladin";
+                    pClass.ClassName = "Paladin";
+                    return Stats;
+                case 7:
+                    Ranger(Level, Stats, pClass);
+                    Name = "Ranger";
+                    pClass.ClassName = "Ranger";
+                    return Stats;
+                case 9:
+                    Rogue(Level, Stats, pClass);
+                    Name = "Rogue";
+                    pClass.ClassName = "Rogue";
+                    return Stats;
+                case 10:
+                    Sorcerer(Level, Stats, pClass);
+                    Name = "Sorcerer";
+                    pClass.ClassName = "Sorcerer";
+                    return Stats;
+                case 11:
+                    Warlock(Level, Stats, pClass);
+                    Name = "Warlock";
+                    pClass.ClassName = "Warlock";
+                    return Stats;
+                case 12:
+                    Wizard(Level, Stats, pClass);
+                    Name = "Wizard";
+                    pClass.ClassName = "Wizard";
                     return Stats;
                 
             }
@@ -420,7 +460,7 @@ namespace CharacterGenerator.Models
                     Barbarian(Level, Stats, pClass);
                     Name = "Barbarian";
                     pClass.ClassName = "Barbarian";
-
+                    FeatureGen(Level, Name, Stats);
                     return Stats;
                 case "Druid":
                     Druid(Level, Stats, pClass);
@@ -448,6 +488,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            BarbSubGen(pClass, stats);
             return Stats; 
         }
         public PlayerStat Bard(int level, PlayerStat stats, PlayerClass pClass) 
@@ -465,7 +506,8 @@ namespace CharacterGenerator.Models
             int Base = 8;
             int ConMod = Stats.ConMod;
             pClass.ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP; 
+            Stats.HitPoints = Stats.HitPoints + ClassHP;
+            BardSubGen(pClass, stats); 
             return Stats;
         }
 
@@ -486,6 +528,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            ClericSubGen(pClass, stats);
             return Stats; 
         }
 
@@ -504,6 +547,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            DruidSubGen(pClass, stats);
             return Stats; 
         }
         public PlayerStat Fighter(int level, PlayerStat stats, PlayerClass pClass)
@@ -521,6 +565,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            FighterSubGen( pClass, stats);
             return Stats; 
         }
         public PlayerStat Monk(int level, PlayerStat stats, PlayerClass pClass)
@@ -538,6 +583,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            MonkSubGen( pClass, stats);
             return Stats; 
         }
         public PlayerStat Paladin(int level, PlayerStat stats, PlayerClass pClass)
@@ -555,6 +601,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            PaladinSubGen( pClass, stats);
             return Stats; 
         }
         public PlayerStat Ranger(int level, PlayerStat stats, PlayerClass pClass)
@@ -572,6 +619,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            RangerSubGen(pClass, stats);
             return Stats; 
         }
         public PlayerStat Rogue(int level, PlayerStat stats, PlayerClass pClass)
@@ -589,6 +637,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            RogueSubGen( pClass, stats);
             return Stats; 
         }
         public PlayerStat Sorcerer(int level, PlayerStat stats, PlayerClass pClass)
@@ -623,6 +672,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            WarlockSubGen( pClass, stats );
             return Stats; 
         }
         public PlayerStat Wizard(int level, PlayerStat stats, PlayerClass pClass)
@@ -640,6 +690,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            WizSubGen( pClass, stats );
             return Stats; 
         }
         
@@ -970,6 +1021,7 @@ namespace CharacterGenerator.Models
                         Feature champ = new Feature (Class, "Primal Champion", playerStat);
                         playerStat.Features.Add(champ);
                     }
+                
                 break;
             }
         }

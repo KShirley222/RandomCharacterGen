@@ -91,9 +91,6 @@ namespace CharacterGenerator.Models
 
         //Trying to implement Features and Spells here
 
-        public List<Feature> Features {get; set;}
-        public List <Spell> SpellList {get; set;}
-
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 

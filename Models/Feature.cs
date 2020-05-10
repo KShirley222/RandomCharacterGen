@@ -7,8 +7,8 @@ namespace CharacterGenerator.Models
     {
         [Key]
         public int FeatureId {get; set;}
-        public int PlayerStatId {get; set;}
-        public PlayerStat Owner {get; set;}
+        public int CharacterId {get; set;}
+        public NewCharacter Owner {get; set;}
         public string FeatSource {get; set;}
         public string FeatureName {get; set;}
 
@@ -18,7 +18,11 @@ namespace CharacterGenerator.Models
         {
             FeatSource = source;
             FeatureName = name;
-            PlayerStatId = playerStat.PlayerStatId;
+        }
+
+        public void BuildFeatureTable(){
+            Feature Rage = new Feature(Class, "Rage", playerStat);
+            Feature UnDef = new Feature(Class, "Unarmored Defense (Barbarian)", playerStat);
         }
     }
 }
