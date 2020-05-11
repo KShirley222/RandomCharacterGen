@@ -11,18 +11,15 @@ namespace CharacterGenerator.Models
         public NewCharacter Owner {get; set;}
         public string FeatSource {get; set;}
         public string FeatureName {get; set;}
+        public int FeatLevel {get; set;}
 
         public Feature(){}
 
-        public Feature(string source, string name, PlayerStat playerStat)
+        public Feature(string source, string name, int level_obtained)
         {
             FeatSource = source;
             FeatureName = name;
-        }
-
-        public void BuildFeatureTable(){
-            Feature Rage = new Feature(Class, "Rage", playerStat);
-            Feature UnDef = new Feature(Class, "Unarmored Defense (Barbarian)", playerStat);
+            FeatLevel = level_obtained;
         }
     }
 }

@@ -250,5 +250,23 @@ namespace CharacterGenerator.Controllers
             HttpContext.Session.Clear();
             return Redirect("/");
         }
+
+        public void BuildFeatureTable(){
+            Feature Rage = new Feature("Barbarian", "Rage", 1);
+            Feature UnDef = new Feature("Barbarian", "Unarmored Defense (Barbarian)", 1);
+            Feature Reck = new Feature("Barbarian", "Reckless Attack", 2);
+            Feature DanSen = new Feature ("Barbarian", "Danger Sense", 2);
+            Feature EA = new Feature("Barbarian", "Extra Attack", 5);
+            Feature fast = new Feature("Barbarian", "Fast Movement", 5);
+            Feature fin = new Feature ("Barbarian", "Feral Instinct", 7);
+            Feature crit = new Feature ("Barbarian", "Brutal Critical (1 Die)", 9);
+            Feature rent = new Feature ("Barbarian", "Relentless Rage", 11);
+            Feature bruh = new Feature ("Barbarian", "Brutal Critical (2 Dice)", 13);
+            Feature pers = new Feature ("Barbarian", "Persistent Rage", 15);
+            Feature three = new Feature ("Barbarian", "Brutal Critical (3 Dice)", 17);
+            Feature indom = new Feature ("Barbarian", "Indomitable Might", 18);
+            Feature champ = new Feature ("Barbarian", "Primal Champion", 20);
+
+        }
     }
 }
