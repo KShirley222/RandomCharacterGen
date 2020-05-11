@@ -19,10 +19,8 @@ namespace CharacterGenerator.Models
         public PlayerBG playerBG { get; set; }
         public int playerStatId { get; set; }
         public PlayerStat playerStat { get; set; }
-        public List<int> playerSkillId { get; set; }
-        public List<PlayerSkill> SkillList { get; set; }
-        public List<int> FeatureId { get; set; }
-        public List<Feature> FeaturesList { get; set; }
+        public List<SpellAssoc> SpellList { get; set; }
+        public List<FeatureAssoc> FeaturesList { get; set; }
         public int Level { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -44,6 +42,20 @@ namespace CharacterGenerator.Models
             playerBG = pBG;
             user = pUser;
             UserId = pUser.UserId;
+            
+        }
+        public NewCharacter(int level, PlayerStat pStat,  PlayerRace pRace, PlayerClass pClass, PlayerBG pBG)
+        {
+            Level = level;
+            playerStat = pStat;
+            playerStatId = pStat.PlayerStatId;
+            playerClassId = pClass.PlayerClassId;
+            playerClass = pClass;
+            playerRaceId = pRace.PlayerRaceId;
+            playerRace = pRace;
+            playerBGId = pBG.PlayerBGId;
+            playerBG = pBG;
+            UserId = 1;
             
         }
     }

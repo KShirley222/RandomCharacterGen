@@ -31,7 +31,7 @@
     }
 </style>
 
-@model NewCharacter
+@model dynamic
 
 @* Header Login/Registration  *@
 <div class="row header">
@@ -43,12 +43,12 @@
                 <div class="row">
                     <button class= "register-form col-sm-5 btn btn-primary" onclick="openRegistration()" >Register</button>
                     <div class="form-popup" id="register">
-                        <partial Name="RegisterPartial"></partial>
+                        @Html.Partial("RegisterPartial", (User) @Model.User)
                     </div>
                     <h4 class="col-sm-1">|</h4>
                     <button class = "login-form col-sm-5 btn btn-primary" onclick="openLogin()">Login</button>
                     <div class="form-popup" id= "login">
-                        <partial Name="LoginPartial"></partial>
+                        @Html.Partial("LoginPartial", (Login) @Model.Login)
                     </div>
                 </div>
             }
@@ -71,56 +71,56 @@
 <div class="cotnainer" style="background: beige; border: 2px solid black; border-radius:5px;  margin: 5px; padding: 20 px;">
 
 <div class="row">
-    <h4 class="col-sm-5 text-center" style = "margin-bottom: 5px;">Character Name the @Model.playerRace.Race</h4>
-    <h4 class="col-sm-4 text-center" style = "margin-bottom: 5px;">@Model.playerClass.ClassName and @Model.playerBG.Background</h4>
+    <h4 class="col-sm-5 text-center" style = "margin-bottom: 5px;">Character Name the @Model.Character.playerRace.Race</h4>
+    <h4 class="col-sm-4 text-center" style = "margin-bottom: 5px;">@Model.Character.playerClass.ClassName and @Model.Character.playerBG.Background</h4>
 </div>
 <div class="row ">
     <div class= "col-sm text-center" style="margin: 10px;">
         <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px;  margin: 2px; background: white;">
             <p>Strength</p>
-            <p>@Model.playerStat.Strength</p>
+            <p>@Model.Character.playerStat.Strength</p>
         </div>
         <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
             <p>Dexterity</p>
-            <p>@Model.playerStat.Dexterity</p>
+            <p>@Model.Character.playerStat.Dexterity</p>
         </div>
         <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
             <p>Constitution</p>
-            <p>@Model.playerStat.Constitution</p>
+            <p>@Model.Character.playerStat.Constitution</p>
         </div>
         <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
             <p>Intelligence</p>
-            <p>@Model.playerStat.Intelligence</p>
+            <p>@Model.Character.playerStat.Intelligence</p>
         </div>
         <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
             <p>Wisdom</p>
-            <p>@Model.playerStat.Wisdom</p>
+            <p>@Model.Character.playerStat.Wisdom</p>
         </div>
         <div class="col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px;">
             <p>Charisma</p>
-            <p>@Model.playerStat.Charisma</p>
+            <p>@Model.Character.playerStat.Charisma</p>
         </div>
     </div>
     <div class = "col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 10px; text-align: left;  ">
         <ul style ="list-style-type:none; text-align: left;">
-            <li>Acrobatics - @Model.playerStat.Acrobatics</li>
-            <li>Animal Handling - @Model.playerStat.AnimalHandling</li>
-            <li>Arcana - @Model.playerStat.Arcana</li>
-            <li>Athletics - @Model.playerStat.Athletics</li>
-            <li>Deception - @Model.playerStat.Deception</li>
-            <li>History - @Model.playerStat.History</li>
-            <li>Insight - @Model.playerStat.Insight</li>
-            <li>Intimidation - @Model.playerStat.Intimidation</li>
-            <li>Investigation - @Model.playerStat.Investigation</li>
-            <li>Medicine - @Model.playerStat.Medicine</li>
-            <li>Nature - @Model.playerStat.Nature</li>
-            <li>Perception - @Model.playerStat.Perception</li>
-            <li>Performance - @Model.playerStat.Performance</li>
-            <li>Persuasion - @Model.playerStat.Persuasion</li>
-            <li>Religion - @Model.playerStat.Religion</li>
-            <li>Sleight of Hand - @Model.playerStat.Sleight</li>
-            <li>Stealth - @Model.playerStat.Stealth</li>
-            <li>Survival - @Model.playerStat.Survival</li>
+            <li>Acrobatics - @Model.Character.playerStat.Acrobatics</li>
+            <li>Animal Handling - @Model.Character.playerStat.AnimalHandling</li>
+            <li>Arcana - @Model.Character.playerStat.Arcana</li>
+            <li>Athletics - @Model.Character.playerStat.Athletics</li>
+            <li>Deception - @Model.Character.playerStat.Deception</li>
+            <li>History - @Model.Character.playerStat.History</li>
+            <li>Insight - @Model.Character.playerStat.Insight</li>
+            <li>Intimidation - @Model.Character.playerStat.Intimidation</li>
+            <li>Investigation - @Model.Character.playerStat.Investigation</li>
+            <li>Medicine - @Model.Character.playerStat.Medicine</li>
+            <li>Nature - @Model.Character.playerStat.Nature</li>
+            <li>Perception - @Model.Character.playerStat.Perception</li>
+            <li>Performance - @Model.Character.playerStat.Performance</li>
+            <li>Persuasion - @Model.Character.playerStat.Persuasion</li>
+            <li>Religion - @Model.Character.playerStat.Religion</li>
+            <li>Sleight of Hand - @Model.Character.playerStat.Sleight</li>
+            <li>Stealth - @Model.Character.playerStat.Stealth</li>
+            <li>Survival - @Model.Character.playerStat.Survival</li>
 
         </ul>
     </div>
@@ -128,11 +128,11 @@
         <div class="row" >
             <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                 <p>Level</p>
-                <p>@Model.Level</p>
+                <p>@Model.Character.Level</p>
             </div>
             <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                 <p>Hit Points</p>
-                <p>@Model.playerStat.HitPoints</p>
+                <p>@Model.Character.playerStat.HitPoints</p>
             </div>
          </div>
          <div class="row" >
@@ -146,31 +146,31 @@
          <div class="row" >
             <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                 <p>Strength Mod</p>
-                <p>@Model.playerStat.StrMod</p>
+                <p>@Model.Character.playerStat.StrMod</p>
             </div>
             <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                 <p>Dexterity Mod</p>
-                <p>@Model.playerStat.DexMod</p>
+                <p>@Model.Character.playerStat.DexMod</p>
             </div>
          </div>
          <div class="row" >
             <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                 <p>Constitution Mod</p>
-                <p>@Model.playerStat.ConMod</p>
+                <p>@Model.Character.playerStat.ConMod</p>
             </div>
             <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                 <p>Intelligence Mod</p>
-                <p>@Model.playerStat.IntMod</p>
+                <p>@Model.Character.playerStat.IntMod</p>
             </div>
          </div>
          <div class="row" >
             <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                 <p>Wisdom Mod</p>
-                <p>@Model.playerStat.WisMod</p>
+                <p>@Model.Character.playerStat.WisMod</p>
             </div>
             <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                 <p>Charisma Mod</p>
-                <p>@Model.playerStat.ChaMod</p>
+                <p>@Model.Character.playerStat.ChaMod</p>
             </div>
          </div>
     </div>
@@ -178,47 +178,6 @@
 </div>
 </div>
 
-
-<div class="row">
-    <div class="col-sm">
-        <p>Proficiencies did run: @Model.playerClass.Proficiencies</p>
-        <p>Player class ASI total: @Model.playerClass.ASI</p>
-        <p>Player class hp: @Model.playerClass.ClassHP</p>
-        <p>Stat HP: @Model.playerStat.HitPoints</p>
-        <p>Race: @Model.playerRace.Race</p>
-        <p>Speed: @Model.playerRace.Speed</p>
-        <p>Racial trait 1: @Model.playerRace.RacialTraits1</p>
-        <p>Racial trait 2: @Model.playerRace.RacialTraits2</p>
-        <p>Background: @Model.playerBG.Background</p>
-        <p>BG Feature: @Model.playerBG.Feature</p>
-        <p>BG PRoficiences ran: @Model.playerBG.Proficiencies</p>
-        <p>Proficiencies @Model.playerStat.Proficiency</p>
-        <p>Acrobatics @Model.playerStat.AcrobaticsB</p>   
-        <p>AnimalHandling @Model.playerStat.AnimalHandlingB</p> 
-        <p>Arcana @Model.playerStat.ArcanaB</p> 
-        <p>Athletics @Model.playerStat.AthleticsB</p> 
-        <p>Deception @Model.playerStat.DeceptionB</p> 
-        <p>History @Model.playerStat.HistoryB</p> 
-        <p>Intimidation @Model.playerStat.IntimidationB</p> 
-        <p>Insight @Model.playerStat.InsightB</p> 
-        <p>Medicine @Model.playerStat.MedicineB</p> 
-        <p>Nature @Model.playerStat.NatureB</p> 
-        <p>Perception @Model.playerStat.PerceptionB</p> 
-        <p>Performance @Model.playerStat.PerformanceB</p> 
-        <p>Persuasion @Model.playerStat.PersuasionB</p> 
-        <p>Religion @Model.playerStat.ReligionB</p> 
-        <p>Sleight @Model.playerStat.SleightB</p> 
-        <p>Stealth @Model.playerStat.StealthB</p> 
-        <p>Survival @Model.playerStat.SurvivalB</p> 
-    </div>
-    <div>
-        <p>
-           
-        </p>
-        
-    </div>
-
-</div>
 
 <script>
 function openRegistration() {

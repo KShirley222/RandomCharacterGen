@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CharacterGenerator.Models
@@ -8,10 +9,12 @@ namespace CharacterGenerator.Models
         [Key]
         public int FeatureId {get; set;}
         public int CharacterId {get; set;}
-        public NewCharacter Owner {get; set;}
         public string FeatSource {get; set;}
         public string FeatureName {get; set;}
         public int FeatLevel {get; set;}
+        public List<FeatureAssoc> Players { get; set; }
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public Feature(){}
 

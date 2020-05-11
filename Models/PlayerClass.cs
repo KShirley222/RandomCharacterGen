@@ -655,6 +655,7 @@ namespace CharacterGenerator.Models
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
             Stats.HitPoints = Stats.HitPoints + ClassHP;
+            SorcSubGen( pClass, stats);
             return Stats; 
         }
         public PlayerStat Warlock(int level, PlayerStat stats, PlayerClass pClass)

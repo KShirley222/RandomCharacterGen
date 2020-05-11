@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace CharacterGenerator.Models
 {
@@ -25,5 +26,8 @@ namespace CharacterGenerator.Models
         [DataType(DataType.Password)]
         [Display(Name ="Confirm Password")]
         public string Confirm {get; set; }
+
+
+        
     }
 }
