@@ -1,1 +1,34 @@
-<p>Test</p>
+@model dynamic
+
+<p>Test @Model.User.UserName</p>
+
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <th scope="col">Name</th>
+                <th scope="col">Level</th>
+                <th scope="col">Race</th>
+                <th scope="col">Subrace</th>
+                <th scope="col">Class</th>
+                <th scope="col">Background</th>
+                <th scope="col">Actions</th>
+            </thead>
+            <tbody>
+
+                @foreach(NewCharacter character in Model.Characters)
+                {
+                    <tr>
+                        <td>Name</td>
+                        <td>@character.Level</td>
+                        <td>@character.playerRace.Race</td>
+                        <td>@character.playerRace.Subrace</td>
+                        <td>@character.playerClass.ClassName</td>
+                        <td>@character.playerBG.Background</td>
+                        <td><a href="#">View</a> | <a href="#">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

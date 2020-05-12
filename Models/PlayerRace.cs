@@ -86,24 +86,29 @@ namespace CharacterGenerator.Models
         // Dragonborn and Dragon Ancestry determine Dragonborn race
         public PlayerStat DragonBorn(int Level, PlayerStat playerStat, PlayerRace playerRace)
         {
+            Random rand = new Random();
+            int num = rand.Next(0,10);
+            string[] DragonType = {"Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White"};
+            string[] DamageType = {"Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold"};
+            playerRace.RacialTraits1 = DamageType[num] + " Dragon Breath";
             playerStat.Strength += 2;
             playerStat.Charisma += 1;
             playerRace.ASI = true;
-            playerRace.RacialTraits1 = DraconicAncestry(playerRace);
+            playerRace.Subrace = DragonType[num];
             playerStat.LangDraconic = true;
             playerStat.LangUndercommon = true;
             return playerStat;
             
         }
-        public string DraconicAncestry(PlayerRace playerRace)
-        {
-            Random rand = new Random();
-            int num = rand.Next(0,10);
-            string[] DragonType = {"Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White"};
-            string[] DamageType = {"Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold"};
-            playerRace.RacialTraits2 = DamageType[num] + " Dragon Breath";
-            return DragonType[num];
-        }
+        // public string DraconicAncestry(PlayerRace playerRace)
+        // {
+        //     Random rand = new Random();
+        //     int num = rand.Next(0,10);
+        //     string[] DragonType = {"Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White"};
+        //     string[] DamageType = {"Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold"};
+        //     playerRace.RacialTraits1 = DamageType[num] + " Dragon Breath";
+        //     return DragonType[num];
+        // }
 
         // Next race
         public PlayerStat Dwarf(int Level, PlayerStat playerStat, PlayerRace playerRace)

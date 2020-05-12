@@ -13,6 +13,7 @@ namespace CharacterGenerator.Models
         [EmailAddress]
         public string Email { get; set; }
         [Required]
+        [Display(Name="User Name")]
         [MinLength(8, ErrorMessage="User Name must be 8 or more characters.")]
         public string UserName { get; set; }
         [Required]

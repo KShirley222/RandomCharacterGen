@@ -1,7 +1,7 @@
 @model User
 
 <div class="container">
-    <h1>Register</h1>
+    <h1 class="text-center">Register</h1>
     <form action="/register" method="post" class="form-container">
         <div class = "form-group">
             <label asp-for="UserName"></label>
@@ -24,7 +24,7 @@
             <span asp-validation-for="Confirm" style="color:red"></span>
         </div>
         <button type="submit" class= "btn btn-primary">Register</button>
-        <button type="button" class="btn btn-danger" onclick = "closeRegistration()">Close</button>
+        @* <button type="button" class="btn btn-danger" onclick = "closeRegistration()">Close</button> *@
     </form>
  
 </div>

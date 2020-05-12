@@ -22,23 +22,6 @@ namespace CharacterGenerator.Controllers
             _context = context;
         }
         
-        [HttpGet("/test")]
-        public IActionResult Test()
-        {
-            int? SessionId = HttpContext.Session.GetInt32("UserId");
-            ViewBag.SessionId = SessionId;
-            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
-            return View ("test");
-        }
-
-        [HttpGet("/user")]
-        public IActionResult UserLogin()
-        {
-            int? SessionId = HttpContext.Session.GetInt32("UserId");
-            ViewBag.SessionId = SessionId;
-            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
-            return View();
-        }
 
         [HttpGet("")]
         public IActionResult Index()
@@ -70,20 +53,8 @@ namespace CharacterGenerator.Controllers
         }
         
 
-        [HttpGet("create/{level}/{classname}/{race}")]
-        public IActionResult Specific(int level, string classname, string race)
-        {
-            Character newchar = new Character(level, classname, race);
-            newchar.SecondaryGeneration(newchar); 
-            newchar.ThirdGeneration(newchar);
-            newchar.FourthGeneration(newchar);
-            newchar.FifthGeneration(newchar);
-            _context.Characters.Add(newchar);
-            _context.SaveChanges();
-            return View("Index", newchar);
-        }
 
-        // Seperate deneration and saving
+        // Seperate generation and saving
         // saving requires userid in session, if not prompt for login register should kick in
         // would be cool if pop up happened so that character doesnt get removed
         [HttpGet("/class")]
@@ -141,6 +112,21 @@ namespace CharacterGenerator.Controllers
             return View("Classes", MyModel);
         }
 
+        // =============================================================================
+        // Other Character Building Routes
+        [HttpGet("create/{level}/{classname}/{race}")]
+        public IActionResult Specific(int level, string classname, string race)
+        {
+            Character newchar = new Character(level, classname, race);
+            newchar.SecondaryGeneration(newchar); 
+            newchar.ThirdGeneration(newchar);
+            newchar.FourthGeneration(newchar);
+            newchar.FifthGeneration(newchar);
+            _context.Characters.Add(newchar);
+            _context.SaveChanges();
+            return View("Index", newchar);
+        }
+        
         [HttpGet("/class/{lvl}/{cls}")]
         public IActionResult SpecCharGene(int lvl, string cls)
         {
@@ -209,6 +195,10 @@ namespace CharacterGenerator.Controllers
 
         }
 
+        
+
+        // ======================================================================
+        // User Login, Registration and Logout
 
         [HttpPost("/register")]
         public IActionResult Register(User newUser)
@@ -218,12 +208,12 @@ namespace CharacterGenerator.Controllers
                 if(_context.Users.Any( u => u.Email == newUser.Email))
                 {
                     ModelState.AddModelError("Email", "Email is already in use.");
-                    return View("/userLogin");
+                    return View("UserLogin");
                 }
                 if(_context.Users.Any( u => u.UserName == newUser.UserName))
                 {
                     ModelState.AddModelError("UserName", "User Name is already in use.");
-                    return View("/userLogin");
+                    return View("UserLogin");
                 }
                 
                 PasswordHasher<User> Hasher = new PasswordHasher<User>();
@@ -236,7 +226,7 @@ namespace CharacterGenerator.Controllers
                 int id = newUser.UserId;
                 return RedirectToAction("CharacterGenerator");
             }
-            return RedirectToAction("CharacterGenerator");
+            return View("UserLogin");
         }
 
         [HttpPost("/login")]
@@ -248,7 +238,7 @@ namespace CharacterGenerator.Controllers
                 if(userInDb == null)
                 {
                     ModelState.AddModelError("Email", "Invalid Email/Password");
-                    return RedirectToAction("CharacterGenerator");
+                    return View("UserLogin");
                 }
                 else{
                     var hasher = new PasswordHasher<Login>();
@@ -256,7 +246,7 @@ namespace CharacterGenerator.Controllers
                     if(result ==0)
                     {
                         ModelState.AddModelError("Email", "Invalid Email/Password");
-                        return RedirectToAction("CharacterGenerator");
+                        return View("UserLogin");
                     }
                     else{
                         HttpContext.Session.SetInt32("UserId", userInDb.UserId);
@@ -264,7 +254,7 @@ namespace CharacterGenerator.Controllers
                     }
                 }
             }
-            return Redirect("CharacterGenerator");
+            return View("UserLogin");
         }
 
         [HttpGet("/logout")]
@@ -273,8 +263,52 @@ namespace CharacterGenerator.Controllers
             HttpContext.Session.Clear();
             return Redirect("/");
         }
+        
+        [HttpGet("/profile/{ID}")]
+        public IActionResult Profile(int ID)
+        {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            if(SessionId == null)
+                {
+                    return View("UserLogin");
+                }
+            else if (ID == SessionId)
+                {
+                    User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == ID);
+                    List<NewCharacter> Characters = _context.NewCharacter.Where(c => c.UserId == SessionUser.UserId).Include( c => c.playerRace).Include( c => c.playerClass).Include(c => c.playerStat).Include(c => c.playerBG).ToList();
+                    dynamic MyModel = new ExpandoObject();
+                    MyModel.Characters = Characters;
+                    MyModel.User = SessionUser; 
+                    return View("profile", MyModel);
+                }
+            return View("UserLogin");
+        }
 
+        [HttpGet("/test")]
+        public IActionResult Test()
+        {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+            return View ("test");
+        }
+
+        [HttpGet("/user")]
+        public IActionResult UserLogin()
+        {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+            return View();
+        }
+        // =============================================================================
+        // Feature builder
+        
         public void BuildFeatureTable(){
+
+            //Base Class Features
+            //Subclass Features
+    //Barbarian
             Feature Rage = new Feature("Barbarian", "Rage", 1);
             Feature UnDef = new Feature("Barbarian", "Unarmored Defense (Barbarian)", 1);
             Feature Reck = new Feature("Barbarian", "Reckless Attack", 2);
@@ -289,6 +323,9 @@ namespace CharacterGenerator.Controllers
             Feature three = new Feature ("Barbarian", "Brutal Critical (3 Dice)", 17);
             Feature indom = new Feature ("Barbarian", "Indomitable Might", 18);
             Feature champ = new Feature ("Barbarian", "Primal Champion", 20);
+        //Totem
+        //Berserker
+    //Bard
             Feature bard0 = new Feature ("Bard", "Bardic Inspiration (d6)", 1);
             Feature bardspc = new Feature ("Bard", "Spellcasting (Bard)", 1);
             Feature bard2 = new Feature ("Bard", "Jack of All Trades", 2);
@@ -307,6 +344,7 @@ namespace CharacterGenerator.Controllers
             Feature bard17 = new Feature("Bard", "Song of Rest (d12)", 17);
             Feature bard18 = new Feature("Bard", "Magical Secrets (Level 18)", 18);
             Feature bard20 = new Feature("Bard", "Superior Inspiration", 20);
+    //Cleric
             Feature Cleric1 = new Feature("Cleric", "Spellcasting (Cleric)", 1);
             Feature Cleric2 = new Feature("Cleric", "Channel Divinity (1/rest)", 2);
             Feature Cleric5 = new Feature("Cleric", "Destroy Undead (CR 1/2)", 5);
@@ -318,6 +356,7 @@ namespace CharacterGenerator.Controllers
             Feature Cleric17 = new Feature("Cleric", "Destroy Undead (CR 4)", 17);
             Feature Cleric18 = new Feature("Cleric", "Channel Divinity (3/rest", 18);
             Feature Cleric20 = new Feature("Cleric", "Divine Intervention Improvement", 20);
+    //Druid
             Feature Druid1 = new Feature("Druid", "Spellcasting (Druid)", 1);
             Feature Druid1_1 = new Feature("Druid", "Druidic", 1);
             Feature Druid2 = new Feature("Druid", "Wild Shape", 2);
@@ -326,6 +365,7 @@ namespace CharacterGenerator.Controllers
             Feature Druid18 = new Feature("Druid", "Timeless Body", 18);
             Feature Druid18_1 = new Feature("Druid", "Beast Spells", 18);
             Feature Druid20 = new Feature("Druid", "Archdruid", 20);
+    //Fighter
             Feature Fighter1 = new Feature("Fighter", "Fighting Style", 1); //Need to implement randomization for Fighting Style choice
             Feature Fighter1_1 = new Feature("Fighter", "Second Wind", 1);
             Feature Fighter2 = new Feature("Fighter", "Action Surge", 2);
@@ -336,6 +376,7 @@ namespace CharacterGenerator.Controllers
             Feature Fighter17 = new Feature("Fighter", "Action Surge (2 Uses)", 17);
             Feature Fighter17_1 = new Feature("Fighter", "Indomitable (3 Uses)", 17);
             Feature Fighter20 = new Feature("Fighter", "Extra Attack (3)", 20);
+    //Monk
             Feature Monk1 = new Feature("Monk", "Unarmored Defense (Monk)", 1);
             Feature Monk1_1 = new Feature("Monk", "Martial Arts", 1);
             Feature Monk2 = new Feature("Monk", "Ki", 2);
@@ -354,9 +395,69 @@ namespace CharacterGenerator.Controllers
             Feature Monk15 = new Feature ("Monk", "Timeless Body", 15);
             Feature Monk18 = new Feature ("Monk", "Empty Body", 18);
             Feature Monk20 = new Feature ("Monk", "Perfect Self", 20);
+    //Paladin
             Feature Pally0 = new Feature ("Paladin", "Divine Sense", 1);
             Feature Pally1 = new Feature ("Paladin", "Lay on Hands", 1);
+            Feature Pally2 = new Feature ("Paladin", "Fighting Style", 2);
+            Feature Pally2_2 = new Feature ("Paladin", "Spellcasting (Paladin)", 2);
+            Feature Pally2_3 = new Feature ("Paladin", "Divine Smite", 2);
+            Feature Pally5 = new Feature ("Paladin", "Divine Smite", 5);
+            Feature Pally10 = new Feature ("Paladin", "Aura of Courage", 10);
+            Feature Pally11 = new Feature ("Paladin", "Improved Divine Smite", 11);
+            Feature Pally14 = new Feature ("Paladin", "Cleansing Touch", 14);
+            Feature Pally18 = new Feature ("Paladin", "Aura Improvements", 18);
+    //Ranger
+            Feature rngr1 = new Feature ("Ranger", "Favored Enemy", 1); //Need to expand on this, as it covers a number of possible options
+            Feature rngr1_1 = new Feature ("Ranger", "Natural Explorer", 1);
+            Feature rngr2 = new Feature ("Ranger", "Fighting Style", 2); //Reqs expansion, similar to other Fighting Style options
+            Feature rngr2_2 = new Feature ("Ranger", "Spellcasting (Ranger)", 2);
+            Feature rngr3 = new Feature ("Ranger", "Primeval Awareness", 3);
+            Feature rngr5 = new Feature ("Ranger", "Extra Attack", 5);
+            Feature rngr6 = new Feature ("Ranger", "Favored Enemy and Natural Explorer Improvements", 6);
+            Feature rngr10 = new Feature ("Ranger", "Natural Explorer Improvement", 10);
+            Feature rngr10_1 = new Feature ("Ranger", "Hide in Plain Sight", 10);
+            Feature rngr14 = new Feature ("Ranger", "Favored Enemy Improvement (Level 14)", 14);
+            Feature rngr14_1 = new Feature ("Ranger", "Vanish", 14);
+            Feature rngr18 = new Feature ("Ranger", "Feral Senses", 18);
+            Feature rngr20 = new Feature ("Ranger", "Foe Slayer", 20);
+    //Rogue
+            Feature rg1 = new Feature ("Rogue", "Expertise", 1);
+            Feature rg1_1 = new Feature ("Rogue", "Sneak Attack", 1);
+            Feature rg1_2 = new Feature ("Rogue", "Thieves Cant", 1);
+            Feature rg2 = new Feature ("Rogue", "Cunning Action", 2);
+            Feature rg5 = new Feature ("Rogue", "Uncanny Dodge", 5);
+            Feature rg6 = new Feature ("Rogue", "Expertise", 6);
+            Feature rg7 = new Feature ("Rogue", "Evasion", 7);
+            Feature rg11 = new Feature ("Rogue", "Reliable Talent", 11);
+            Feature rg14 = new Feature ("Rogue", "Blindsense", 14);
+            Feature rg15 = new Feature ("Rogue", "Slippery Mind", 15);
+            Feature rg18 = new Feature ("Rogue", "Elusive", 18);
+            Feature rg20 = new Feature ("Rogue", "Stroke of Luck", 20);
+    //Sorcerer
+            Feature sorc1 = new Feature ("Sorcerer", "Spellcasting (Sorcerer)", 1);
+            Feature sorc2 = new Feature ("Sorcerer", "Font of Magic", 2);
+            Feature sorc3 = new Feature ("Sorcerer", "Metamagic (Level 3)", 3); //Have to generate options
+            Feature sorc10 = new Feature ("Sorcerer", "Metamagic (Level 10)", 10);
+            Feature sorc17 = new Feature ("Sorcerer", "Metamagic (Level 17)", 17);
+            Feature sorc20 = new Feature ("Sorcerer", "Sorcerous Restoration", 20);
+    //Warlock
+            Feature lock0 = new Feature ("Warlock", "Pact Magic", 1);
+            Feature lock2 = new Feature ("Warlock", "Eldritch Invocations", 2); //Need to expand based on Invocations
+            Feature lock3 = new Feature ("Warlock", "Pact Boon", 3); // Need to expand on this to generate options, probably list each pact boon under this and when Pact boon is recieved, add one of the options to the list
+            Feature lock11 = new Feature ("Warlock", "Mystic Arcanum (Level 6)", 11);
+            Feature lock13 = new Feature ("Warlock", "Mystic Arcanum (Level 7)", 13);
+            Feature lock15 = new Feature ("Warlock", "Mystic Arcanum (Level 8)", 15);
+            Feature lock17 = new Feature ("Warlock", "Mystic Arcanum (Level 9)", 17);
+            Feature lock20 = new Feature ("Warlock", "Eldritch Master", 20);
+    //Wizard
+            Feature Wiz1 = new Feature ("Wizard", "Spellcasting (Wizard)", 1);
+            Feature Wiz1_1 = new Feature ("Wizard", "Arcane Recovery", 1);
+            Feature Wiz18 = new Feature ("Wizard", "Spell Mastery", 18);
+            Feature Wiz20 = new Feature ("Wizard", "Signature Spell", 20);
 
+
+
+            _context.SaveChanges();
         }
     }
 }

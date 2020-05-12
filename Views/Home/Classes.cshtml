@@ -35,19 +35,21 @@
 
 @* Header Login/Registration  *@
 <div class="row header">
-    <h1 class= "col-sm-6"><a href="/">RPG Character Generator</a></h1>
-    <div class="col-sm-6">
+    <h1 class= "col-sm-8 text-center"><a href="/">RPG Character Generator</a></h1>
+    <div class="col-sm-4">
         @{
             if(ViewBag.SessionId == null)
             {
                 <div class="row">
-                    <button class= "register-form col-sm-5 btn btn-primary" onclick="openRegistration()" >Register</button>
+                    <button class= "register-form col-sm-5 btn btn-primary btn-sm" onclick="openRegistration()" >Register</button>
                     <div class="form-popup" id="register">
+                        @* <partial Name="RegisterPartial"></partial> *@
                         @Html.Partial("RegisterPartial", (User) @Model.User)
                     </div>
                     <h4 class="col-sm-1">|</h4>
-                    <button class = "login-form col-sm-5 btn btn-primary" onclick="openLogin()">Login</button>
+                    <button class = "login-form col-sm-6 btn btn-primary btn-sm" onclick="openLogin()">Login</button>
                     <div class="form-popup" id= "login">
+                        @* <partial Name="LoginPartial"></partial> *@
                         @Html.Partial("LoginPartial", (Login) @Model.Login)
                     </div>
                 </div>
@@ -56,9 +58,9 @@
             {
                 <div class="row">
 
-                    <a class="btn btn-primary col-sm-5" href="/profile">Profile</a>
+                    <a class="btn btn-primary btn-sm col-sm-5" href="/profile/@Model.User.UserId">Profile</a>
                     <h4 class="col-sm-1">|</h4>
-                    <a class="btn btn-danger col-sm-5" href="/logout">Logout</a>
+                    <a class="btn btn-primary btn-sm col-sm-6" href="/logout">Logout</a>
                 </div>
             }
         }
@@ -67,12 +69,14 @@
 
 
 
+
 @* Pull API from fantasy name generator for names *@
 <div class="cotnainer" style="background: beige; border: 2px solid black; border-radius:5px;  margin: 5px; padding: 20 px;">
 
 <div class="row">
-    <h4 class="col-sm-5 text-center" style = "margin-bottom: 5px;">Character Name the @Model.Character.playerRace.Race</h4>
-    <h4 class="col-sm-4 text-center" style = "margin-bottom: 5px;">@Model.Character.playerClass.ClassName and @Model.Character.playerBG.Background</h4>
+    <h4 class="col-sm-4 text-center" style = "margin-bottom: 5px;">Character Name</h4>
+    <h4 class="col-sm-4 text-center" style = "margin-bottom: 5px;">@Model.Character.playerRace.Subrace @Model.Character.playerRace.Race </h4>
+    <h4 class="col-sm-4 text-center" style = "margin-bottom: 5px;">@Model.Character.playerClass.ClassName  @Model.Character.playerBG.Background</h4>
 </div>
 <div class="row ">
     <div class= "col-sm text-center" style="margin: 10px;">
@@ -136,40 +140,40 @@
             </div>
          </div>
          <div class="row" >
-            <div class="col-5 text-center" style ="border-radius:5px; background: white; margin: 2px; text-align: left;">
+            <div class="col-5 text-center" style ="border-radius:5px;  margin: 2px; text-align: left;">
                 <span><br></span>
             </div>
-            <div class="col-5 text-center" style ="border-radius:5px; background: white; margin:2px; text-align: left;">
+            <div class="col-5 text-center" style ="border-radius:5px;  margin:2px; text-align: left;">
                 <span><br></span>
             </div>
          </div>
          <div class="row" >
             <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                <p>Strength Mod</p>
+                <p>Strength Modifier</p>
                 <p>@Model.Character.playerStat.StrMod</p>
             </div>
             <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                <p>Dexterity Mod</p>
+                <p>Dexterity Modifier</p>
                 <p>@Model.Character.playerStat.DexMod</p>
             </div>
          </div>
          <div class="row" >
             <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                <p>Constitution Mod</p>
+                <p>Constitution Modifier</p>
                 <p>@Model.Character.playerStat.ConMod</p>
             </div>
             <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                <p>Intelligence Mod</p>
+                <p>Intelligence Modifier</p>
                 <p>@Model.Character.playerStat.IntMod</p>
             </div>
          </div>
          <div class="row" >
             <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                <p>Wisdom Mod</p>
+                <p>Wisdom Modifier</p>
                 <p>@Model.Character.playerStat.WisMod</p>
             </div>
             <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                <p>Charisma Mod</p>
+                <p>Charisma Modifier</p>
                 <p>@Model.Character.playerStat.ChaMod</p>
             </div>
          </div>

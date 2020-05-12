@@ -35,19 +35,19 @@
 
 @* Header Login/Registration  *@
 <div class="row header">
-    <h1 class= "col-sm-6"><a href="/">RPG Character Generator</a></h1>
-    <div class="col-sm-6">
+    <h1 class= "col-sm-8 text center"><a href="/">RPG Character Generator</a></h1>
+    <div class="col-sm-4">
         @{
             if(ViewBag.SessionId == null)
             {
                 <div class="row">
-                    <button class= "register-form col-sm-5 btn btn-primary" onclick="openRegistration()" >Register</button>
+                    <button class= "register-form col-sm-5 btn btn-primary btn-sm" onclick="openRegistration()" >Register</button>
                     <div class="form-popup" id="register">
                         @* <partial Name="RegisterPartial"></partial> *@
                         @Html.Partial("RegisterPartial", (User) @Model.User)
                     </div>
                     <h4 class="col-sm-1">|</h4>
-                    <button class = "login-form col-sm-5 btn btn-primary" onclick="openLogin()">Login</button>
+                    <button class = "login-form col-sm-5 btn btn-primary btn-sm" onclick="openLogin()">Login</button>
                     <div class="form-popup" id= "login">
                         @* <partial Name="LoginPartial"></partial> *@
                         @Html.Partial("LoginPartial", (Login) @Model.Login)
@@ -58,9 +58,9 @@
             {
                 <div class="row">
 
-                    <button class="btn btn-primary col-sm-5" href="/profile">Profile</button>
+                    <a class="btn btn-primary btn-sm col-sm-5" href="/profile/@Model.User.UserId">Profile</a>
                     <h4 class="col-sm-1">|</h4>
-                    <button class="btn btn-danger col-sm-5" href="/logout">Logout</button>
+                    <a class="btn btn-primary btn-sm col-sm-5" href="/logout">Logout</a>
                 </div>
             }
         }
@@ -72,8 +72,13 @@
 @* Pull API from fantasy name generator for names *@
 <div class="cotnainer" style="background: beige; border: 2px solid black; border-radius:5px;  margin: 5px; padding: 20 px;">
     <div class="row">
-        <h4 class="col-sm-5 text-center" style = "margin-bottom: 5px;">Character Name the @ViewBag.character.playerRace.Race</h4>
-        <h4 class="col-sm-4 text-center" style = "margin-bottom: 5px;">@ViewBag.character.playerClass.ClassName and @ViewBag.character.playerBG.Background</h4>
+        <h4 class="col-sm-5 text-center" style = "margin-bottom: 5px;">Character Name @ViewBag.character.playerRace.Race</h4>
+        <h4 class="col-sm-7 text-center" style = "margin-bottom: 5px;">@ViewBag.character.playerClass.ClassName and @ViewBag.character.playerBG.Background</h4>
+    </div>
+    <div class="row">
+        <h4 class="col-sm-5 text-center">
+
+        </h4>
     </div>
     <div class="row ">
         <div class= "col-sm text-center" style="margin: 10px;">
@@ -102,75 +107,75 @@
                 <p>@ViewBag.character.playerStat.Charisma</p>
             </div>
         </div>
-        <div class = "col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 10px; text-align: left;  ">
+        <div class = "col-sm text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 10px; text-align: left; padding-top: 20px;  ">
             <ul style ="list-style-type:none; text-align: left;">
-                <li>Acrobatics - @ViewBag.character.playerStat.Acrobatics</li>
-                <li>Animal Handling - @ViewBag.character.playerStat.AnimalHandling</li>
-                <li>Arcana - @ViewBag.character.playerStat.Arcana</li>
-                <li>Athletics - @ViewBag.character.playerStat.Athletics</li>
-                <li>Deception - @ViewBag.character.playerStat.Deception</li>
-                <li>History - @ViewBag.character.playerStat.History</li>
-                <li>Insight - @ViewBag.character.playerStat.Insight</li>
-                <li>Intimidation - @ViewBag.character.playerStat.Intimidation</li>
-                <li>Investigation - @ViewBag.character.playerStat.Investigation</li>
-                <li>Medicine - @ViewBag.character.playerStat.Medicine</li>
-                <li>Nature - @ViewBag.character.playerStat.Nature</li>
-                <li>Perception - @ViewBag.character.playerStat.Perception</li>
-                <li>Performance - @ViewBag.character.playerStat.Performance</li>
-                <li>Persuasion - @ViewBag.character.playerStat.Persuasion</li>
-                <li>Religion - @ViewBag.character.playerStat.Religion</li>
-                <li>Sleight of Hand - @ViewBag.character.playerStat.Sleight</li>
-                <li>Stealth - @ViewBag.character.playerStat.Stealth</li>
-                <li>Survival - @ViewBag.character.playerStat.Survival</li>
+                <li style="margin:1px;">Acrobatics - @ViewBag.character.playerStat.Acrobatics</li>
+                <li style="margin:1px;">Animal Handling - @ViewBag.character.playerStat.AnimalHandling</li>
+                <li style="margin:1px;">Arcana - @ViewBag.character.playerStat.Arcana</li>
+                <li style="margin:1px;">Athletics - @ViewBag.character.playerStat.Athletics</li>
+                <li style="margin:1px;">Deception - @ViewBag.character.playerStat.Deception</li>
+                <li style="margin:1px;">History - @ViewBag.character.playerStat.History</li>
+                <li style="margin:1px;">Insight - @ViewBag.character.playerStat.Insight</li>
+                <li style="margin:1px;">Intimidation - @ViewBag.character.playerStat.Intimidation</li>
+                <li style="margin:1px;">Investigation - @ViewBag.character.playerStat.Investigation</li>
+                <li style="margin:1px;">Medicine - @ViewBag.character.playerStat.Medicine</li>
+                <li style="margin:1px;">Nature - @ViewBag.character.playerStat.Nature</li>
+                <li style="margin:1px;">Perception - @ViewBag.character.playerStat.Perception</li>
+                <li style="margin:1px;">Performance - @ViewBag.character.playerStat.Performance</li>
+                <li style="margin:1px;">Persuasion - @ViewBag.character.playerStat.Persuasion</li>
+                <li style="margin:1px;">Religion - @ViewBag.character.playerStat.Religion</li>
+                <li style="margin:1px;">Sleight of Hand - @ViewBag.character.playerStat.Sleight</li>
+                <li style="margin:1px;">Stealth - @ViewBag.character.playerStat.Stealth</li>
+                <li style="margin:1px;">Survival - @ViewBag.character.playerStat.Survival</li>
 
             </ul>
         </div>
         <div class="col-sm" style="margin: 10px;">
             <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <div class="col-5 text-center" style ="border: 2px solid black; background: white; border-radius:5px;  margin: 2px; text-align: left;">
                     <p>Level</p>
                     <p>@ViewBag.character.Level</p>
                 </div>
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <div class="col-5 text-center" style ="border: 2px solid black; background: white;  border-radius:5px; margin: 2px; text-align: left;">
                     <p>Hit Points</p>
                     <p>@ViewBag.character.playerStat.HitPoints</p>
                 </div>
             </div>
             <div class="row" >
-                <div class="col-5 text-center" style ="border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <div class="col-5 text-center" style ="border-radius:5px;  margin: 2px; text-align: left;">
                     <span><br></span>
                 </div>
-                <div class="col-5 text-center" style ="border-radius:5px; background: white; margin:2px; text-align: left;">
+                <div class="col-5 text-center" style ="border-radius:5px; margin:2px; text-align: left;">
                     <span><br></span>
                 </div>
             </div>
             <div class="row" >
                 <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Strength Mod</p>
+                    <p>Strength Modifier</p>
                     <p>@ViewBag.character.playerStat.StrMod</p>
                 </div>
                 <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Dexterity Mod</p>
+                    <p>Dexterity Modifier</p>
                     <p>@ViewBag.character.playerStat.DexMod</p>
                 </div>
             </div>
             <div class="row" >
                 <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Constitution Mod</p>
+                    <p>Constitution Modifier</p>
                     <p>@ViewBag.character.playerStat.ConMod</p>
                 </div>
                 <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Intelligence Mod</p>
+                    <p>Intelligence Modifier</p>
                     <p>@ViewBag.character.playerStat.IntMod</p>
                 </div>
             </div>
             <div class="row" >
                 <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Wisdom Mod</p>
+                    <p>Wisdom Modifier</p>
                     <p>@ViewBag.character.playerStat.WisMod</p>
                 </div>
                 <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Charisma Mod</p>
+                    <p>Charisma Modifier</p>
                     <p>@ViewBag.character.playerStat.ChaMod</p>
                 </div>
             </div>

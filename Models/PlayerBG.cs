@@ -21,7 +21,7 @@ namespace CharacterGenerator.Models
         public PlayerStat BGSelector(PlayerStat playerStat, PlayerBG playerBG)
         {
             Random rand = new Random();
-            int num = rand.Next(0,16);
+            int num = rand.Next(0,15);
             switch(num)
             {
                 case 0:
