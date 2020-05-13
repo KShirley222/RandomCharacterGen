@@ -1,6 +1,7 @@
 @model dynamic
 
-<p>Test @Model.User.UserName</p>
+<p>Welcome @Model.User.UserName!</p>
+
 
 <div class="row">
     <div class="col">
@@ -12,6 +13,7 @@
                 <th scope="col">Subrace</th>
                 <th scope="col">Class</th>
                 <th scope="col">Background</th>
+                <th scope="col">Features & Spells</th>
                 <th scope="col">Actions</th>
             </thead>
             <tbody>
@@ -25,7 +27,8 @@
                         <td>@character.playerRace.Subrace</td>
                         <td>@character.playerClass.ClassName</td>
                         <td>@character.playerBG.Background</td>
-                        <td><a href="#">View</a> | <a href="#">Delete</a></td>
+                        <td>View Ability List</td>
+                        <td><a href="/view/@character.CharacterId">View</a> | <a href="#">Delete</a></td>
                     </tr>
                 }
             </tbody>

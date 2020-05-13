@@ -29,25 +29,58 @@
         background-color: #ddd;
         outline: none;
     }
+
+    
+    .container{
+        background-color: #BFC0C0;
+    }
+    .btn{
+        background-color: #2d3142;
+        border: 1px solid #2d3142;
+    }
+    .btn-primary:hover {
+        background-color: #3B0D11;
+        border: 1px solid #3B0D11;
+        opacity: 1;
+    }
+    .btn-sample:active {
+        background-color: #3B0D11;
+        border: 1px solid #2d3142;
+    }
+    .title {
+        color: #2D3142 ;
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    .welcome {
+        font-weight: bold;
+        color: #2D3142;
+        text-align: center;
+    }
+    #refresh{
+        color: #3B0D11;
+        font-style: italic;
+        font-size: large;
+    }
 </style>
 
 @model dynamic
 
 @* Header Login/Registration  *@
 <div class="row header">
-    <h1 class= "col-sm-8 text center"><a href="/">RPG Character Generator</a></h1>
+    <h1 class= "col-sm-8 text center"><a href="/" class="title">RPG Character Generator</a></h1>
     <div class="col-sm-4">
         @{
             if(ViewBag.SessionId == null)
             {
                 <div class="row">
-                    <button class= "register-form col-sm-5 btn btn-primary btn-sm" onclick="openRegistration()" >Register</button>
+                    <button class= "register-form col-sm-5 btn btn-primary btn-sm logreg" onclick="openRegistration()" >Register</button>
                     <div class="form-popup" id="register">
                         @* <partial Name="RegisterPartial"></partial> *@
                         @Html.Partial("RegisterPartial", (User) @Model.User)
                     </div>
                     <h4 class="col-sm-1">|</h4>
-                    <button class = "login-form col-sm-5 btn btn-primary btn-sm" onclick="openLogin()">Login</button>
+                    <button class = "login-form col-sm-5 btn btn-primary btn-sm logreg" onclick="openLogin()">Login</button>
                     <div class="form-popup" id= "login">
                         @* <partial Name="LoginPartial"></partial> *@
                         @Html.Partial("LoginPartial", (Login) @Model.Login)
@@ -58,12 +91,20 @@
             {
                 <div class="row">
 
-                    <a class="btn btn-primary btn-sm col-sm-5" href="/profile/@Model.User.UserId">Profile</a>
+                    <a class="btn btn-primary btn-sm col-sm-5 logreg" href="/profile/@Model.User.UserId">Profile</a>
                     <h4 class="col-sm-1">|</h4>
-                    <a class="btn btn-primary btn-sm col-sm-5" href="/logout">Logout</a>
+                    <a class="btn btn-primary btn-sm col-sm-5 logreg" href="/logout">Logout</a>
                 </div>
             }
         }
+    </div>
+</div>
+
+<div class="row welcome">
+    <div class="col">
+        <p class=" welcome">Welcome to our humble Character Generator!</p>
+        <p class=" welcome">If you would like to be a bit more precise, then please register and you will be able to save your characters!</p>
+        <p class=" welcome">Otherwise, click <a href="/" id="refresh">here</a> for another Character! Thanks for Visiting!</p>
     </div>
 </div>
 

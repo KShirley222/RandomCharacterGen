@@ -301,6 +301,23 @@ namespace CharacterGenerator.Controllers
             User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
             return View();
         }
+
+        [HttpGet("/view/{ID}")]
+        public IActionResult ViewCharacter(int ID)
+        {
+
+            NewCharacter character = _context.NewCharacter.Include( c => c.playerRace).Include( c => c.playerClass).Include(c => c.playerStat).Include(c => c.playerBG).FirstOrDefault( c => c.CharacterId == ID);
+
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+
+            dynamic MyModel = new ExpandoObject();
+            MyModel.User = SessionUser;
+            MyModel.Login = new Login();
+            MyModel.Character = character; 
+            return View("classes", MyModel);
+        }
         // =============================================================================
         // Feature builder
         
