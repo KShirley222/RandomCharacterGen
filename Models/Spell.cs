@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CharacterGenerator.Models
@@ -7,21 +8,21 @@ namespace CharacterGenerator.Models
     {
         [Key]
         public int SpellId {get; set;}
-        public int PlayerStatId {get; set;}
+        public int CharacterId {get; set;}
         public PlayerStat Caster {get; set;}
         public string SpellName {get; set;}
         public string SpellSource {get; set;}
         public int SpellLevel {get; set;}
+
+        public List<SpellAssoc> Players { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public Spell(){}
-        public Spell(int SPL_LVL, string source, string name, PlayerStat playerStat)
+        public Spell(int SPL_LVL, string source, string name)
         {
             SpellLevel = SPL_LVL;
-            SpellSource = source;
             SpellName = name;
-            PlayerStatId = playerStat.PlayerStatId;
         }
     }
 

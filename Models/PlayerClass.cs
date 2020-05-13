@@ -817,7 +817,7 @@ namespace CharacterGenerator.Models
                     pc.SubClassName = "Champion";
                     break;
                 case 1:
-                    pc.SubClassName = "Champion";
+                    pc.SubClassName = "Battle Master";
                     break;
                 case 2:
                     pc.SubClassName = "Eldritch Knight";
@@ -915,7 +915,7 @@ namespace CharacterGenerator.Models
             switch(subclassnum)
             {
                 case 0:
-                    pc.SubClassName = "The Archefey";
+                    pc.SubClassName = "The Archfey";
                     break;
                 case 1:
                     pc.SubClassName = "The Great Old One";
