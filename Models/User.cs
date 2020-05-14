@@ -29,6 +29,13 @@ namespace CharacterGenerator.Models
         public string Confirm {get; set; }
 
 
-        
+        public User(){}
+
+        public User(string email, string userName, string password)
+        {
+            Email = email;
+            UserName = userName;
+            Password = password;
+        }
     }
 }

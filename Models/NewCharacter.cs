@@ -15,7 +15,7 @@ namespace CharacterGenerator.Models
         public PlayerClass playerClass { get; set; }
         public int playerRaceId { get; set; }
         public PlayerRace playerRace { get; set; }
-        public int playerBGId { get; set; }
+        public int BGId { get; set; }
         public PlayerBG playerBG { get; set; }
         public int playerStatId { get; set; }
         public PlayerStat playerStat { get; set; }
@@ -25,9 +25,30 @@ namespace CharacterGenerator.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public NewCharacter(int level)
+        public NewCharacter(){}
+        
+        public NewCharacter(int level, User testUser)
         {
-            Level = level;
+            Level = 1;
+            user = testUser; 
+            UserId = testUser.UserId;
+            
+            playerStat = new PlayerStat(1);
+            playerStatId = playerStat.PlayerStatId;
+
+            playerBG = new PlayerBG();
+            playerBG.BGSelector(playerStat, playerBG);
+            BGId = playerBG.PlayerBGId;
+
+            playerRace = new PlayerRace();
+            playerRace.RaceSelector(Level, playerStat, playerRace);
+            playerRaceId = playerRace.PlayerRaceId;
+
+            playerClass = new PlayerClass(Level, playerStat);
+            playerClass.ClassSelector(Level, playerStat, playerClass);
+            playerClassId = playerClass.PlayerClassId;
+
+            playerStat.UpdatePro(playerStat);
         }
         public NewCharacter(int level, PlayerStat pStat,  PlayerRace pRace, PlayerClass pClass, PlayerBG pBG, User pUser)
         {
@@ -38,7 +59,7 @@ namespace CharacterGenerator.Models
             playerClass = pClass;
             playerRaceId = pRace.PlayerRaceId;
             playerRace = pRace;
-            playerBGId = pBG.PlayerBGId;
+            BGId = pBG.PlayerBGId;
             playerBG = pBG;
             user = pUser;
             UserId = pUser.UserId;
@@ -53,7 +74,7 @@ namespace CharacterGenerator.Models
             playerClass = pClass;
             playerRaceId = pRace.PlayerRaceId;
             playerRace = pRace;
-            playerBGId = pBG.PlayerBGId;
+            BGId = pBG.PlayerBGId;
             playerBG = pBG;
             UserId = 1;
             

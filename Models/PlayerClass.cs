@@ -23,6 +23,10 @@ namespace CharacterGenerator.Models
         {
             
         }
+        public PlayerClass(int one)
+        {
+            
+        }
         public PlayerClass(int level, PlayerStat stats)
         {
             // Class Selector will select and determine class, passing it to a class function 

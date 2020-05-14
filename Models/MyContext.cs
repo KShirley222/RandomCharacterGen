@@ -12,5 +12,7 @@ namespace CharacterGenerator.Models
         public DbSet<PlayerBG> PlayerBGs { get; set; }
         public DbSet <PlayerClass> PlayerClasses { get; set; }
         public DbSet <User> Users { get; set; }
+        public DbSet <Feature> Features { get; set;}
+        public DbSet <FeatureAssoc> Feature_Associations {get; set;}
     }
 }

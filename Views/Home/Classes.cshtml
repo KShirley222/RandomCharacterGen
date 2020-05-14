@@ -179,7 +179,15 @@
          </div>
     </div>
     
-</div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @foreach(Feature feat in Model.Features)
+            {
+            <p>@feat.FeatureName</p>
+            }
+        </div>
+    </div>
 </div>
 
 
