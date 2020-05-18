@@ -19,10 +19,11 @@ namespace CharacterGenerator.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public Spell(){}
-        public Spell(int SPL_LVL, string source, string name)
+        public Spell(int SPL_LVL, List<string> sources, string name)
         {
             SpellLevel = SPL_LVL;
             SpellName = name;
+
         }
     }
 

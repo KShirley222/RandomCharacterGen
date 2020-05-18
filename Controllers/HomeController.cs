@@ -1129,7 +1129,22 @@ namespace CharacterGenerator.Controllers
             _context.Features.Add(trans5);
 
         _context.SaveChanges();
+
         return RedirectToAction ("Index");
+        }
+
+        [HttpGet("/topsecretspells")]
+        public IActionResult GetSpells()
+        {
+            //I have no idea if the following will work whatsover
+            ApiHelper.IntializeClient();
+            var spellarray = SpellProcessor.test();
+            Console.WriteLine(spellarray);
+            // SpellArrayHelper helpMe = new SpellArrayHelper();
+           
+            // helpMe.spellJson(spellarray);
+
+            return RedirectToAction ("Index");
         }
     }
 }
