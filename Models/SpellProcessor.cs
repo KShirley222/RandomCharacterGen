@@ -23,12 +23,12 @@ namespace CharacterGenerator.Models
                             Console.WriteLine(response);
                             Console.WriteLine(spellarray.Results);
                             Console.WriteLine("*****STAR*****");
-                            // foreach (object Spell in spellarray.Results)
-                            // {
-                            //     Console.WriteLine(Spell);
-                            //     SpellArrayHelper myJsonObject = (SpellArrayHelper)Spell;
-                            //     Console.WriteLine(myJsonObject.url);
-                            // }
+                            foreach (object Spell in spellarray.Results)
+                            {;
+                                Console.WriteLine(Spell);
+                                // SpellArrayHelper myJsonObject = (SpellArrayHelper)Spell;
+                                // Console.WriteLine(myJsonObject.url);
+                            }
                             return spellarray;
                         }
                     else
