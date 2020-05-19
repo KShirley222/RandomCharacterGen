@@ -26,8 +26,8 @@ namespace CharacterGenerator.Models
                             foreach (object Spell in spellarray.Results)
                             {;
                                 Console.WriteLine(Spell);
-                                SpellArrayHelper myJsonObject = (SpellArrayHelper)Spell;
-                                Console.WriteLine(myJsonObject.url);
+                                // SpellArrayHelper myJsonObject = (SpellArrayHelper)Spell;
+                                // Console.WriteLine(myJsonObject.url);
                             }
                             return spellarray;
                         }
