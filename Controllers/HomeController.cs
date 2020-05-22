@@ -179,7 +179,6 @@ namespace CharacterGenerator.Controllers
             }
 
 
-
             //Dynamic model with USer, Login, Character
             dynamic MyModel = new ExpandoObject();
             MyModel.User = SessionUser;
@@ -199,6 +198,19 @@ namespace CharacterGenerator.Controllers
             //LINQ query
 
             return View("Classes", MyModel);
+        }
+
+        // =============================================================================
+        // Test for FrontEnd Design
+        [HttpGet("/testhtml")]
+        public IActionResult TestHtml()
+        {
+            dynamic MyModel = new ExpandoObject();
+            MyModel.User = _context.Users.FirstOrDefault(u => u.UserId == 1);
+            MyModel.Character = _context.NewCharacter.FirstOrDefault(c => c.CharacterId == 1); 
+            MyModel.Login = new Login();
+            
+            return View("TestDisplay", MyModel);
         }
 
         // =============================================================================
