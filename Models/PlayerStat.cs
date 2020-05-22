@@ -95,10 +95,7 @@ namespace CharacterGenerator.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
 
-        public PlayerStat()
-        {
-            
-        }
+        public PlayerStat(){}
         public PlayerStat(int level)
         {
             int Level = level;

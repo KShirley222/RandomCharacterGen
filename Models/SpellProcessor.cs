@@ -12,42 +12,32 @@ namespace CharacterGenerator.Models
 {
     public class SpellProcessor
     {
-        public static async Task<SpellHelperModel> test()
+        public static async Task<SpellArrayHelperModel> test(string addonstring)
         {
-            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(ApiHelper.ApiClient.BaseAddress+"api/spells/"))
+            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(ApiHelper.ApiClient.BaseAddress+addonstring))
                 {
                     if (response.IsSuccessStatusCode)
                         {
-                            SpellHelperModel spellarray = await response.Content.ReadAsAsync<SpellHelperModel>();
-                            Console.WriteLine("*****STAR*****");
-                            Console.WriteLine(response);
-                            Console.WriteLine(spellarray.Results);
-                            Console.WriteLine("*****STAR*****");
-                            foreach (object Spell in spellarray.Results)
-                            {;
-                                Console.WriteLine(Spell);
-                                // SpellArrayHelper myJsonObject = (SpellArrayHelper)Spell;
-                                // Console.WriteLine(myJsonObject.url);
-                            }
-                            return spellarray;
+                            SpellArrayHelperModel spell = await response.Content.ReadAsAsync<SpellArrayHelperModel>();
+                            // Console.WriteLine("*****STAR*****");
+                            // Console.WriteLine(response);
+                            // Console.WriteLine(spellarray);
+                            // Console.WriteLine("*****STAR*****");
+                            // foreach (object Spell in spellarray.Results)
+                            // {;
+                            //     Console.WriteLine(Spell);
+                            //     // SpellArrayHelper myJsonObject = (SpellArrayHelper)Spell;
+                            //     // Console.WriteLine(myJsonObject.url);
+                            // }
+                            Console.WriteLine(ApiHelper.ApiClient.BaseAddress+addonstring);
+                            return spell;
                         }
                     else
                         {
                             Console.WriteLine("*****STAR*****");
                             Console.WriteLine(response.ReasonPhrase);
                             Console.WriteLine("*****STAR*****");
-                            Console.WriteLine("*****STAR*****");
-                            Console.WriteLine(response.ReasonPhrase);
-                            Console.WriteLine("*****STAR*****");
-                            Console.WriteLine("*****STAR*****");
-                            Console.WriteLine(response.ReasonPhrase);
-                            Console.WriteLine("*****STAR*****");
-                            Console.WriteLine("*****STAR*****");
-                            Console.WriteLine(response.ReasonPhrase);
-                            Console.WriteLine("*****STAR*****");
-                            Console.WriteLine("*****STAR*****");
-                            Console.WriteLine(response.ReasonPhrase);
-                            Console.WriteLine("*****STAR*****");
+                            Console.WriteLine(ApiHelper.ApiClient.BaseAddress+addonstring);
                             throw new Exception(response.ReasonPhrase);
                         }
                 }

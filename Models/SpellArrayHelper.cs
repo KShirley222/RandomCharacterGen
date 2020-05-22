@@ -10,16 +10,10 @@ using Newtonsoft.Json.Linq;
 
 namespace CharacterGenerator.Models
 {
-    public class SpellArrayHelper
+    public class SpellArrayHelperModel
     {
-        public string Index {get; set;}
         public string Name {get; set;}
-        public string url {get; set;}
-
-    // public void spellJson( object spell)
-    // {
-    //     SpellArrayHelper myJsonObject = JsonConvert.DeserializeObject<SpellArrayHelper>((string)spell);
-    //     Console.WriteLine(myJsonObject);
-    // }
+        public int Level {get; set;}
+        // public List<string> Classes {get;set;}
     }
 }

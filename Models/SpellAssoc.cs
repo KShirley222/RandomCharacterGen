@@ -6,7 +6,7 @@ namespace CharacterGenerator.Models
     public class SpellAssoc
     {
         [Key]
-        public int FeatureAssocId { get; set; }
+        public int SpellAssocId { get; set; }
         public int SpellId { get; set; }
         public Spell SpellA  { get; set; }
         public int CharacterId { get; set; }

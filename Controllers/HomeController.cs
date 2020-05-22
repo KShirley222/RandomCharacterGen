@@ -1138,333 +1138,510 @@ namespace CharacterGenerator.Controllers
         [HttpGet("/topsecretspells")]
         public IActionResult GetSpells()
         {
-            List<string> spellurls = new List<string>{
-                "/api/spells/acid-arrow",
-                "/api/spells/acid-splash",
-                "/api/spells/aid",
-                "/api/spells/alarm",
-                "/api/spells/alter-self",
-                "/api/spells/animal-friendship",
-                "/api/spells/animal-messenger",
-                "/api/spells/animal-shapes",
-                "/api/spells/animate-dead",
-                "/api/spells/animate-objects",
-                "/api/spells/antilife-shell",
-                "/api/spells/antimagic-field",
-                "/api/spells/antipathy-sympathy",
-                "/api/spells/arcane-eye",
-                "/api/spells/arcane-hand",
-                "/api/spells/arcane-lock",
-                "/api/spells/arcane-sword",
-                "/api/spells/arcanists-magic-aura",
-                "/api/spells/astral-projection",
-                "/api/spells/augury",
-                "/api/spells/awaken",
-                "/api/spells/bane",
-                "/api/spells/banishment",
-                "/api/spells/barkskin",
-                "/api/spells/beacon-of-hope",
-                "/api/spells/bestow-curse",
-                "/api/spells/black-tentacles",
-                "/api/spells/blade-barrier",
-                "/api/spells/bless",
-                "/api/spells/blight",
-                "/api/spells/blindness-deafness",
-                "/api/spells/blink",
-                "/api/spells/blur",
-                "/api/spells/branding-smite",
-                "/api/spells/burning-hands",
-                "/api/spells/call-lightning",
-                "/api/spells/calm-emotions",
-                "/api/spells/chain-lightning",
-                "/api/spells/charm-person",
-                "/api/spells/chill-touch",
-                "/api/spells/circle-of-death",
-                "/api/spells/clairvoyance",
-                "/api/spells/clone",
-                "/api/spells/cloudkill",
-                "/api/spells/color-spray",
-                "/api/spells/command",
-                "/api/spells/commune",
-                "/api/spells/commune-with-nature",
-                "/api/spells/comprehend-languages",
-                "/api/spells/compulsion",
-                "/api/spells/cone-of-cold",
-                "/api/spells/confusion",
-                "/api/spells/conjure-animals",
-                "/api/spells/conjure-celestial",
-                "/api/spells/conjure-elemental",
-                "/api/spells/conjure-fey",
-                "/api/spells/conjure-minor-elementals",
-                "/api/spells/conjure-woodland-beings",
-                "/api/spells/contact-other-plane",
-                "/api/spells/contagion",
-                "/api/spells/contingency",
-                "/api/spells/continual-flame",
-                "/api/spells/control-water",
-                "/api/spells/control-weather",
-                "/api/spells/counterspell",
-                "/api/spells/create-food-and-water",
-                "/api/spells/create-or-destroy-water",
-                "/api/spells/create-undead",
-                "/api/spells/creation",
-                "/api/spells/cure-wounds",
-                "/api/spells/dancing-lights",
-                "/api/spells/darkness",
-                "/api/spells/darkvision",
-                "/api/spells/daylight",
-                "/api/spells/death-ward",
-                "/api/spells/delayed-blast-fireball",
-                "/api/spells/demiplane",
-                "/api/spells/detect-evil-and-good",
-                "/api/spells/detect-magic",
-                "/api/spells/detect-poison-and-disease",
-                "/api/spells/detect-thoughts",
-                "/api/spells/dimension-door",
-                "/api/spells/disguise-self",
-                "/api/spells/disintegrate",
-                "/api/spells/dispel-evil-and-good",
-                "/api/spells/dispel-magic",
-                "/api/spells/divination",
-                "/api/spells/divine-favor",
-                "/api/spells/divine-word",
-                "/api/spells/dominate-beast",
-                "/api/spells/dominate-monster",
-                "/api/spells/dominate-person",
-                "/api/spells/dream",
-                "/api/spells/druidcraft",
-                "/api/spells/earthquake",
-                "/api/spells/eldritch-blast",
-                "/api/spells/enhance-ability",
-                "/api/spells/enlarge-reduce",
-                "/api/spells/entangle",
-                "/api/spells/enthrall",
-                "/api/spells/etherealness",
-                "/api/spells/expeditious-retreat",
-                "/api/spells/eyebite",
-                "/api/spells/fabricate",
-                "/api/spells/faerie-fire",
-                "/api/spells/faithful-hound",
-                "/api/spells/false-life",
-                "/api/spells/fear",
-                "/api/spells/feather-fall",
-                "/api/spells/feeblemind",
-                "/api/spells/find-familiar",
-                "/api/spells/find-steed",
-                "/api/spells/find-the-path",
-                "/api/spells/find-traps",
-                "/api/spells/finger-of-death",
-                "/api/spells/fire-bolt",
-                "/api/spells/fire-shield",
-                "/api/spells/fire-storm",
-                "/api/spells/fireball",
-                "/api/spells/flame-blade",
-                "/api/spells/flame-strike",
-                "/api/spells/flaming-sphere",
-                "/api/spells/flesh-to-stone",
-                "/api/spells/floating-disk",
-                "/api/spells/fly",
-                "/api/spells/fog-cloud",
-                "/api/spells/forbiddance",
-                "/api/spells/forcecage",
-                "/api/spells/foresight",
-                "/api/spells/freedom-of-movement",
-                "/api/spells/freezing-sphere",
-                "/api/spells/gaseous-form",
-                "/api/spells/gate",
-                "/api/spells/geas",
-                "/api/spells/gentle-repose",
-                "/api/spells/giant-insect",
-                "/api/spells/glibness",
-                "/api/spells/globe-of-invulnerability",
-                "/api/spells/glyph-of-warding",
-                "/api/spells/goodberry",
-                "/api/spells/grease",
-                "/api/spells/greater-invisibility",
-                "/api/spells/greater-restoration",
-                "/api/spells/guardian-of-faith",
-                "/api/spells/guards-and-wards",
-                "/api/spells/guidance",
-                "/api/spells/guiding-bolt",
-                "/api/spells/gust-of-wind",
-                "/api/spells/hallow",
-                "/api/spells/hallucinatory-terrain",
-                "/api/spells/harm",        
-                "/api/spells/haste",
-                "/api/spells/heal",
-                "/api/spells/healing-word",
-                "/api/spells/heat-metal",
-                "/api/spells/hellish-rebuke",
-                "/api/spells/heroes-feast",
-                "/api/spells/heroism",
-                "/api/spells/hideous-laughter",        
-                "/api/spells/hold-monster",
-                "/api/spells/hold-person",
-                "/api/spells/holy-aura",
-                "/api/spells/hunters-mark",
-                "/api/spells/hypnotic-pattern",
-                "/api/spells/ice-storm",
-                "/api/spells/identify",
-                "/api/spells/illusory-script",
-                "/api/spells/imprisonment",
-                "/api/spells/incendiary-cloud",
-                "/api/spells/inflict-wounds",
-                "/api/spells/insect-plague",
-                "/api/spells/instant-summons",
-                "/api/spells/invisibility",
-                "/api/spells/irresistible-dance",
-                "/api/spells/jump",        
-                "/api/spells/knock",
-                "/api/spells/legend-lore",
-                "/api/spells/lesser-restoration",
-                "/api/spells/levitate",        
-                "/api/spells/light",
-                "/api/spells/lightning-bolt",
-                "/api/spells/locate-animals-or-plants",
-                "/api/spells/locate-creature",
-                "/api/spells/locate-object",
-                "/api/spells/longstrider",
-                "/api/spells/mage-armor",
-                "/api/spells/mage-hand",
-                "/api/spells/magic-circle",
-                "/api/spells/magic-jar",
-                "/api/spells/magic-missile",
-                "/api/spells/magic-mouth",
-                "/api/spells/magic-weapon",
-                "/api/spells/magnificent-mansion",
-                "/api/spells/major-image",
-                "/api/spells/mass-cure-wounds",
-                "/api/spells/mass-heal",
-                "/api/spells/mass-healing-word",
-                "/api/spells/mass-suggestion",
-                "/api/spells/maze",
-                "/api/spells/meld-into-stone",
-                "/api/spells/mending",
-                "/api/spells/message",
-                "/api/spells/meteor-swarm",
-                "/api/spells/mind-blank",
-                "/api/spells/minor-illusion",
-                "/api/spells/mirage-arcane",
-                "/api/spells/mirror-image",
-                "/api/spells/mislead",
-                "/api/spells/misty-step",
-                "/api/spells/modify-memory",
-                "/api/spells/moonbeam",
-                "/api/spells/move-earth",
-                "/api/spells/nondetection",
-                "/api/spells/pass-without-trace",
-                "/api/spells/passwall",
-                "/api/spells/phantasmal-killer",
-                "/api/spells/phantom-steed",
-                "/api/spells/planar-ally",
-                "/api/spells/planar-binding",
-                "/api/spells/plane-shift",
-                "/api/spells/plant-growth",
-                "/api/spells/poison-spray",
-                "/api/spells/polymorph",
-                "/api/spells/power-word-kill",
-                "/api/spells/power-word-stun",
-                "/api/spells/prayer-of-healing",
-                "/api/spells/prestidigitation",
-                "/api/spells/prismatic-spray",
-                "/api/spells/prismatic-wall",
-                "/api/spells/private-sanctum",
-                "/api/spells/produce-flame",
-                "/api/spells/programmed-illusion",
-                "/api/spells/project-image",
-                "/api/spells/protection-from-energy",
-                "/api/spells/protection-from-evil-and-good",
-                "/api/spells/protection-from-poison",
-                "/api/spells/purify-food-and-drink",
-                "/api/spells/raise-dead",
-                "/api/spells/ray-of-enfeeblement",
-                "/api/spells/ray-of-frost",
-                "/api/spells/regenerate",
-                "/api/spells/reincarnate",
-                "/api/spells/remove-curse",
-                "/api/spells/resilient-sphere",
-                "/api/spells/resistance",
-                "/api/spells/resurrection",
-                "/api/spells/reverse-gravity",
-                "/api/spells/revivify",
-                "/api/spells/rope-trick",
-                "/api/spells/sacred-flame",
-                "/api/spells/sanctuary",
-                "/api/spells/scorching-ray",
-                "/api/spells/scrying",
-                "/api/spells/secret-chest",
-                "/api/spells/see-invisibility",
-                "/api/spells/seeming",
-                "/api/spells/sending",
-                "/api/spells/sequester",
-                "/api/spells/shapechange",
-                "/api/spells/shatter",
-                "/api/spells/shield",
-                "/api/spells/shield-of-faith",
-                "/api/spells/shillelagh",
-                "/api/spells/shocking-grasp",
-                "/api/spells/silence",
-                "/api/spells/silent-image",
-                "/api/spells/simulacrum",
-                "/api/spells/sleep",
-                "/api/spells/sleet-storm",
-                "/api/spells/slow",
-                "/api/spells/spare-the-dying",
-                "/api/spells/speak-with-animals",
-                "/api/spells/speak-with-dead",
-                "/api/spells/speak-with-plants",
-                "/api/spells/spider-climb",
-                "/api/spells/spike-growth",
-                "/api/spells/spirit-guardians",
-                "/api/spells/spiritual-weapon",
-                "/api/spells/stinking-cloud",
-                "/api/spells/stone-shape",
-                "/api/spells/stoneskin",
-                "/api/spells/storm-of-vengeance",
-                "/api/spells/suggestion",
-                "/api/spells/sunbeam",
-                "/api/spells/sunburst",
-                "/api/spells/symbol",
-                "/api/spells/telekinesis",
-                "/api/spells/telepathic-bond",
-                "/api/spells/teleport",
-                "/api/spells/teleportation-circle",
-                "/api/spells/thaumaturgy",
-                "/api/spells/thunderwave",
-                "/api/spells/time-stop",
-                "/api/spells/tiny-hut",
-                "/api/spells/tongues",
-                "/api/spells/transport-via-plants",
-                "/api/spells/tree-stride",
-                "/api/spells/true-polymorph",
-                "/api/spells/true-resurrection",
-                "/api/spells/true-seeing",
-                "/api/spells/true-strike",
-                "/api/spells/unseen-servant",
-                "/api/spells/vampiric-touch",
-                "/api/spells/vicious-mockery",
-                "/api/spells/wall-of-fire",
-                "/api/spells/wall-of-force",
-                "/api/spells/wall-of-ice",
-                "/api/spells/wall-of-stone",
-                "/api/spells/wall-of-thorns",
-                "/api/spells/warding-bond",
-                "/api/spells/water-breathing",
-                "/api/spells/water-walk",
-                "/api/spells/web",        
-                "/api/spells/weird",
-                "/api/spells/wind-walk",
-                "/api/spells/wind-wall",   
-                "/api/spells/wish",
-                "/api/spells/word-of-recall",
-                "/api/spells/zone-of-truth"};
-            //I have no idea if the following will work whatsover
-            ApiHelper.IntializeClient();
-            Console.WriteLine("START*****START*****START");
-
-            Console.WriteLine("END*****END*****END");
+            generatespells();
+            // APITesting();
             //Issue seems to be in conversion from type Task<SpellHelperModel> to other instances. Looked into it in Spellprocessor, should now be returning a list of some sort
             return View ("BlankTestPage");
+        }
+        public void generatespells()
+        {
+            string Wizard = "Wizard";
+            string Bard = "Bard";
+            string Druid = "Druid";
+            string Ranger = "Ranger";
+            string Paladin = "Paladin";
+            string Cleric = "Cleric";
+            string Sorcerer = "Sorcerer";
+            string Warlock = "Warlock";
+            
+
+            Spell ASplash = new Spell(0,"Acid Splash", "Wizard");
+            _context.Spells.Add(ASplash);
+            Spell CTouch = new Spell(0, "Chill Touch", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(CTouch);
+            Spell DLight = new Spell(0, "Dancing Lights", "Sorcerer", "Bard", "Wizard");
+            _context.Spells.Add(DLight);
+            Spell Dcraft = new Spell(0, "Druidcraft", "Druid");
+            _context.Spells.Add(Dcraft);
+            Spell eblst = new Spell(0, "Eldritch Blast", "Warlock");
+            _context.Spells.Add(eblst);
+            Spell fbolt = new Spell(0, "Firebolt", "Sorcerer", "Wizard");
+            _context.Spells.Add(fbolt);
+            Spell gdnc = new Spell(0, "Guidance", "Cleric", "Druid");
+            _context.Spells.Add(gdnc);
+            Spell lght = new Spell(0, "Light", "Bard", "Cleric", "Sorcerer");
+            _context.Spells.Add(lght);
+            Spell mhand = new Spell(0, "Mage Hand", "Bard", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(mhand);
+            Spell mend = new Spell(0, "Mending", "Bard", "Druid", "Sorcerer", "Wizard");
+            _context.Spells.Add(mend);
+            Spell mess = new Spell(0, "Message", "Bard","Sorcerer");
+            _context.Spells.Add(mess);
+            Spell miill = new Spell(0, "Minor Illusion", "Bard", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(miill);
+            Spell pspray = new Spell(0, "Poison Spray", "Druid", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(pspray);
+            Spell presti = new Spell(0, "Prestidigitation", "Bard", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(presti);
+            Spell prodflame = new Spell(0, "Produce Flame", "Druid");
+            _context.Spells.Add(prodflame);
+            Spell ryfrst = new Spell(0, "Ray of Frost", "Sorcerer", "Wizard");
+            _context.Spells.Add(ryfrst);
+            Spell restist = new Spell(0, "Resistance", "Cleric:", "Druid");
+            _context.Spells.Add(restist);
+            Spell sflame = new Spell(0, "Sacred Flame", "Cleric");
+            _context.Spells.Add(sflame);
+            Spell shill = new Spell(0, "Shillelagh", "Druid");
+            _context.Spells.Add(shill);
+            Spell sgrasp = new Spell(0, "Shocking Grasp", "Sorcerer", "Wizard");
+            _context.Spells.Add(sgrasp);
+            Spell spare = new Spell(0, "Spare the Dying", "Cleric");
+            _context.Spells.Add(spare);
+            Spell Thaum = new Spell(0, "Thaumaturgy", "Cleric");
+            _context.Spells.Add(Thaum);
+            Spell TrueStrike = new Spell(0, "True Strike", "Bard", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(TrueStrike);
+            Spell vmock = new Spell(0, "Viscious Mockery", "Bard");
+            _context.Spells.Add(vmock);
+
+        //Level 1
+            Spell alrm = new Spell(1, "Alarm", "Ranger", "Wizard");
+            _context.Spells.Add(alrm);
+            Spell anfriend = new Spell(1, "Animal Friendship", "Bard", "Druid", "Ranger");
+            _context.Spells.Add(anfriend);
+            Spell bane = new Spell(1, "Bane", "Bard", "Cleric");
+            _context.Spells.Add(bane);
+            Spell bless = new Spell(1, "Bless", "Cleric", "Paladin");
+            _context.Spells.Add(bless);
+            Spell bhands = new Spell(1, "Burning Hands", "Sorcerer", "Wizard");
+            _context.Spells.Add(bhands);
+            Spell chrmprsn = new Spell(1, "Charm Person", "Bard", "Druid", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(chrmprsn);
+            Spell clrspry = new Spell(1, "Color Spray", "Sorcerer", "Wizard");
+            _context.Spells.Add(clrspry);
+            Spell cmmnd = new Spell(1, "Command", "Cleric", "Paladin");
+            _context.Spells.Add(cmmnd);
+            Spell complang = new Spell(1, "Comprehend Languages", "Bard", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(complang);
+            Spell corwater = new Spell(1, "Comprehend Languages", "Cleric", "Druid");
+            _context.Spells.Add(corwater);
+            Spell cwounds = new Spell(1, "Cure Wounds", "Bard", "Cleric", "Druid");
+            _context.Spells.Add(cwounds);
+            Spell deg = new Spell(1, "Detect Evil and Good", "Cleric", "Paladin");
+            _context.Spells.Add(deg);
+            Spell dmag = new Spell(1, "Detect Magic", "Bard", "Cleric", "Druid", "Paladin", "Ranger", "Sorcerer", "Wizard");
+            _context.Spells.Add(dmag);
+            Spell dpoi = new Spell(1, "Detect Poison and Disease", "Cleric", "Druid", "Paladin", "Ranger");
+            _context.Spells.Add(dpoi);
+            Spell disguise = new Spell(1, "Disguise Self", "Bard", "Sorcerer", "Wizard");
+            _context.Spells.Add(disguise);
+            Spell dfav = new Spell(1, "Divine Favor","Paladin");
+            _context.Spells.Add(dfav);
+            Spell entang = new Spell(1, "Entangle", "Druid");
+            _context.Spells.Add(entang);
+            Spell exret = new Spell(1, "Expeditious Retreat", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(exret);
+            Spell ffire = new Spell(1, "Faerie Fire", "Bard", "Druid");
+            _context.Spells.Add(ffire);
+            Spell flife = new Spell(1, "False Life", "Sorcerer", "Wizard");
+            _context.Spells.Add(flife);
+            Spell ffall = new Spell(1, "Feather Fall", "Bard", "Sorcerer", "Wizard");
+            _context.Spells.Add(ffall);
+            Spell findfam = new Spell(1, "Find Familiar", "Wizard");
+            _context.Spells.Add(findfam);
+            Spell fdisc = new Spell(1, "Floating Disc", "Wizard");
+            _context.Spells.Add(fdisc);
+            Spell fogc = new Spell(1, "Fog Cloud", "Druid", "Ranger", "Sorcerer", "Wizard");
+            _context.Spells.Add(fogc);
+            Spell gberry = new Spell(1, "Goodberry", "Druid", "Ranger");
+            _context.Spells.Add(gberry);
+            Spell grease = new Spell(1, "Grease", "Wizard");
+            _context.Spells.Add(grease);
+            Spell gbolt = new Spell(1, "Guiding Bolt", "Cleric");
+            _context.Spells.Add(gbolt);
+            Spell hword = new Spell(1, "Healing Word", "Bard", "Cleric", "Druid");
+            _context.Spells.Add(hword);
+            Spell rebuke = new Spell(1, "Hellish Rebuke", "Warlock");
+            _context.Spells.Add(rebuke);
+            Spell heroism = new Spell(1, "Heroism", "Bard", "Paladin");
+            _context.Spells.Add(heroism);
+            Spell hidlaugh = new Spell(1, "Hideous Laughter", "Bard", "Wizard");
+            _context.Spells.Add(hidlaugh);
+            Spell hmark = new Spell(1, "Hunter's Mark", "Ranger");
+            _context.Spells.Add(hmark);
+            Spell identify = new Spell(1, "Identify", "Bard", "Wizard");
+            _context.Spells.Add(identify);
+            Spell iscript = new Spell(1, "Illusory Script", "Bard", "Wizard");
+            _context.Spells.Add(iscript);
+            Spell iwounds = new Spell(1, "Inflict Wounds", "Cleric");
+            _context.Spells.Add(iwounds);
+            Spell jamp = new Spell(1, "Jump", "Druid", "Ranger", "Sorcerer", "Wizard");
+            _context.Spells.Add(jamp);
+            Spell lstrider = new Spell(1, "Longstrider", "Bard", "Druid", "Ranger", "Wizard");
+            _context.Spells.Add(lstrider);
+            Spell marmor = new Spell(1, "Mage Armor", "Sorcerer", "Wizard");
+            _context.Spells.Add(marmor);
+            Spell mmisl = new Spell(1, "Magic Missile", "Sorcerer", "Wizard");
+            _context.Spells.Add(mmisl);
+            Spell peg = new Spell(1, "Protection from Evil and Good", "Cleric", "Paladin", "Warlock", "Wizard");
+            _context.Spells.Add(peg);
+            Spell pfd = new Spell(1, "Purify Food and Drink", "Cleric", "Druid", "Paladin");
+            _context.Spells.Add(pfd);
+            Spell sanc = new Spell(1, "Sanctuary", "Cleric");
+            _context.Spells.Add(sanc);
+            Spell shld = new Spell(1, "Shield", "Sorcerer", "Wizard");
+            _context.Spells.Add(shld);
+            Spell shldf = new Spell(1, "Shield of Faith", "Cleric", "Paladin");
+            _context.Spells.Add(shldf);
+            Spell silimg = new Spell(1, "Silent Image", "Bard", "Sorcerer", "Wizard");
+            _context.Spells.Add(silimg);
+            Spell slp = new Spell(1, "Sleep", "Bard", "Sorcerer", "Wizard");
+            _context.Spells.Add(slp);
+            Spell spkwans = new Spell(1, "Speak With Animals", "Bard", "Druid", "Ranger");
+            _context.Spells.Add(spkwans);
+            Spell twave = new Spell(1, "Thunderwave", "Bard", "Druid","Sorcerer", "Wizard");
+            _context.Spells.Add(twave);
+            Spell userv = new Spell(1, "Unseen Servant", "Bard", "Warlock", "Wizard");
+            _context.Spells.Add(userv);
+
+        //level 2
+            Spell aarrow = new Spell(2, "Acid Arrow", "Wizard");
+            _context.Spells.Add(aarrow);
+            Spell aid = new Spell(2, "Aid", "Cleric", "Paladin");
+            _context.Spells.Add(aid);
+            Spell aself = new Spell(2, "Alter Self", "Sorcerer", "Wizard");
+            _context.Spells.Add(aself);
+            Spell anmess = new Spell(2, "Animal Messenger", "Bard", "Druid", "Ranger");
+            _context.Spells.Add(anmess);
+            Spell alock = new Spell(2, "Arcane Lock", "Wizard");
+            _context.Spells.Add(alock);
+            Spell ama = new Spell(2, "Arcanist's Magic Aura", "Wizard");
+            _context.Spells.Add(ama);
+            Spell augury = new Spell(2, "Augury", "Cleric");
+            _context.Spells.Add(augury);
+            Spell brkskn = new Spell(2, "Bark Skin", "Druid", "Ranger");
+            _context.Spells.Add(brkskn);
+            Spell dlindeaf = new Spell(2, "Blindness/Deafness", "Bard", "Cleric", "Sorcerer", "Wizard");
+            _context.Spells.Add(dlindeaf);
+            Spell blur = new Spell(2, "Blur", "Sorcerer", "Wizard");
+            _context.Spells.Add(blur);
+            Spell brandin = new Spell(2, "Branding Smite", "Paladin");
+            _context.Spells.Add(brandin);
+            Spell calme = new Spell(2, "Calm Emotions", "Bard", "Cleric");
+            _context.Spells.Add(calme);
+            Spell conflame = new Spell(2, "Continual Flame", "Cleric", "Wizard");
+            _context.Spells.Add(conflame);
+            Spell dorkness = new Spell(2, "Darkness", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(dorkness);
+            Spell dorkv = new Spell(2, "Darkvision", "Druid", "Ranger", "Sorcerer", "Wizard");
+            _context.Spells.Add(dorkv);
+            Spell dthots = new Spell(2, "Detect Thoughts", "Bard", "Sorcerer", "Wizard");
+            _context.Spells.Add(dthots);
+            Spell ebail = new Spell(2, "Enhance Ability", "Bard", "Cleric", "Druid", "Sorcerer");
+            _context.Spells.Add(ebail);
+            Spell enlreduc = new Spell(2, "Enlarge/Reduce", "Sorcerer", "Wizard");
+            _context.Spells.Add(enlreduc);
+            Spell enthrall = new Spell(2, "Enthrall", "Bard", "Warlock");
+            _context.Spells.Add(enthrall);
+            Spell fsteed = new Spell(2, "Find Steed", "Paladin");
+            _context.Spells.Add(fsteed);
+            Spell ftraps = new Spell(2, "Find Traps","Cleric", "Druid", "Ranger");
+            _context.Spells.Add(ftraps);
+            Spell fblade = new Spell(2, "Flame Blade", "Druid");
+            _context.Spells.Add(fblade);
+            Spell fsphere = new Spell(2, "Flaming Sphere", "Druid", "Wizard");
+            _context.Spells.Add(fsphere);
+            Spell grepo = new Spell(2, "Gentle Repose", "Cleric", "Wizard");
+            _context.Spells.Add(grepo);
+            Spell gwind = new Spell(2, "Gust of Wind", "Druid", "Sorcerer", "Wizard");
+            _context.Spells.Add(gwind);
+            Spell hmetal = new Spell(2, "Heat Metal", "Bard", "Druid");
+            _context.Spells.Add(hmetal);
+            Spell hperson = new Spell(2, "Hold Person", "Bard", "Cleric", "Druid", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(hperson);
+            Spell invis = new Spell(2, "Invisibility", "Bard", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(invis);
+            Spell knck = new Spell(2, "Knock", "Bard", "Sorcerer", "Wizard");
+            _context.Spells.Add(knck);
+            Spell lsrrstr = new Spell(2, "Lesser Restoration", "Bard", "Cleric", "Druid", "Paladin", "Ranger");
+            _context.Spells.Add(lsrrstr);
+            Spell levi = new Spell(2, "Levitate", "Sorcerer", "Wizard");
+            _context.Spells.Add(levi);
+            Spell locanpla = new Spell(2, "Locate Animals or Plants", "Druid","Ranger");
+            _context.Spells.Add(locanpla);
+            Spell locaob = new Spell(2, "Locate Object", "Bard","Cleric", "Druid", "Paladin", "Ranger", "Wizard");
+            _context.Spells.Add(locaob);
+            Spell mmouth = new Spell(2, "Magic Mouth", "Bard", "Wizard");
+            _context.Spells.Add(mmouth);
+            Spell mwep = new Spell(2, "Magic Weapon", "Paladin", "Wizard");
+            _context.Spells.Add(mwep);
+            Spell mimage = new Spell(2, "Mirror Image", "Sorcerer","Warlock", "Wizard");
+            _context.Spells.Add(mimage);
+            Spell mistep = new Spell(2, "Misty Step", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(mistep);
+            Spell mbeam = new Spell(2, "Moonbeam", "Druid");
+            _context.Spells.Add(mbeam);
+            Spell pwt = new Spell(2, "Pass Without Trace", "Druid", "Ranger");
+            _context.Spells.Add(pwt);
+            Spell prayer = new Spell(2, "Prayer of Healing", "Cleric");
+            _context.Spells.Add(prayer);
+            Spell poiprot = new Spell(2, "Protection from Poison", "Cleric", "Druid", "Paladin", "Ranger");
+            _context.Spells.Add(poiprot);
+            Spell roe = new Spell(2, "Ray of Enfeeblement", "Warlock", "Wizard");
+            _context.Spells.Add(roe);
+            Spell ropetrick = new Spell(2, "Rope Trick", "Wizard");
+            _context.Spells.Add(ropetrick);
+            Spell sray = new Spell(2, "Scorching Ray", "Sorcerer", "Wizard");
+            _context.Spells.Add(sray);
+            Spell sinvis = new Spell(2, "See Invisibility", "Bard", "Sorcerer", "Wizard");
+            _context.Spells.Add(sinvis);
+            Spell shat = new Spell(2, "Shatter", "Bard", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(shat);
+            Spell silen = new Spell(2, "Silence", "Bard", "Cleric", "Ranger");
+            _context.Spells.Add(silen);
+            Spell spclimb = new Spell(2, "Spider Climb", "Sorcerer","Warlock", "Wizard");
+            _context.Spells.Add(spclimb);
+            Spell sgrowth = new Spell(2, "Spike Growth", "Druid");
+            _context.Spells.Add(sgrowth);
+            Spell swep = new Spell(2, "Spiritual Weapon", "Cleric");
+            _context.Spells.Add(swep);
+            Spell sug = new Spell(2, "Suggestion", "Bard", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(sug);
+            Spell wardbond = new Spell(2, "Warding Bond", "Cleric");
+            _context.Spells.Add(wardbond);
+            Spell web = new Spell(2, "Web", "Sorcerer", "Wizard");
+            _context.Spells.Add(web);
+            Spell zoneoftruth = new Spell(2, "Zone of Truth","Bard", "Cleric", "Paladin");
+            _context.Spells.Add(zoneoftruth);
+            
+        // Level 3
+            Spell animateDead = new Spell(3, "Animate Dead", "Wizard", "Cleric");
+            _context.Spells.Add(animateDead);
+            Spell beaconHope = new Spell(3, "Beacon of Hope", "Cleric");
+            _context.Spells.Add(beaconHope);
+            Spell bestowCurse = new Spell(3, "Bestow Curse", "Bard", "Cleric", "Wizard");
+            _context.Spells.Add(bestowCurse);
+            Spell blink = new Spell(3, "Blink", "Wizard", "Sorcerer");
+            _context.Spells.Add(blink);
+            Spell callLighting = new Spell(3, "Call Lightning", "Druid");
+            _context.Spells.Add(callLighting);
+            Spell clairvoyance = new Spell(3, "Clairvoyance", "Bard", "Cleric", "Sorcerer", "Wizard");
+            _context.Spells.Add(clairvoyance);
+            Spell conjureAnimals = new Spell(3, "Conjure Animals", "Druid", "Ranger");
+            _context.Spells.Add(conjureAnimals);
+            Spell counterspell = new Spell(3, "Counterspell", "Warlock", "Sorcerer", "Wizard");
+            _context.Spells.Add(counterspell);
+            Spell createFood = new Spell(3, "Create Food and Water", "Palandin", "Cleric", "Sorcerer", "Wizard");
+            _context.Spells.Add(createFood);
+            Spell daylight = new Spell(3, "Daylight", "Druid", "Cleric", "Paladin", "Ranger", "Sorcerer");
+            _context.Spells.Add(daylight);
+            Spell dispelMagic = new Spell(3, "Dispel Magic", "Bard", "Cleric", "Druid", "Paladin", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(dispelMagic);
+            Spell fear = new Spell(3, "Fear", "Bard", "Warlock", "Sorcerer", "Wizard");
+            _context.Spells.Add(fear);
+            Spell fireball = new Spell(3, "Fireball","Sorcerer", "Wizard");
+            _context.Spells.Add(fireball);
+            Spell fly = new Spell(3, "Warlock", "Sorcerer", "Wizard");
+            _context.Spells.Add(fly);
+            Spell gaseousForm = new Spell(3, "Gaseous Form", "Warlock", "Sorcerer", "Wizard");
+            _context.Spells.Add(gaseousForm);
+            Spell glyphWard = new Spell(3, "Glyph of Warding", "Bard", "Cleric", "Wizard");
+            _context.Spells.Add(glyphWard);
+            Spell haste = new Spell(3, "Haste", "Sorcerer", "Wizard");
+            _context.Spells.Add(haste);
+            Spell hypnoticPattern = new Spell(3, "Hypnotic Pattern", "Bard", "Warlock", "Sorcerer", "Wizard");
+            _context.Spells.Add(hypnoticPattern);
+            Spell lightningBolt = new Spell(3, "Lightning Bolt", "Bard", "Warlock", "Sorcerer", "Wizard");
+            _context.Spells.Add(lightningBolt);
+            Spell magicCircle = new Spell(3, "Magic Circle", "Cleric", "Warlock", "Paladin", "Wizard");
+            _context.Spells.Add(magicCircle);
+            Spell majorImage = new Spell(3, "Major Image", "Bard", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(majorImage);
+            Spell massHealing = new Spell(3, "Mass Healing", "Cleric");
+            _context.Spells.Add(massHealing);
+            Spell meldStone = new Spell(3, "Meld into Stone", "Cleric", "Druid");
+            _context.Spells.Add(meldStone);
+            Spell nondetection = new Spell(3, "Nondetection", "Bard", "Rangers", "Wizards");
+            _context.Spells.Add(nondetection);
+            Spell phantomSeed = new Spell(3, "Phantom Seed", "Wizard");
+            _context.Spells.Add(phantomSeed);
+            Spell plantGrowth = new Spell(3, "Plant Growth", "Bard", "Druid", "Ranger");
+            _context.Spells.Add(plantGrowth);
+            Spell protectionEnergy = new Spell(3, "Protection From Energy", "Cleric", "Druid", "Ranger", "Sorcerer", "Wizard");
+            _context.Spells.Add(protectionEnergy);
+            Spell removeCurse = new Spell(3, "Remove Curse", "Cleric", "Paladin", "Warlock", "Wizard");
+            _context.Spells.Add(protectionEnergy);
+            Spell revivify = new Spell(3, "Revivify", "Cleric", "Paladin");
+            _context.Spells.Add(revivify);
+            Spell sending = new Spell(3, "Sending", "Cleric", "Bard", "Wizard");
+            _context.Spells.Add(sending);
+            Spell sleetStorm = new Spell(3, "Sleet Storm", "Druic", "Sorcerer", "Wizard");
+            _context.Spells.Add(sleetStorm);
+            Spell slow = new Spell(3, "Slow", "Srocerer", "Wizard");
+            _context.Spells.Add(slow);
+            Spell speakDead = new Spell(3, "Speak with Dead", "Cleric", "Bard");
+            _context.Spells.Add(speakDead);
+            Spell speakPlants = new Spell(3, "Speak with Plants", "Druid", "Ranger");
+            _context.Spells.Add(speakPlants);
+            Spell spiritGaurdians = new Spell(3, "Spirit Gaurdians", "Cleric");
+            _context.Spells.Add(spiritGaurdians);
+            Spell stikingCloud = new Spell(3, "Stinking Cloud", "Sorcerer", "Wizard" );
+            _context.Spells.Add(stikingCloud);
+            Spell tinyHut = new Spell(3, "Tiny Hut", "Wizard", "Bard" );
+            _context.Spells.Add(tinyHut);
+            Spell tongues = new Spell(3, "Tongues", "Cleric", "Warlock", "Sorcerer", "Wizard", "Bard" );
+            _context.Spells.Add(tongues);
+            Spell vampricTouch = new Spell(3, "Vampric Touch", "Warlock", "Wizard" );
+            _context.Spells.Add(vampricTouch);
+            Spell waterBreathing = new Spell(3, "Water Breathing", "Druid", "Ranger", "Sorcerer", "Wizard" );
+            _context.Spells.Add(waterBreathing);
+            Spell waterWalking = new Spell(3, "Cleric", "Druid", "Ranger", "Sorcerer" );
+            _context.Spells.Add(waterWalking);
+            Spell windWall = new Spell(3, "Wind Wall", "Druid", "Ranger");
+            _context.Spells.Add(windWall);
+            
+        // Level 4
+            Spell arceye = new Spell(4, "Arcane Eye", "Wizard");
+            _context.Spells.Add(arceye);
+            Spell banish = new Spell(4, "Banishment", "Cleric", "Paladin", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(banish);
+            Spell blktent = new Spell(4, "Black Tentacles", "Wizard");
+            _context.Spells.Add(blktent);
+            Spell blight = new Spell(4, "Blight", "Druid", "Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(blight);
+            Spell compul = new Spell(4, "Compulsion", "Bard");
+            _context.Spells.Add(compul);
+            Spell confus = new Spell(4, "Confusion", "Bard", "Druid", "Sorcerer", "Wizard");
+            _context.Spells.Add(confus);
+            Spell ConjureME = new Spell(4, "Conjure Minor Elementals", "Druid", "Wizard");
+            _context.Spells.Add(ConjureME);
+            Spell ConjureWB = new Spell(4, "Conjure Woodland Beings", "Druid", "Ranger");
+            _context.Spells.Add(ConjureWB);
+            Spell cwater = new Spell(4, "Control Water", "Cleric", "Druid", "Wizard");
+            _context.Spells.Add(cwater);
+            Spell DWard = new Spell(4, "Death Ward", "Cleric", "Paladin");
+            _context.Spells.Add(DWard);
+            Spell DDoor = new Spell(4, "Dimension Door", "Bard","Sorcerer", "Warlock", "Wizard");
+            _context.Spells.Add(DDoor);
+            Spell divin = new Spell(4, "Divination", "Cleric");
+            _context.Spells.Add(divin);
+            Spell dombeast = new Spell(4, "Dominate Beast", "Druid", "Sorcerer");
+            _context.Spells.Add(dombeast);
+            Spell fab = new Spell(4, "Fabricate", "Wizard");
+            _context.Spells.Add(fab);
+            Spell fhound = new Spell(4, "Faithel Hound", "Wizard");
+            _context.Spells.Add(fhound);
+            Spell fshield = new Spell(4, "Fire Shield", "Wizard");
+            _context.Spells.Add(fshield);
+            Spell freemov = new Spell(4, "Freedom of Movement", "Bard", "Cleric", "Druid", "Ranger");
+            _context.Spells.Add(freemov);
+            Spell giins = new Spell(4, "Giant Insect", "Druid");
+            _context.Spells.Add(giins);
+            Spell ginvis = new Spell(4, "Greater Invisibility", "Bard", "Sorcerer","Wizard");
+            _context.Spells.Add(ginvis);
+            Spell gofaith = new Spell(4, "Guardian of Faith", "Cleric");
+            _context.Spells.Add(gofaith);
+            Spell halluter = new Spell(4, "Hallucinatory Terrain", "Bard","Warlock", "Wizard");
+            _context.Spells.Add(halluter);
+            Spell locacreat = new Spell(4, "Locate Creature", "Bard","Cleric","Druid", "Paladin","Ranger", "Wizard");
+            _context.Spells.Add(locacreat);
+            Spell Phankill = new Spell(4, "Phantasmal Killer","Wizard");
+            _context.Spells.Add(Phankill);
+            Spell polym = new Spell(4, "Polymorph", "Bard", "Druid", "Sorcerer", "Wizard");
+            _context.Spells.Add(polym);
+            Spell privsanc = new Spell(4, "Private Sanctum", "Wizard");
+            _context.Spells.Add(privsanc);
+            Spell rsphere = new Spell(4, "Resilient", "Wizard");
+            _context.Spells.Add(rsphere);
+            Spell schest = new Spell(4, "Secret Chest", "Wizard");
+            _context.Spells.Add(schest);
+            Spell stonesha = new Spell(4, "Stone Shape", "Cleric", "Druid", "Wizard");
+            _context.Spells.Add(stonesha);
+            Spell Stoneskin = new Spell(4, "Stoneskin", "Druid", "Ranger", "Sorcerer", "Wizard");
+            _context.Spells.Add(Stoneskin);
+            Spell wallofiya = new Spell(4, "Wall of Fire", "Druid","Sorcerer", "Wizard");
+            _context.Spells.Add(wallofiya);
+
+            // 5th Level
+            Spell anobj = new Spell(5, "Animate Objects", "Bard","Sorcerer", "Wizard");
+            _context.Spells.Add(anobj);
+            Spell anlifshl = new Spell(5, "Antilife Shell", "Druid");
+            _context.Spells.Add(anlifshl);
+            Spell archand = new Spell(5, "Arcane Hand", "Wizard");
+            _context.Spells.Add(archand);
+            Spell awaken = new Spell(5, "Awaken", "Bard", "Druid");
+            _context.Spells.Add(awaken);
+            Spell cloudkill = new Spell(5, "Cloudkill", "Sorcerer", "Wizard");
+            _context.Spells.Add(cloudkill);
+            Spell commune = new Spell(5, "Commune", "Cleric");
+            _context.Spells.Add(commune);
+            Spell communeNature = new Spell(5, "Commune with Nature", "Druid", "Ranger");
+            _context.Spells.Add(communeNature);
+            Spell coneOfCold = new Spell(5, "Cone of Cold", "Sorcerer", "Wizard");
+            _context.Spells.Add(coneOfCold);
+            Spell conjureElemnetal = new Spell(5, "Conjure Elemental", "Druid", "Wizard");
+            _context.Spells.Add(conjureElemnetal);
+            Spell contactPlane = new Spell(5, "Contact Other Plane", "Warlock", "Wizard");
+            _context.Spells.Add(contactPlane);
+            Spell contagion = new Spell(5, "Contagion", "Cleric", "Druid");
+            _context.Spells.Add(contagion);
+            Spell creation = new Spell(5, "Creation", "Sorcerer", "Wizard");
+            _context.Spells.Add(creation);
+            Spell dispelEvilGood = new Spell(5, "Dispel Evil and Good", "Cleric", "Paladin");
+            _context.Spells.Add(dispelEvilGood);
+            Spell dominatePerson = new Spell(5, "Dominate Person", "Sorcerer", "Bard", "Wizard");
+            _context.Spells.Add(dominatePerson);
+            Spell dream = new Spell(5, "Dream", Wizard, Warlock, "Bard");
+            _context.Spells.Add(dream); 
+            Spell flameStrike = new Spell(5, "Flame Strike", Cleric);
+            _context.Spells.Add(flameStrike);
+            Spell geas = new Spell(5, "Geas", Bard, Cleric, Druid, Paladin, Wizard);
+            _context.Spells.Add(geas);
+            Spell greaterResto = new Spell(5, "Greater Restoration", Bard, Cleric, Druid);
+            _context.Spells.Add(greaterResto);
+            Spell hallow = new Spell(5, "Hallow", Cleric);
+            _context.Spells.Add(hallow);
+            Spell holdMonster = new Spell(5, "Hold Monster", Bard, Sorcerer, Warlock, Wizard);
+            _context.Spells.Add(holdMonster);
+            Spell insectPlague = new Spell(5, "Insect Plague", Sorcerer, Cleric, Druid);
+            _context.Spells.Add(insectPlague);
+            Spell legendLore = new Spell(5, "Legend Lore", Bard, Cleric, Wizard);
+            _context.Spells.Add(legendLore);
+            Spell massCure = new Spell(5, "Mass Cure Wounds", Bard, Cleric, Druid);
+            _context.Spells.Add(massCure);
+            Spell mislead = new Spell(5, "Mislead", Bard, Wizard);
+            _context.Spells.Add(mislead);
+            Spell modMemory = new Spell(5, "Modify Memory", Bard, Wizard);
+            _context.Spells.Add(modMemory);
+            Spell passwall = new Spell(5, "Passwall", Wizard);
+            _context.Spells.Add(passwall);
+            Spell planarBinding= new Spell(5, "Planar Binding", Bard, Cleric, Druid, Wizard);
+            _context.Spells.Add(planarBinding);
+            Spell raiseDead = new Spell(5, "Raise Dead", Bard, Cleric, Paladin);
+            _context.Spells.Add(raiseDead);
+            Spell reincarnate = new Spell(5, "Reincarnate", Druid);
+            _context.Spells.Add(reincarnate);
+            Spell scrying = new Spell(5, "Scrying", Bard, Cleric, Druid, Warlock, Wizard);
+            _context.Spells.Add(scrying);
+            Spell seeming = new Spell(5, "Seeming", Bard, Sorcerer, Wizard);
+            _context.Spells.Add(seeming);
+            Spell telekinesis = new Spell(5, "Telekinesis", Sorcerer, Wizard);
+            _context.Spells.Add(telekinesis);
+            Spell telepathicBond = new Spell(5, "Telepathic Bond", Wizard);
+            _context.Spells.Add(telepathicBond);
+            Spell teleportationCir = new Spell(5, "Teleportation Circle", Bard, Sorcerer, Wizard);
+            _context.Spells.Add(teleportationCir);
+            Spell treeStride = new Spell(5, "Tree Stride", Ranger, Druid);
+            _context.Spells.Add(treeStride);
+            Spell wallForce = new Spell(5, "Wall of Force", Wizard);
+            _context.Spells.Add(wallForce);
+            Spell wallStone = new Spell(5, "Wall of Stone", Wizard, Sorcerer, Druid);
+            _context.Spells.Add(wallStone);
+
+            // Level 6
+            
+            
+            
         }
     }
 }

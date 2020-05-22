@@ -14,5 +14,7 @@ namespace CharacterGenerator.Models
         public DbSet <User> Users { get; set; }
         public DbSet <Feature> Features { get; set;}
         public DbSet <FeatureAssoc> Feature_Associations {get; set;}
+        public DbSet <Spell> Spells {get; set;}
+        public DbSet <SpellAssoc> Spell_Associations {get; set;}
     }
 }
