@@ -1816,5 +1816,65 @@ namespace CharacterGenerator.Controllers
             Spell wish = new Spell(9, "Wish", Sorcerer, Wizard);
             _context.Spells.Add(wish);
         }
+    
+        public int DetermineSpellLevel(NewCharacter PC) //Use this in the GetPossibleSpells function
+        {
+            if (PC.playerClass.ClassName == "Paladin" || PC.playerClass.ClassName == "Ranger")
+                {
+                    if (PC.playerClass.ClassLevel >=2)
+                    {
+                        double palrangerspells = Math.Ceiling(.25*PC.playerClass.ClassLevel);
+                        int palrangerspells_lvl = (int)palrangerspells;
+                        return palrangerspells_lvl;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            double classspelllevel = Math.Ceiling(.50*PC.playerClass.ClassLevel);
+            int spell_lvl = (int)classspelllevel;
+            return spell_lvl;
+        }
+        public List<Spell> GetPossibleSpells(NewCharacter PC, int SPL_LVL)
+        {
+            List<Spell> A = _context.Spells.Where(s => s.SpellLevel <= SPL_LVL).ToList();
+            List<Spell> B = new List<Spell>();
+
+            foreach(Spell s in A)
+            {
+                //Cannot seem to get switches to work here base on s.Source#, sadly
+                if (s.Source1 == PC.playerClass.ClassName)
+                {
+                    B.Add(s);
+                }
+                else if (s.Source2 == PC.playerClass.ClassName)
+                {
+                    B.Add(s);
+                }
+                else if (s.Source3 == PC.playerClass.ClassName)
+                {
+                    B.Add(s);
+                }
+                else if (s.Source4 == PC.playerClass.ClassName)
+                {
+                    B.Add(s);
+                }
+                else if (s.Source5 == PC.playerClass.ClassName)
+                {
+                    B.Add(s);
+                }
+                else if (s.Source6 == PC.playerClass.ClassName)
+                {
+                    B.Add(s);
+                }
+                else if (s.Source7 == PC.playerClass.ClassName)
+                {
+                    B.Add(s);
+                }
+            }
+            //Returns a list with all of the spells associated with the class in particular
+            return B;
+        }
     }
 }
