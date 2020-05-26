@@ -156,12 +156,9 @@ namespace CharacterGenerator.Controllers
             // reruns numbers based on updated proficiencies and skill increases
             playerStat.UpdatePro(playerStat);
 
-
-            // Skills/Spells
-           
-
             // create connection to all character objects within the character
             NewCharacter newPlayer = new NewCharacter(Level, playerStat,playerRace,playerClass, playerBG, SessionUser);
+
             _context.PlayerStats.Add(playerStat); 
             _context.PlayerBGs.Add(playerBG); 
             _context.PlayerClasses.Add(playerClass);
@@ -178,6 +175,30 @@ namespace CharacterGenerator.Controllers
                 _context.SaveChanges();
             }
 
+            // Skills/Spells only works for wiz
+            
+            List<Spell> allSpells = GetPossibleSpells(newPlayer, newPlayer.Level);
+            Console.WriteLine("TEST TWO ***TEST TWO ***");
+            Console.WriteLine(allSpells);
+            foreach (Spell spell in allSpells)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            Console.WriteLine("TEST TWO ***TEST TWO ***");
+            List<Spell> availableSpells = AvaialableSpellsWizard(allSpells, newPlayer);
+            Console.WriteLine("TEST THREE ***TEST THREE ***");
+            Console.WriteLine(availableSpells);
+            foreach (Spell spell in availableSpells)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            Console.WriteLine("TEST THREE ***TEST THREE ***");
+            foreach(Spell added in availableSpells )
+            {
+                SpellAssoc a = new SpellAssoc(newPlayer, added);
+                _context.Spell_Associations.Add(a);
+                _context.SaveChanges();
+            }
 
             //Dynamic model with USer, Login, Character
             dynamic MyModel = new ExpandoObject();
@@ -193,6 +214,10 @@ namespace CharacterGenerator.Controllers
                         .ToList();
             
             MyModel.Features = Feats;
+
+        
+            MyModel.Spells = availableSpells;
+    
             //  _context.Feature_Associations.Where( f => f.CharacterId == newPlayer.CharacterId).Include( f => f.FeatureA).ThenInclude( feat => feat.FeatureName).ToList();
 
             //LINQ query
@@ -1849,10 +1874,12 @@ namespace CharacterGenerator.Controllers
                 }
          
 
-   double classspelllevel = Math.Ceiling(.50*PC.playerClass.ClassLevel);
+             double classspelllevel = Math.Ceiling(.50*PC.playerClass.ClassLevel);
             int spell_lvl = (int)classspelllevel;
             return spell_lvl;
         }
+
+        //Spells Step 1.
         public List<Spell> GetPossibleSpells(NewCharacter PC, int SPL_LVL)
         {
             List<Spell> A = _context.Spells.Where(s => s.SpellLevel <= SPL_LVL).ToList();
@@ -1921,13 +1948,146 @@ namespace CharacterGenerator.Controllers
             return arr; 
         }
 
+        //
+        // Avaialable Spells, Wizard
+        public List<Spell> AvaialableSpellsWizard(List<Spell> fullListAvail, NewCharacter PC)
+        {
+            List<Spell> levelOne = fullListAvail.Where(s => s.SpellLevel == 1).ToList();
+            RandomizeSpells(levelOne, levelOne.Count);
+            List<Spell> levelTwo = fullListAvail.Where(s => s.SpellLevel == 2).ToList();
+            RandomizeSpells(levelTwo, levelTwo.Count);
+            List<Spell> levelThree = fullListAvail.Where(s => s.SpellLevel == 3).ToList();
+            RandomizeSpells(levelThree, levelThree.Count);
+            List<Spell> levelFour = fullListAvail.Where(s => s.SpellLevel == 4).ToList();
+            RandomizeSpells(levelFour, levelFour.Count);
+            List<Spell> levelFive = fullListAvail.Where(s => s.SpellLevel == 5).ToList();
+            RandomizeSpells(levelFive, levelFive.Count);
+            List<Spell> levelSix = fullListAvail.Where(s => s.SpellLevel == 6).ToList();
+            RandomizeSpells(levelSix, levelSix.Count);
+            List<Spell> levelSeven = fullListAvail.Where(s => s.SpellLevel == 7).ToList();
+            RandomizeSpells(levelSeven, levelSeven.Count);
+            List<Spell> levelEight = fullListAvail.Where(s => s.SpellLevel == 8).ToList();
+            RandomizeSpells(levelEight, levelEight.Count);
+            List<Spell> levelNine = fullListAvail.Where(s => s.SpellLevel == 9).ToList();
+            RandomizeSpells(levelNine, levelNine.Count);
+            
+            List<Spell> availableSpells = new List<Spell>();
 
-        // Avaialable Spells
-        public List<Spell> AvaialableSpells(List<Spell> fullList)
+
+            //Based on Character's level, determine what spells known are chosen from the list available to the character
+            //DetermineSpellLevel() can be modified to indicate access to spell tiers, using the Math.Ceiling functionality described there to determine spell level at the time that the spell could be chosen. Characters, through leveling progression, get access to different spells based upon their level and we can use that to determine what is added to their spells known.
+            //Currently, we can use a For Loop(for(int i=1; i>ClassLevel; i++)) to determine spells known for a Wizard, grabbing from the appropriate list and adding it to what they know
+            //Other classes will require some finangling, but the basic structure will be there once we understand how to implement it here.
+            //Structure for spells: Available Spells (AS), Spells Known (SK) is a subset of AS, Prepared Spells is a subset of SK.
+            //(A(S(PS)K)S) <- Loose diagram of the idea
+            int l2 = 0;
+            int l3 = 0;
+            int l4 = 0;
+            int l5 = 0;
+            int l6 = 0;
+            int l7 = 0;
+            int l8 = 0;
+            int l9 = 0;
+
+            for(int i=1; i<=PC.Level; i++) // I was thinking of while loops lol
+            {
+                if(i == 1) // Can be modified for Paladins and Rangers to start @ 2
+                    {
+                        for(int j = 5; j>-1; j--)
+                        {
+                            //Add level1 association, twice to represent spells gained on level up
+                            availableSpells.Add(levelOne[j]);
+                        }
+                    }
+                else
+                {
+                    int Spell_Level_Available =(int)Math.Ceiling(.5*i);
+                    switch(Spell_Level_Available)
+                        {
+                            case 1:
+                                //Add level1 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelOne[7]);
+                                availableSpells.Add(levelOne[8]);
+                                
+                                break;
+                            case 2:
+                                //Add level2 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelTwo[l2]);
+                                l2+=1;
+                                availableSpells.Add(levelTwo[l2]);
+                                l2+=1;
+                                break;
+                            case 3:
+                                //Add level3 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelThree[l3]);
+                                l3+=1;
+                                availableSpells.Add(levelThree[l3]);
+                                l3+=1;
+                                break;
+                            case 4:
+                                //Add level4 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelFour[l4]);
+                                l4+=1;
+                                availableSpells.Add(levelFour[l4]);
+                                l4+=1;
+                                break;
+                            case 5:
+                                //Add level5 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelFive[l5]);
+                                l5+=1;
+                                availableSpells.Add(levelFive[l5]);
+                                l5+=1;
+                                break;
+                            case 6:
+                                //Add level6 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelSix[l6]);
+                                l6+=1;
+                                availableSpells.Add(levelSix[l6]);
+                                l6+=1;
+                                break;
+                            case 7:
+                                //Add level7 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelSeven[l7]);
+                                l7+=1;
+                                availableSpells.Add(levelSeven[l7]);
+                                l7+=1;
+                                break;
+                            case 8:
+                                //Add level8 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelEight[l8]);
+                                l8+=1;
+                                availableSpells.Add(levelEight[l8]);
+                                l8+=1;
+                                break;
+                            case 9:
+                                //Add level9 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelNine[l9]);
+                                l9+=1;
+                                availableSpells.Add(levelNine[l9]);
+                                l9+=1;
+                                break;
+                            case 10:
+                                //Add level9 association, twice to represent spells gained on level up
+                                availableSpells.Add(levelNine[l9]);
+                                l9+=1;
+                                availableSpells.Add(levelNine[l9]);
+                                l9+=1;
+                                break;
+                        }
+                }
+            }
+            return availableSpells;
+        }
+
+
+
+
+
+
 
 
         // Prepared seplls algo that doesnt quite work            // Prints the random array 
-// PrepareSpells//         }
+// 
 // 
 // //         // public List<Spell> SelectSpells(List<Spell> fullListAvail, NewCharacter PC)
 //         // {

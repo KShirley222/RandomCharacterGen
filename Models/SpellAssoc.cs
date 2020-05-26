@@ -13,5 +13,17 @@ namespace CharacterGenerator.Models
         public NewCharacter PlayerA { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public SpellAssoc()
+        {
+            
+        }
+        public SpellAssoc (NewCharacter character, Spell spell)
+        {
+            CharacterId = character.CharacterId;
+            PlayerA = character;
+            SpellA = spell;
+            SpellId = spell.SpellId; 
+        }
     }
 }

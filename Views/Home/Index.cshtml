@@ -123,7 +123,7 @@
         <p class=" welcome">If you would like to be a bit more precise, then please register and you will be able to save your characters!</p>
         <p class=" welcome">Otherwise, click <a href="/" id="refresh">here</a> for another Character! Thanks for Visiting!</p>
         <br>
-        <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the 5th Edition Players Handbook for Dungeons and Dragons. If you wish to gather information on the rules referenced here, please buy a copy of the 5th Edition Player's Handbook or use <a href="dndbeyond.com">DnD Beyond</a> and purchase the materials there.</p>
+        <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href=>Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="dndbeyond.com">DnD Beyond</a> and purchase the materials there.</p>
     </div>
 </div>
 
@@ -132,7 +132,7 @@
 @* Pull API from fantasy name generator for names *@
 <div class="container-lg" style="background: beige; border: 5px solid black; border-radius:10px;  margin-left: 3%; margin-right: 3%; padding: 2%;">
     <div class="row">
-        <h5 class="col-sm-3 text-center d-flex justify-content-center charBase" >Character Name: <input type="text" name="CharacterName"></h5>
+        <h5 class="col-sm-3 text-center d-flex justify-content-center charBase" >Name: <input type="text" name="CharacterName"></h5>
         <h5 class="col-sm-2 text-center d-flex justify-content-center charBase" >Class: @Model.Character.playerClass.ClassName</h5>
         <h5 class="col-sm-2 text-center d-flex justify-content-center charBase" >Race: @Model.Character.playerRace.Race</h5>
         <h5 class="col-sm-2 text-center d-flex justify-content-center charBase" >Background:@Model.Character.playerBG.Background</h5>
@@ -289,9 +289,9 @@
                 </li>
             </ul>
         </div>
-
+        
         @* Column 3 *@
-        <div class="col-sm-3" style="margin-left: 10px;">
+        <div class="col-sm-3">
             <div class="row" >
                 <div class="col-5 text-center">
                     <h5>Proficiency</h5>
@@ -301,80 +301,82 @@
                 </div>
             </div>
             <div class="row" >
-                
-                <div class="col-5 text-center" style ="border: 2px solid black; background: white; border-radius:5px;  margin: 2px; text-align: left;">
-                    <p>Strength</p>
-                    <p>@Model.Character.playerStat.Strength</p>
+                <div class="col-5 text-center " style ="border: 2px solid black; background: white; border-radius:5px;  margin: 2px; text-align: left;">
+                    <p>Hit Points</p>
+                    <p>@Model.Character.playerStat.HitPoints</p>
                 </div>
-                <span class="col-sm-1"></span>
                 <div class="col-5 text-center" style ="border: 2px solid black; background: white;  border-radius:5px; margin: 2px; text-align: left;">
-                    <p>Dexterity</p>
-                    <p>@Model.Character.playerStat.Dexterity</p>
+                    <p>Proficiency</p>
+                    <p>@Model.Character.playerStat.Proficiency</p>
                 </div>
             </div>
             <div class="row" >
-                
                 <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Dexterity</p>
-                    <p>@Model.Character.playerStat.Dexterity</p>
+                    <p>Speed</p>
+                    <p>@Model.Character.playerRace.Speed</p>
                 </div>
-                <span class="col-sm-1"></span>
                 <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                     <p>PlaceHolder</p>
                     <p>something?</p>
                 </div>
             </div>
             <div class="row" >
-                
                 <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Constitution</p>
-                    <p>@Model.Character.playerStat.Constitution</p>
+                    <p>Strength Modifier</p>
+                    <p>@Model.Character.playerStat.StrMod</p>
                 </div>
-                <span class="col-sm-1"></span>
                 <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                     <p>Dexterity Modifier</p>
                     <p>@Model.Character.playerStat.DexMod</p>
                 </div>
             </div>
             <div class="row" >
-                
                 <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Intelligence</p>
-                    <p>@Model.Character.playerStat.Intelligence</p>
+                    <p>Constitution Modifier</p>
+                    <p>@Model.Character.playerStat.ConMod</p>
                 </div>
-                <span class="col-sm-1"></span>
                 <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                     <p>Intelligence Modifier</p>
                     <p>@Model.Character.playerStat.IntMod</p>
                 </div>
             </div>
             <div class="row" >
-                
                 <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Wisdom </p>
-                    <p>@Model.Character.playerStat.Wisdom</p>
+                    <p>Wisdom Modifier</p>
+                    <p>@Model.Character.playerStat.WisMod</p>
                 </div>
-                <span class="col-sm-1"></span>
                 <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
                     <p>Charisma Modifier</p>
                     <p>@Model.Character.playerStat.ChaMod</p>
                 </div>
             </div>
             <div class="row" >
-                
                 <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Charisma </p>
-                    <p>@Model.Character.playerStat.Charisma</p>
+                    <p>Place Holder</p>
+                    <p>something</p>
                 </div>
-                <span class="col-sm-1"></span>
                 <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Charisma Modifier</p>
-                    <p>@Model.Character.playerStat.ChaMod</p>
+                    <p>Place Holder</p>
+                    <p>something</p>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+
         @* Column 4 *@
-    <div class = "col-sm-2 text-center" style =" text-align: left; ">
+        <div class = "col-sm-3 text-center" style =" text-align: left; ">
+            <h5>Features</h5>
+            <ul style ="text-align: left; border: 2px solid black; border-radius:5px; background: white; padding: 30px; ;">
+                @foreach(Feature feat in Model.Features)
+            {
+            <li>@feat.FeatureName</li>
+            }
+            </ul>
+        </div>
+
+        @* Column 5 *@
+        <div class = "col-sm-4 text-center" style =" text-align: left; ">
             <h5>Spells</h5>
             <ul style ="text-align: left; border: 2px solid black; border-radius:5px; background: white; padding-top: 3%; padding-left: 10%; ;" class="col-sm">
                <li>Foreach spell in spell array</li>
@@ -395,16 +397,13 @@
                 <li>sixth column?????</li>
             </ul>
         </div>
+
+        @* Column 6 *@
+        <div class="col">
+            
+        </div>
     </div>
     <div class="row">
-        <div class="col">
-            <h5>Features</h5>
-            @foreach(Feature feat in Model.Features)
-            {
-            <p>@feat.FeatureName</p>
-
-            }
-        </div>
         <div class="col">
             <h5>Skills and Spells</h5>
             <p>Spells</p>

@@ -118,7 +118,7 @@ namespace CharacterGenerator.Models
 
                 //Creating for subraces
                 Random rand = new Random();
-                int num = rand.Next(0,2);
+                int num = rand.Next(0,1);
                 switch(num)
                     {
                         case 0:
@@ -149,7 +149,7 @@ namespace CharacterGenerator.Models
                 playerStat.Dexterity += 2;
                 //Creating for subraces
                 Random rand = new Random();
-                int num = rand.Next(0,2);
+                int num = rand.Next(0,1);
                 switch(num)
                     {
                         case 0:
@@ -187,7 +187,7 @@ namespace CharacterGenerator.Models
             playerRace.RacialTraits1 = "Darkvision (60 ft)";
             playerRace.RacialTraits2 ="Gnome Cunning";
              Random rand = new Random();
-                int num = rand.Next(0,2);
+                int num = rand.Next(1,2);
                 switch(num)
                 {
                     case 0:
@@ -601,7 +601,7 @@ namespace CharacterGenerator.Models
         {
             playerStat.Dexterity += 2;
             Random rand = new Random();
-            int num = rand.Next(0,2);
+            int num = rand.Next(0,1);
             switch (num)
                 {
                     case 0:

@@ -188,6 +188,17 @@
             }
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            @if(Model.Spells != null){
+
+                @foreach(Spell spell in Model.Spells)
+                {
+                    <p>@spell.SpellName</p>
+                }
+            }
+        </div>
+    </div>
 </div>
 
 

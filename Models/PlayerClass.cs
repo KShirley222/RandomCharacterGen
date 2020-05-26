@@ -374,7 +374,7 @@ namespace CharacterGenerator.Models
             PlayerStat Stats = stats;
             PlayerClass pClass = playerClass;
             Random rand = new Random();
-            switch(rand.Next(0,3))
+            switch(rand.Next(0,12))
             {
                 case 0:
                     Bard(Level, Stats, pClass);
@@ -417,27 +417,26 @@ namespace CharacterGenerator.Models
                     Name = "Ranger";
                     pClass.ClassName = "Ranger";
                     return Stats;
-                case 9:
+                case 8:
                     Rogue(Level, Stats, pClass);
                     Name = "Rogue";
                     pClass.ClassName = "Rogue";
                     return Stats;
-                case 10:
+                case 9:
                     Sorcerer(Level, Stats, pClass);
                     Name = "Sorcerer";
                     pClass.ClassName = "Sorcerer";
                     return Stats;
-                case 11:
+                case 10:
                     Warlock(Level, Stats, pClass);
                     Name = "Warlock";
                     pClass.ClassName = "Warlock";
                     return Stats;
-                case 12:
+                case 11:
                     Wizard(Level, Stats, pClass);
                     Name = "Wizard";
                     pClass.ClassName = "Wizard";
                     return Stats;
-                
             }
             return Stats;
         }
@@ -703,7 +702,7 @@ namespace CharacterGenerator.Models
         public void BarbSubGen(PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,2);
+            int subclassnum = rand.Next(0,1);
             switch(subclassnum)
                 {
                     case 0:
@@ -719,7 +718,7 @@ namespace CharacterGenerator.Models
         public void BardSubGen(PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,2);
+            int subclassnum = rand.Next(0,1);
             switch(subclassnum)
                 {
                     case 0:
@@ -735,7 +734,7 @@ namespace CharacterGenerator.Models
         public void ClericSubGen(PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,7);
+            int subclassnum = rand.Next(1,2);
             //KnowledgePHB LifePHB LightPHB NaturePHB TempestPHB TrickeryPHB WarPHB
             switch(subclassnum)
                 {
@@ -771,7 +770,7 @@ namespace CharacterGenerator.Models
         public void DruidSubGen(PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,2);
+            int subclassnum = rand.Next(1,2);
             switch(subclassnum)
                 {
                     case 0:
@@ -814,7 +813,7 @@ namespace CharacterGenerator.Models
         public void FighterSubGen(PlayerClass pc,PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,3);
+            int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
                 case 0:
@@ -831,7 +830,7 @@ namespace CharacterGenerator.Models
         public void MonkSubGen (PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,3);
+            int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
                 case 0:
@@ -849,7 +848,7 @@ namespace CharacterGenerator.Models
         public void PaladinSubGen (PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,3);
+            int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
                 case 0:
@@ -867,7 +866,7 @@ namespace CharacterGenerator.Models
         public void RangerSubGen (PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,2);
+            int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
                 case 0:
@@ -882,7 +881,7 @@ namespace CharacterGenerator.Models
         public void RogueSubGen (PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,3);
+            int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
                 case 0:
@@ -900,7 +899,7 @@ namespace CharacterGenerator.Models
         public void SorcSubGen (PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,2);
+            int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
                 case 0:
@@ -915,7 +914,7 @@ namespace CharacterGenerator.Models
         public void WarlockSubGen (PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,3);
+            int subclassnum = rand.Next(2,3);
             switch(subclassnum)
             {
                 case 0:
@@ -933,7 +932,7 @@ namespace CharacterGenerator.Models
         public void WizSubGen (PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(0,3);
+            int subclassnum = rand.Next(4,5);
             switch(subclassnum)
             {
                 case 0:
