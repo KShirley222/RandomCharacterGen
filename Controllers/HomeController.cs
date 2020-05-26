@@ -1150,10 +1150,17 @@ namespace CharacterGenerator.Controllers
         [HttpGet("/topsecretspells")]
         public IActionResult GetSpells()
         {
+            var searchcheck = _context.Spells.FirstOrDefault();
+            if (searchcheck != null)
+                {
+                    List<Spell> success = _context.Spells.ToList();
+                    return View ("BlankTestPage", success);
+                }
             generatespells();
+            List<Spell> test = _context.Spells.ToList();
             // APITesting();
             //Issue seems to be in conversion from type Task<SpellHelperModel> to other instances. Looked into it in Spellprocessor, should now be returning a list of some sort
-            return View ("BlankTestPage");
+            return View ("BlankTestPage", test);
         }
         public void generatespells()
         {
@@ -1165,7 +1172,6 @@ namespace CharacterGenerator.Controllers
             string Cleric = "Cleric";
             string Sorcerer = "Sorcerer";
             string Warlock = "Warlock";
-            
 
             Spell ASplash = new Spell(0,"Acid Splash", "Wizard");
             _context.Spells.Add(ASplash);
@@ -1235,7 +1241,7 @@ namespace CharacterGenerator.Controllers
             _context.Spells.Add(cmmnd);
             Spell complang = new Spell(1, "Comprehend Languages", "Bard", "Sorcerer", "Warlock", "Wizard");
             _context.Spells.Add(complang);
-            Spell corwater = new Spell(1, "Comprehend Languages", "Cleric", "Druid");
+            Spell corwater = new Spell(1, "Create or Destroy Water", "Cleric", "Druid");
             _context.Spells.Add(corwater);
             Spell cwounds = new Spell(1, "Cure Wounds", "Bard", "Cleric", "Druid");
             _context.Spells.Add(cwounds);
@@ -1453,7 +1459,7 @@ namespace CharacterGenerator.Controllers
             _context.Spells.Add(fear);
             Spell fireball = new Spell(3, "Fireball","Sorcerer", "Wizard");
             _context.Spells.Add(fireball);
-            Spell fly = new Spell(3, "Warlock", "Sorcerer", "Wizard");
+            Spell fly = new Spell(3, "Fly","Warlock", "Sorcerer", "Wizard");
             _context.Spells.Add(fly);
             Spell gaseousForm = new Spell(3, "Gaseous Form", "Warlock", "Sorcerer", "Wizard");
             _context.Spells.Add(gaseousForm);
@@ -1471,18 +1477,20 @@ namespace CharacterGenerator.Controllers
             _context.Spells.Add(majorImage);
             Spell massHealing = new Spell(3, "Mass Healing", "Cleric");
             _context.Spells.Add(massHealing);
+            Spell massHealingword = new Spell(3, "Mass Healing", "Cleric");
+            _context.Spells.Add(massHealingword);
             Spell meldStone = new Spell(3, "Meld into Stone", "Cleric", "Druid");
             _context.Spells.Add(meldStone);
             Spell nondetection = new Spell(3, "Nondetection", "Bard", "Rangers", "Wizards");
             _context.Spells.Add(nondetection);
-            Spell phantomSeed = new Spell(3, "Phantom Seed", "Wizard");
+            Spell phantomSeed = new Spell(3, "Phantom Steed", "Wizard");
             _context.Spells.Add(phantomSeed);
             Spell plantGrowth = new Spell(3, "Plant Growth", "Bard", "Druid", "Ranger");
             _context.Spells.Add(plantGrowth);
             Spell protectionEnergy = new Spell(3, "Protection From Energy", "Cleric", "Druid", "Ranger", "Sorcerer", "Wizard");
             _context.Spells.Add(protectionEnergy);
             Spell removeCurse = new Spell(3, "Remove Curse", "Cleric", "Paladin", "Warlock", "Wizard");
-            _context.Spells.Add(protectionEnergy);
+            _context.Spells.Add(removeCurse);
             Spell revivify = new Spell(3, "Revivify", "Cleric", "Paladin");
             _context.Spells.Add(revivify);
             Spell sending = new Spell(3, "Sending", "Cleric", "Bard", "Wizard");
@@ -1507,7 +1515,7 @@ namespace CharacterGenerator.Controllers
             _context.Spells.Add(vampricTouch);
             Spell waterBreathing = new Spell(3, "Water Breathing", "Druid", "Ranger", "Sorcerer", "Wizard" );
             _context.Spells.Add(waterBreathing);
-            Spell waterWalking = new Spell(3, "Cleric", "Druid", "Ranger", "Sorcerer" );
+            Spell waterWalking = new Spell(3, "Water Walk", "Cleric", "Druid", "Ranger", "Sorcerer" );
             _context.Spells.Add(waterWalking);
             Spell windWall = new Spell(3, "Wind Wall", "Druid", "Ranger");
             _context.Spells.Add(windWall);
@@ -1563,7 +1571,7 @@ namespace CharacterGenerator.Controllers
             _context.Spells.Add(polym);
             Spell privsanc = new Spell(4, "Private Sanctum", "Wizard");
             _context.Spells.Add(privsanc);
-            Spell rsphere = new Spell(4, "Resilient", "Wizard");
+            Spell rsphere = new Spell(4, "Resilient Sphere", "Wizard");
             _context.Spells.Add(rsphere);
             Spell schest = new Spell(4, "Secret Chest", "Wizard");
             _context.Spells.Add(schest);
@@ -1573,6 +1581,8 @@ namespace CharacterGenerator.Controllers
             _context.Spells.Add(Stoneskin);
             Spell wallofiya = new Spell(4, "Wall of Fire", "Druid","Sorcerer", "Wizard");
             _context.Spells.Add(wallofiya);
+            Spell iceStorm = new Spell(4, "Ice Storm", "Druid","Sorcerer", "Wizard");
+            _context.Spells.Add(iceStorm);
 
             // 5th Level
             Spell anobj = new Spell(5, "Animate Objects", "Bard","Sorcerer", "Wizard");
@@ -1815,6 +1825,11 @@ namespace CharacterGenerator.Controllers
             _context.Spells.Add(wrd);
             Spell wish = new Spell(9, "Wish", Sorcerer, Wizard);
             _context.Spells.Add(wish);
+            Spell stormofveng = new Spell(9, "Storm of Vengeance", Druid);
+            _context.Spells.Add(stormofveng);
+
+
+            _context.SaveChanges();
         }
     
         public int DetermineSpellLevel(NewCharacter PC) //Use this in the GetPossibleSpells function
@@ -1832,7 +1847,9 @@ namespace CharacterGenerator.Controllers
                         return 0;
                     }
                 }
-            double classspelllevel = Math.Ceiling(.50*PC.playerClass.ClassLevel);
+         
+
+   double classspelllevel = Math.Ceiling(.50*PC.playerClass.ClassLevel);
             int spell_lvl = (int)classspelllevel;
             return spell_lvl;
         }
@@ -1876,5 +1893,265 @@ namespace CharacterGenerator.Controllers
             //Returns a list with all of the spells associated with the class in particular
             return B;
         }
+
+        //Thank you GFG, this should help out immensely.
+        public static List<Spell> RandomizeSpells(List<Spell> arr, int n) 
+        { 
+        // Creating a object 
+        // for Random class 
+            Random r = new Random(); 
+            
+            // Start from the last element and 
+            // swap one by one. We don't need to 
+            // run for the first element  
+            // that's why i > 0 
+            for (int i = n - 1; i > 0; i--)  
+            { 
+                
+                // Pick a random index 
+                // from 0 to i 
+                int j = r.Next(0, i+1); 
+                
+                // Swap arr[i] with the 
+                // element at random index 
+                Spell temp = arr.ElementAt(i); 
+                arr[i] = arr.ElementAt(j); 
+                arr[j] = temp; 
+            }     
+            return arr; 
+        }
+
+
+        // Avaialable Spells
+        public List<Spell> AvaialableSpells(List<Spell> fullList)
+
+
+        // Prepared seplls algo that doesnt quite work            // Prints the random array 
+// PrepareSpells//         }
+// 
+// //         // public List<Spell> SelectSpells(List<Spell> fullListAvail, NewCharacter PC)
+//         // {
+//         //     List<Spell> levelOne = fullListAvail.Where(s => s.SpellLevel == 1).ToList();
+//         //     RandomizeSpells(levelOne, levelOne.Count);
+//         //     List<Spell> levelTwo = fullListAvail.Where(s => s.SpellLevel == 2).ToList();
+//         //     RandomizeSpells(levelTwo, levelTwo.Count);
+//         //     List<Spell> levelThree = fullListAvail.Where(s => s.SpellLevel == 3).ToList();
+//         //     RandomizeSpells(levelThree, levelThree.Count);
+//         //     List<Spell> levelFour = fullListAvail.Where(s => s.SpellLevel == 4).ToList();
+//         //     RandomizeSpells(levelFour, levelFour.Count);
+//         //     List<Spell> levelFive = fullListAvail.Where(s => s.SpellLevel == 5).ToList();
+//         //     RandomizeSpells(levelFive, levelFive.Count);
+//         //     List<Spell> levelSix = fullListAvail.Where(s => s.SpellLevel == 6).ToList();
+//         //     RandomizeSpells(levelSix, levelSix.Count);
+//         //     List<Spell> levelSeven = fullListAvail.Where(s => s.SpellLevel == 7).ToList();
+//         //     RandomizeSpells(levelSeven, levelSeven.Count);
+//         //     List<Spell> levelEight = fullListAvail.Where(s => s.SpellLevel == 8).ToList();
+//         //     RandomizeSpells(levelEight, levelEight.Count);
+//             // List<Spell> levelNine = fullListAvail.Where(s => s.SpellLevel == 9).ToList();
+//         //     RandomizeSpells(levelNine, levelNine.Count);
+//         //     List<Spell> availableSpells = new List<Spell>();
+// 
+// //         //     switch(PC.playerClass.ClassName)
+//         //     {
+//         //         case "Wizard":
+//         //             int WizLvl = PC.Level;
+//         //             int lvlOneSpells, lvlTwoSpells, lvlThreeSpells, lvlFourSpells, lvlFiveSpells, lvlSixSpells, lvlSevenSpells, lvlEightSpells, lvlNineSpells;
+//         //             switch(WizLvl)
+//         //             {
+//         //                 case 1:
+//         //                     lvlOneSpells = 2;
+//         //                 break;
+//         //                 case 2:
+//         //                     lvlOneSpells = 3;
+//         //                 break;
+//         //                 case 3:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 2;
+//         //                 break;
+//         //                 case 4:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                 break;
+//         //                 case 5:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 2;
+//         //                 break;
+//         //                 case 6:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                 break;
+//         //                 case 7:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 1;
+//         //                 break;
+//         //                 case 8:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 2;
+//         //                 break;
+//         //                 case 9:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 1;
+//         //                 break;
+//         //                 case 10:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 2;
+//         //                 break;
+//         //                 case 11:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 2;
+//         //                     lvlSixSpells = 1;
+//         //                 break;
+//         //                 case 12:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 2;
+//         //                     lvlSixSpells = 1;
+//         //                 break;
+//         //                 case 13:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 2;
+//         //                     lvlSixSpells = 1;
+//         //                     lvlSevenSpells = 1;
+//         //                 break;
+//         //                 case 14:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 2;
+//         //                     lvlSixSpells = 1;
+//         //                     lvlSevenSpells = 1;
+//         //                 break;
+//         //                 case 15:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 2;
+//         //                     lvlSixSpells = 1;
+//         //                     lvlSevenSpells = 1;
+//         //                     lvlEightSpells = 1;
+//         //                 break;
+//         //                 case 16:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 2;
+//         //                     lvlSixSpells = 1;
+//         //                     lvlSevenSpells = 1;
+//         //                     lvlEightSpells = 1;
+//         //                 break;
+//         //                 case 17:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 2;
+//         //                     lvlSixSpells = 1;
+//         //                     lvlSevenSpells = 1;
+//         //                     lvlEightSpells = 1;
+//         //                     lvlNineSpells = 1;
+//         //                 break;
+//         //                 case 18:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 3;
+//         //                     lvlSixSpells = 1;
+//         //                     lvlSevenSpells = 1;
+//         //                     lvlEightSpells = 1;
+//         //                     lvlNineSpells = 1;
+//         //                 break;
+//         //                 case 19:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 3;
+//         //                     lvlSixSpells = 2;
+//         //                     lvlSevenSpells = 1;
+//         //                     lvlEightSpells = 1;
+//         //                     lvlNineSpells = 1;
+//         //                 break;
+//         //                 case 20:
+//         //                     lvlOneSpells = 4;
+//         //                     lvlTwoSpells = 3;
+//         //                     lvlThreeSpells = 3;
+//         //                     lvlFourSpells = 3;
+//         //                     lvlFiveSpells = 3;
+//         //                     lvlSixSpells = 2;
+//         //                     lvlSevenSpells = 2;
+//                             // lvlEightSpells = 1;
+//         //                     lvlNineSpells = 1;
+//         //                 break;
+// 
+// //         //             }
+//         //         for(lvlOneSpells; lvlOneSpells > 0; lvlOneSpells-- )
+//         //         {
+//         //             availableSpells.add(lvlOneSpells);
+//         //         }
+//         //         for(lvlTwoSpells; lvlTwoSpells > 0; lvlTwoSpells-- )
+//         //         {
+//         //             availableSpells.add(lvlTwoSpells);
+//         //         }
+//         //         for(lvlThreeSpells; lvlThreeSpells > 0; lvlThreeSpells-- )
+//         //         {
+//         //             availableSpells.add(lvlThreeSpells);
+//         //         }
+//         //         for(lvlFourSpells; lvlFourSpells > 0; lvlFourSpells-- )
+//         //         {
+//         //             availableSpells.add(lvlFourSpells);
+//         //         }
+//         //         for(lvlFiveSpells; lvlFiveSpells > 0; lvlFiveSpells-- )
+//         //         {
+//         //             availableSpells.add(lvlFiveSpells);
+//         //         }
+//         //         for(lvlSixSpells; lvlSixSpells > 0; lvlSixSpells-- )
+//         //         {
+//         //             availableSpells.add(lvlSixSpells);
+//         //         }
+//         //         for(lvlSevenSpells; lvlSevenSpells > 0; lvlSevenSpells-- )
+//         //         {
+//         //             availableSpells.add(lvlSevenSpells);
+//         //         }
+//         //         for(lvlEightSpells; lvlEightSpells > 0; lvlEightSpells-- )
+//         //         {
+//         //             availableSpells.add(lvlEightSpells);
+//         //         }
+//         //         for(lvlNineSpells; lvlNineSpells > 0; lvlNineSpells-- )
+//         //         {
+//                                 // }
+//         //         return availableSpells;
+                
+// 
+// //         //         case "Cleric":
+//         //         
+         //     return availableSpells;
+//             // }
+            // return availableSpells;
+
+        // }
     }
 }

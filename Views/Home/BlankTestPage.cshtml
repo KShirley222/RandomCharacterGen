@@ -1,3 +1,9 @@
+@model List<Spell>
+
 <a href="/topsecretspells"> 
 <h1>Refresh the Page</h1>
+@foreach(Spell s in Model)
+{
+<p>@s.SpellName</p>
+}
 </a>
