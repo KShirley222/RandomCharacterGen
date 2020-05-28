@@ -1963,20 +1963,20 @@ namespace CharacterGenerator.Controllers
                         availableSpells.Add(Cantrips[c]);
                     }
                 }
-            else if (PC.Level >= 4)
-                {
-                    for (int c = 3; c> -1; c--)
+                else if (PC.Level >= 4)
                     {
-                        availableSpells.Add(Cantrips[c]);
+                        for (int c = 3; c> -1; c--)
+                        {
+                            availableSpells.Add(Cantrips[c]);
+                        }
                     }
-                }
-            else 
-                {
-                    for (int c = 2; c> -1; c--)
-                    {
-                        availableSpells.Add(Cantrips[c]);
-                    }
-                }
+                    else 
+                        {
+                            for (int c = 2; c> -1; c--)
+                            {
+                                availableSpells.Add(Cantrips[c]);
+                            }
+                        }
 
             int l2 = 0;
             int l3 = 0;
@@ -2099,6 +2099,8 @@ namespace CharacterGenerator.Controllers
         //Bard Spell grabber, requires maitnence. Bards have a total of 16 spells from their own list that they acquire in a staggered progression. This can be a good test bed for how the sorcerer may also work.
         //Current idea: Bards have the ability to switch out spells that they currently know with another of the level that they have the ability to use. Randomize the list of spells that they currently have on level up, remove the last one, and then add 2 from the bard list for that level. Once they hit 9th level spells, we can have it select from levels 5-7 at random, continuing iterations of l5-l7 to select the appropriate spell to add, and switchthing them out accordingly. 
         //Magical Secrets is its own beast, but it can be done by adding all of the appropriate spells via LINQ query where the sources are !Bard, and adding them at the appropriate level.
+        //Total Bard spells by 20: 18
+        //Bard level 1 spells: 4
         public List<Spell> AvaialableSpellsBard(List<Spell> fullListAvail, NewCharacter PC)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
@@ -2137,12 +2139,13 @@ namespace CharacterGenerator.Controllers
             {
                 if(i == 1) // Can be modified for Paladins and Rangers to start @ 2
                     {
-                        for(int j = 5; j>-1; j--)
+                        for(int j = 3; j>-1; j--)
                         {
                             //Add level1 association, twice to represent spells gained on level up
                             availableSpells.Add(levelOne[j]);
                         }
                     }
+                    //4 spells base
                 else
                 {
                     int Spell_Level_Available =(int)Math.Ceiling(.5*i);
@@ -2150,97 +2153,100 @@ namespace CharacterGenerator.Controllers
                         {
                             case 1:
                                 //Add level1 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelOne[7]);
-                                availableSpells.Add(levelOne[8]);
+                                availableSpells.Add(levelOne[4]);
                                 break;
+                                //5 level 1 spells, 5 total
                             case 2:
                                 //Add level2 association, twice to represent spells gained on level up
                                 availableSpells.Add(levelTwo[l2]);
                                 l2+=1;
-                                availableSpells.Add(levelTwo[l2]);
-                                l2+=1;
                                 break;
+                                //5 level 1 spells, 1/2 level 2 spells, 6/7 total
                             case 3:
                                 //Add level3 association, twice to represent spells gained on level up
                                 availableSpells.Add(levelThree[l3]);
                                 l3+=1;
-                                availableSpells.Add(levelThree[l3]);
-                                l3+=1;
                                 break;
+                                //5 level 1 spells, 2 level 2 spells, 1/2 level 3 spells 8/9 total
                             case 4:
                                 //Add level4 association, twice to represent spells gained on level up
                                 availableSpells.Add(levelFour[l4]);
                                 l4+=1;
-                                availableSpells.Add(levelFour[l4]);
-                                l4+=1;
                                 break;
+                                //5 level 1 spells, 2 level 2 spells, 2 level 3 spells, 1/2 level 4 spells 10/11 total
                             case 5:
-                                //Add level5 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelFive[l5]);
-                                l5+=1;
+                                if (i == 10)
+                                    {
+                                        break;
+                                    }
                                 availableSpells.Add(levelFive[l5]);
                                 l5+=1;
                                 break;
                             case 6:
-                                //Add level6 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelSix[l6]);
-                                l6+=1;
+                                if (i == 12)
+                                    {
+                                        break;
+                                    }
                                 availableSpells.Add(levelSix[l6]);
                                 l6+=1;
                                 break;
                             case 7:
-                                //Add level7 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelSeven[l7]);
-                                l7+=1;
+                                if (i == 14)
+                                    {
+                                        break;
+                                    }
                                 availableSpells.Add(levelSeven[l7]);
                                 l7+=1;
                                 break;
                             case 8:
-                                //Add level8 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelEight[l8]);
-                                l8+=1;
+                                if (i == 16)
+                                    {
+                                        break;
+                                    }
                                 availableSpells.Add(levelEight[l8]);
                                 l8+=1;
                                 break;
                             case 9:
-                                //Add level9 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelNine[l9]);
-                                l9+=1;
+                                if (i > 17)
+                                {
+                                    break;
+                                }
                                 availableSpells.Add(levelNine[l9]);
                                 l9+=1;
                                 break;
                             case 10:
-                                //Add level9 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelNine[l9]);
-                                l9+=1;
+                                if (i > 17)
+                                {
+                                    break;
+                                }
                                 availableSpells.Add(levelNine[l9]);
                                 l9+=1;
                                 break;
                         }
-            //Cantrips. Need to be made Bard appropriate, but also need to be placed after everything to maintain Cantrip requirements by level
-            if (PC.Level >= 10)
-                {
-                    for (int c = 4; c> -1; c--)
-                    {
-                        availableSpells.Add(Cantrips[c]);
-                    }
                 }
-            else if (PC.Level >= 4)
+            }
+            //Cantrips. Made to reflect Bard progression
+            if (PC.Level >= 10) //level 10 to final character cantrips
                 {
                     for (int c = 3; c> -1; c--)
                     {
                         availableSpells.Add(Cantrips[c]);
                     }
                 }
-            else 
-                {
-                    for (int c = 2; c> -1; c--)
+                else if (PC.Level >= 4) //Level 4 character cantrips
                     {
-                        availableSpells.Add(Cantrips[c]);
+                        for (int c = 2; c> -1; c--)
+                        {
+                            availableSpells.Add(Cantrips[c]);
+                        }
                     }
-                }
-                }
-            }
+                    else// Base Character cantrips
+                        {
+                            for (int c = 1; c> -1; c--)
+                            {
+                                availableSpells.Add(Cantrips[c]);
+                            }
+                        }
             return availableSpells;
         }
 
