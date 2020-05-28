@@ -183,22 +183,22 @@ namespace CharacterGenerator.Controllers
             {
                 Console.WriteLine(spell.SpellName);
             }
-            Console.WriteLine("TEST TWO ***TEST TWO ***");
-            List<Spell> availableSpells = AvaialableSpellsWizard(allSpells, newPlayer);
-            Console.WriteLine("TEST THREE ***TEST THREE ***");
-            Console.WriteLine(availableSpells);
-            foreach (Spell spell in availableSpells)
-            {
-                Console.WriteLine(spell.SpellName);
-            }
-            Console.WriteLine("TEST THREE ***TEST THREE ***");
-            foreach(Spell added in availableSpells )
-            {
-                SpellAssoc a = new SpellAssoc(newPlayer, added);
-                _context.Spell_Associations.Add(a);
-                _context.SaveChanges();
-            }
 
+                Console.WriteLine("TEST TWO ***TEST TWO ***");
+                List<Spell> availableSpells = AvaialableSpellsWizard(allSpells, newPlayer);
+                Console.WriteLine("TEST THREE ***TEST THREE ***");
+                Console.WriteLine(availableSpells);
+                foreach (Spell spell in availableSpells)
+                {
+                    Console.WriteLine(spell.SpellName);
+                }
+                Console.WriteLine("TEST THREE ***TEST THREE ***");
+                foreach(Spell added in availableSpells )
+                {
+                    SpellAssoc a = new SpellAssoc(newPlayer, added);
+                    _context.Spell_Associations.Add(a);
+                    _context.SaveChanges();
+                }
             //Dynamic model with USer, Login, Character
             dynamic MyModel = new ExpandoObject();
             MyModel.User = SessionUser;
@@ -1968,13 +1968,16 @@ namespace CharacterGenerator.Controllers
                         for (int c = 3; c> -1; c--)
                         {
                             availableSpells.Add(Cantrips[c]);
+                            
                         }
                     }
-                    else 
+                    else
                         {
                             for (int c = 2; c> -1; c--)
                             {
+            
                                 availableSpells.Add(Cantrips[c]);
+
                             }
                         }
 
@@ -2259,23 +2262,69 @@ namespace CharacterGenerator.Controllers
             RandomizeSpells(Cantrips, Cantrips.Count);
             List<Spell> levelOne = fullListAvail.Where(s => s.SpellLevel == 1).ToList();
             RandomizeSpells(levelOne, levelOne.Count);
+            Console.WriteLine("levelOne");
+            foreach(Spell spell in levelOne)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
             List<Spell> levelTwo = fullListAvail.Where(s => s.SpellLevel == 2).ToList();
             RandomizeSpells(levelTwo, levelTwo.Count);
+            Console.WriteLine("levelTwo");
+            foreach(Spell spell in levelTwo)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
             List<Spell> levelThree = fullListAvail.Where(s => s.SpellLevel == 3).ToList();
             RandomizeSpells(levelThree, levelThree.Count);
+            Console.WriteLine("levelThree");
+            foreach(Spell spell in fullListAvail)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
             List<Spell> levelFour = fullListAvail.Where(s => s.SpellLevel == 4).ToList();
             RandomizeSpells(levelFour, levelFour.Count);
+            Console.WriteLine("levelFour");
+            foreach(Spell spell in levelFour)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
             List<Spell> levelFive = fullListAvail.Where(s => s.SpellLevel == 5).ToList();
             RandomizeSpells(levelFive, levelFive.Count);
+            Console.WriteLine("levelFive");
+            foreach(Spell spell in levelFive)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
             List<Spell> levelSix = fullListAvail.Where(s => s.SpellLevel == 6).ToList();
             RandomizeSpells(levelSix, levelSix.Count);
+            Console.WriteLine("levelSix");
+            foreach(Spell spell in levelSix)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
             List<Spell> levelSeven = fullListAvail.Where(s => s.SpellLevel == 7).ToList();
             RandomizeSpells(levelSeven, levelSeven.Count);
+            Console.WriteLine("levelSeven");
+            foreach(Spell spell in levelSeven)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
             List<Spell> levelEight = fullListAvail.Where(s => s.SpellLevel == 8).ToList();
             RandomizeSpells(levelEight, levelEight.Count);
+            Console.WriteLine("levelEight");
+            foreach(Spell spell in levelEight)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
             List<Spell> levelNine = fullListAvail.Where(s => s.SpellLevel == 9).ToList();
             RandomizeSpells(levelNine, levelNine.Count);
-            
+            Console.WriteLine("levelNine");
+            foreach(Spell spell in levelNine)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            Console.WriteLine("Full list section end ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
             List<Spell> availableSpells = new List<Spell>();
 
 
@@ -2298,15 +2347,17 @@ namespace CharacterGenerator.Controllers
             {
                 if(i == 1) // Can be modified for Paladins and Rangers to start @ 2
                     {
-                        for(int j = 5; j>-1; j--)
+                        for(int j = 5; j<=0; j--)
                         {
                             //Add level1 association, twice to represent spells gained on level up
-                            availableSpells.Add(levelOne[j]);
+                            availableSpells.Add(levelOne[1]);// set to 1 for testing purposes
                         }
                     }
                 else
                 {
                     int Spell_Level_Available =(int)Math.Ceiling(.5*i);
+                    Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                    Console.WriteLine(Spell_Level_Available);
                     switch(Spell_Level_Available)
                         {
                             case 1:
@@ -2316,65 +2367,84 @@ namespace CharacterGenerator.Controllers
                                 break;
                             case 2:
                                 //Add level2 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelTwo[l2]);
+                                availableSpells.Add(levelTwo[1]);
+                                Console.WriteLine(Spell_Level_Available);
+                                Console.WriteLine(levelTwo[2]);
                                 l2+=1;
-                                availableSpells.Add(levelTwo[l2]);
+                                availableSpells.Add(levelTwo[3]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l2+=1;
                                 break;
                             case 3:
                                 //Add level3 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelThree[l3]);
+                                availableSpells.Add(levelThree[1]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l3+=1;
-                                availableSpells.Add(levelThree[l3]);
+                                availableSpells.Add(levelThree[2]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l3+=1;
                                 break;
                             case 4:
                                 //Add level4 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelFour[l4]);
+                                availableSpells.Add(levelFour[1]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l4+=1;
-                                availableSpells.Add(levelFour[l4]);
+                                availableSpells.Add(levelFour[2]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l4+=1;
                                 break;
                             case 5:
                                 //Add level5 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelFive[l5]);
+                                availableSpells.Add(levelFive[1]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l5+=1;
-                                availableSpells.Add(levelFive[l5]);
+                                availableSpells.Add(levelFive[2]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l5+=1;
                                 break;
                             case 6:
                                 //Add level6 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelSix[l6]);
+                                availableSpells.Add(levelSix[1]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l6+=1;
-                                availableSpells.Add(levelSix[l6]);
+                                availableSpells.Add(levelSix[2]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l6+=1;
                                 break;
                             case 7:
                                 //Add level7 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelSeven[l7]);
+                                availableSpells.Add(levelSeven[1]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l7+=1;
-                                availableSpells.Add(levelSeven[l7]);
+                                availableSpells.Add(levelSeven[2]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l7+=1;
                                 break;
                             case 8:
                                 //Add level8 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelEight[l8]);
+                                availableSpells.Add(levelEight[1]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l8+=1;
-                                availableSpells.Add(levelEight[l8]);
+                                availableSpells.Add(levelEight[2]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l8+=1;
                                 break;
                             case 9:
                                 //Add level9 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelNine[l9]);
+                                availableSpells.Add(levelNine[1]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l9+=1;
-                                availableSpells.Add(levelNine[l9]);
+                                availableSpells.Add(levelNine[2]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l9+=1;
                                 break;
                             case 10:
                                 //Add level9 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelNine[l9]);
+                                availableSpells.Add(levelNine[1]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l9+=1;
-                                availableSpells.Add(levelNine[l9]);
+                                availableSpells.Add(levelNine[2]);
+                                Console.WriteLine(Spell_Level_Available);
                                 l9+=1;
                                 break;
                         }

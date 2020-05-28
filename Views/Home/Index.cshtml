@@ -76,9 +76,38 @@
     .charBase{
         border: 2px solid black;
         border-radius: 3px;
-        margin: 5px;
-        
     }
+    .equal {
+        display: flex;
+        display: -webkit-flex;
+        flex-wrap: wrap;
+    }
+    .statbox{
+        border: 2px solid black; 
+        background: white; 
+        border-radius:5px;  
+        text-align: left;
+    }
+    .bigbox{
+        border: 2px solid black; 
+        background: white; 
+        border-radius:5px;  
+        text-align: left;
+        padding-top: 3%;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    #featbox{
+        border: 2px solid black; 
+        background: white; 
+        border-radius:5px;  
+        text-align: left;
+        padding-top: 3%;
+        padding-left: 20px;
+    }
+    
+
+    
 </style>
 
 @model dynamic
@@ -130,244 +159,241 @@
 
 
 @* Pull API from fantasy name generator for names *@
-<div class="container-lg" style="background: beige; border: 5px solid black; border-radius:10px;  margin-left: 3%; margin-right: 3%; padding: 2%;">
+<div class="container-lg" style="background: beige; border: 5px solid black; border-radius:10px; padding: 2%;">
     <div class="row">
-        <h5 class="col-sm-3 text-center d-flex justify-content-center charBase" >Name: <input type="text" name="CharacterName"></h5>
-        <h5 class="col-sm-2 text-center d-flex justify-content-center charBase" >Class: @Model.Character.playerClass.ClassName</h5>
-        <h5 class="col-sm-2 text-center d-flex justify-content-center charBase" >Race: @Model.Character.playerRace.Race</h5>
-        <h5 class="col-sm-2 text-center d-flex justify-content-center charBase" >Background:@Model.Character.playerBG.Background</h5>
-        <h5 class="col-sm-2 text-center d-flex justify-content-center charBase" >Level:@Model.Character.Level</h5>
+        <h5 class="col-sm-6 col-md-3 text-center  charBase" >Name: <input type="text" name="CharacterName"></h5>
+        <h5 class="col-sm-6 col-md-2 text-center  charBase" >Class: @Model.Character.playerClass.ClassName</h5>
+        <h5 class="col-sm-6 col-md-2 text-center  charBase" >Race: @Model.Character.playerRace.Race</h5>
+        <h5 class="col-sm-6 col-md-3 text-center  charBase" >Background:@Model.Character.playerBG.Background</h5>
+        <h5 class="col-sm-6 col-md-2 text-center  charBase" >Level:@Model.Character.Level</h5>
     </div>
-    <div class="row">
+    <div class="row equal">
         @* Column 1 *@
-        <div class="col-sm-3">
-            <div class="row" >
-                <div class="col-5 text-center">
-                    <h5>Proficiency</h5>
+        <div class="col-sm-12 col-md-4 d-flex flex-md-column text-center">
+            <div class="row equal p-2 flex-md-row" >
+                <div class="col-sm-6 text-center">
+                    <h5>Stats</h5>
                 </div>
-                <div class="col-5 text-center">
-                    <h5>Proficiency</h5>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="col-5 text-center " style ="border: 2px solid black; background: white; border-radius:5px;  margin: 2px; text-align: left;">
-                    <p>Hit Points</p>
-                    <p>@Model.Character.playerStat.HitPoints</p>
-                </div>
-                <div class="col-5 text-center" style ="border: 2px solid black; background: white;  border-radius:5px; margin: 2px; text-align: left;">
-                    <p>Proficiency</p>
-                    <p>@Model.Character.playerStat.Proficiency</p>
+                <div class="col-sm-6 text-center">
+                    <h5>Modifiers</h5>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Speed</p>
-                    <p>@Model.Character.playerRace.Speed</p>
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox" >
+                    <p>Strength</p>
+                    <p>@Model.Character.playerStat.Strength</p>
                 </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>PlaceHolder</p>
-                    <p>something?</p>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+                <div class="col-sm-6 text-center statbox" >
                     <p>Strength Modifier</p>
                     <p>@Model.Character.playerStat.StrMod</p>
                 </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+            </div>
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
+                    <p>Dexterity</p>
+                    <p>@Model.Character.playerStat.Dexterity</p>
+                </div>
+                <div class="col-sm-6 text-center statbox" >
                     <p>Dexterity Modifier</p>
                     <p>@Model.Character.playerStat.DexMod</p>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
+                    <p>Constitution</p>
+                    <p>@Model.Character.playerStat.Constitution</p>
+                </div>
+                <div class="col-sm-6 text-center statbox" >
                     <p>Constitution Modifier</p>
                     <p>@Model.Character.playerStat.ConMod</p>
                 </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Intelligence Modifier</p>
-                    <p>@Model.Character.playerStat.IntMod</p>
-                </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
+                    <p>Wisdom</p>
+                    <p>@Model.Character.playerStat.Wisdom</p>
+                </div>
+                <div class="col-sm-6 text-center statbox" >
                     <p>Wisdom Modifier</p>
                     <p>@Model.Character.playerStat.WisMod</p>
                 </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+            </div>
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
+                    <p>Charisma</p>
+                    <p>@Model.Character.playerStat.Charisma</p>
+                </div>
+                <div class="col-sm-6 text-center statbox" >
                     <p>Charisma Modifier</p>
                     <p>@Model.Character.playerStat.ChaMod</p>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Place Holder</p>
-                    <p>something</p>
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
+                    <p>Intelligence</p>
+                    <p>@Model.Character.playerStat.Intelligence</p>
                 </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Place Holder</p>
-                    <p>something</p>
+                <div class="col-sm-6 text-center statbox" >
+                    <p>Intelligence Modifier</p>
+                    <p>@Model.Character.playerStat.IntMod</p>
                 </div>
             </div>
         </div>
         
         @* Column 2 *@
-        <div class = "col-sm-2 text-center" style =" text-align: left; ">
-            <h5>Skills</h5>
-            <ul style ="text-align: left; border: 2px solid black; border-radius:5px; background: white; padding: 30px; ;">
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Acrobatics">
-                    Acrobatics
-                    <span class="profVals">@Model.Character.playerStat.Acrobatics</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "AnimalHandling ">
-                    Animal Handling 
-                    <span class="profVals">@Model.Character.playerStat.AnimalHandling</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Arcana">
-                    Arcana 
-                    <span class="profVals">@Model.Character.playerStat.Arcana</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Athletics">
-                    Athletics 
-                    <span class="profVals">@Model.Character.playerStat.Athletics</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Deception">
-                    Deception 
-                    <span class="profVals"> @Model.Character.playerStat.Deception</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "History">
-                    History 
-                    <span class="profVals">@Model.Character.playerStat.History</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Insight">
-                    Insight 
-                    <span class="profVals"> @Model.Character.playerStat.Insight</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Intimidation">
-                    Intimidation 
-                    <span class="profVals"> @Model.Character.playerStat.Intimidation</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Investigation">
-                    Investigation 
-                    <span class="profVals"> @Model.Character.playerStat.Investigation</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Medicine">
-                    Medicine 
-                    <span class="profVals"> @Model.Character.playerStat.Medicine</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Nature">
-                    Nature 
-                    <span class="profVals"> @Model.Character.playerStat.Nature</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Perception">
-                    Perception 
-                    <span class="profVals"> @Model.Character.playerStat.Perception</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Performance">
-                    Performance 
-                    <span class="profVals">@Model.Character.playerStat.Performance</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Persuasion">
-                    Persuasion 
-                    <span class="profVals">@Model.Character.playerStat.Persuasion</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Religion">
-                    Religion 
-                    <span class="profVals"> @Model.Character.playerStat.Religion</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Sleight">
-                    Sleight of Hand 
-                    <span class="profVals"> @Model.Character.playerStat.Sleight</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Stealth">
-                    Stealth 
-                    <span class="profVals"> @Model.Character.playerStat.Stealth</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Survival">
-                    Survival 
-                    <span class="profVals"> @Model.Character.playerStat.Survival</span>
-                </li>
-            </ul>
+        <div class = "col-sm-12 col-md-4 text-center d-flex flex-md-column">
+                <h5>Skills</h5>
+                <ul class="col-sm statbox bigbox">
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Acrobatics">
+                        Acrobatics
+                        <span class="profVals">@Model.Character.playerStat.Acrobatics</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "AnimalHandling ">
+                        Animal Handling 
+                        <span class="profVals">@Model.Character.playerStat.AnimalHandling</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Arcana">
+                        Arcana 
+                        <span class="profVals">@Model.Character.playerStat.Arcana</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Athletics">
+                        Athletics 
+                        <span class="profVals">@Model.Character.playerStat.Athletics</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Deception">
+                        Deception 
+                        <span class="profVals"> @Model.Character.playerStat.Deception</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "History">
+                        History 
+                        <span class="profVals">@Model.Character.playerStat.History</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Insight">
+                        Insight 
+                        <span class="profVals"> @Model.Character.playerStat.Insight</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Intimidation">
+                        Intimidation 
+                        <span class="profVals"> @Model.Character.playerStat.Intimidation</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Investigation">
+                        Investigation 
+                        <span class="profVals"> @Model.Character.playerStat.Investigation</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Medicine">
+                        Medicine 
+                        <span class="profVals"> @Model.Character.playerStat.Medicine</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Nature">
+                        Nature 
+                        <span class="profVals"> @Model.Character.playerStat.Nature</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Perception">
+                        Perception 
+                        <span class="profVals"> @Model.Character.playerStat.Perception</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Performance">
+                        Performance 
+                        <span class="profVals">@Model.Character.playerStat.Performance</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Persuasion">
+                        Persuasion 
+                        <span class="profVals">@Model.Character.playerStat.Persuasion</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Religion">
+                        Religion 
+                        <span class="profVals"> @Model.Character.playerStat.Religion</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Sleight">
+                        Sleight of Hand 
+                        <span class="profVals"> @Model.Character.playerStat.Sleight</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Stealth">
+                        Stealth 
+                        <span class="profVals"> @Model.Character.playerStat.Stealth</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Survival">
+                        Survival 
+                        <span class="profVals"> @Model.Character.playerStat.Survival</span>
+                    </li>
+                </ul>
         </div>
         
         @* Column 3 *@
-        <div class="col-sm-3">
-            <div class="row" >
-                <div class="col-5 text-center">
+        <div class="col-sm-12 col-md-4  d-flex flex-md-column text-center">
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center">
                     <h5>Proficiency</h5>
                 </div>
-                <div class="col-5 text-center">
+                <div class="col-sm-6 text-center">
                     <h5>Proficiency</h5>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center " style ="border: 2px solid black; background: white; border-radius:5px;  margin: 2px; text-align: left;">
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox ">
                     <p>Hit Points</p>
                     <p>@Model.Character.playerStat.HitPoints</p>
                 </div>
-                <div class="col-5 text-center" style ="border: 2px solid black; background: white;  border-radius:5px; margin: 2px; text-align: left;">
+                <div class="col-sm-6 text-center statbox" >
                     <p>Proficiency</p>
                     <p>@Model.Character.playerStat.Proficiency</p>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
                     <p>Speed</p>
                     <p>@Model.Character.playerRace.Speed</p>
                 </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>PlaceHolder</p>
-                    <p>something?</p>
+                <div class="col-sm-6 text-center statbox" >
+                    <p>Initiative</p>
+                    <p>0</p>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Strength Modifier</p>
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
+                    <p>Base AC</p>
+                    <p>0</p>
+                </div>
+                <div class="col-sm-6 text-center statbox" >
+                    <p>?????</p>
+                    <p>0</p>
+                </div>
+            </div>
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
+                    <p>Strength Saving</p>
                     <p>@Model.Character.playerStat.StrMod</p>
                 </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Dexterity Modifier</p>
+                <div class="col-sm-6 text-center statbox" >
+                    <p>Dexterity Saving</p>
                     <p>@Model.Character.playerStat.DexMod</p>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Constitution Modifier</p>
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
+                    <p>Constitution Saving</p>
                     <p>@Model.Character.playerStat.ConMod</p>
                 </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Intelligence Modifier</p>
+                <div class="col-sm-6 text-center statbox" >
+                    <p>Intelligence Saving</p>
                     <p>@Model.Character.playerStat.IntMod</p>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Wisdom Modifier</p>
+            <div class="row equal p-2" >
+                <div class="col-sm-6 text-center statbox">
+                    <p>Wisdom Saving</p>
                     <p>@Model.Character.playerStat.WisMod</p>
                 </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Charisma Modifier</p>
+                <div class="col-sm-6 text-center statbox" >
+                    <p>Charisma Saving</p>
                     <p>@Model.Character.playerStat.ChaMod</p>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-5 text-center" style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Place Holder</p>
-                    <p>something</p>
-                </div>
-                <div class="col-5 text-center"  style ="border: 2px solid black; border-radius:5px; background: white; margin: 2px; text-align: left;">
-                    <p>Place Holder</p>
-                    <p>something</p>
-                </div>
-            </div>
         </div>
-    </div>
-    <div class="row">
-
         @* Column 4 *@
-        <div class = "col-sm-3 text-center" style =" text-align: left; ">
+        <div class = "col-sm-12 col-md-4 text-center" style =" text-align: left; ">
             <h5>Features</h5>
-            <ul style ="text-align: left; border: 2px solid black; border-radius:5px; background: white; padding: 30px; ;">
+            <ul class= "statbox">
                 @foreach(Feature feat in Model.Features)
             {
             <li>@feat.FeatureName</li>
@@ -376,9 +402,9 @@
         </div>
 
         @* Column 5 *@
-        <div class = "col-sm-4 text-center" style =" text-align: left; ">
+        <div class = "col-sm-12 col-md-4 text-center" style =" text-align: left; ">
             <h5>Spells</h5>
-            <ul style ="text-align: left; border: 2px solid black; border-radius:5px; background: white; padding-top: 3%; padding-left: 10%; ;" class="col-sm">
+            <ul class="col-sm statbox bigbox">
                <li>Foreach spell in spell array</li>
                <li>print spells in a list</li>
                <li>if we get the details from the api</li>
@@ -393,17 +419,35 @@
                 <li>logo font too</li>
                 <li>give login and registration an x</li>
                 <li>do something with fatures</li>
-                <li>shirnk container and make two rows of three columns??????</li>
+                <li>shirnk container and make two row equals of three columns??????</li>
                 <li>sixth column?????</li>
             </ul>
         </div>
 
         @* Column 6 *@
-        <div class="col">
-            
+        <div class="col-sm-12 col-md-4 text-center">
+            <h5>Notes</h5>
+            <ul class="col-sm statbox bigbox">
+               <li></li>
+               <li></li>
+               <li>if we get the details from the api</li>
+               <li>We can populate data in a popup on mouse over</li>
+               <li>Gonna need to make these flex containers so they all fit the same size all the time</li>
+               <li>Need to center all 4 columns</li>
+               <li>proficeney hgihlighting in js needs work</li>
+               <li>make all the boxes in each column the same fucking size</li>
+               <li>color, texture, shadows</li>
+               <li>get a better font</li>
+               <li>get a color scheme pallete</li>
+                <li>logo font too</li>
+                <li>give login and registration an x</li>
+                <li>do something with fatures</li>
+                <li>shirnk container and make two row equals of three columns??????</li>
+                <li>sixth column?????</li>
+            </ul>
         </div>
     </div>
-    <div class="row">
+    <div class="row equal">
         <div class="col">
             <h5>Skills and Spells</h5>
             <p>Spells</p>
