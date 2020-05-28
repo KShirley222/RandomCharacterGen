@@ -183,22 +183,22 @@ namespace CharacterGenerator.Controllers
             {
                 Console.WriteLine(spell.SpellName);
             }
-            Console.WriteLine("TEST TWO ***TEST TWO ***");
-            List<Spell> availableSpells = AvaialableSpellsWizard(allSpells, newPlayer);
-            Console.WriteLine("TEST THREE ***TEST THREE ***");
-            Console.WriteLine(availableSpells);
-            foreach (Spell spell in availableSpells)
-            {
-                Console.WriteLine(spell.SpellName);
-            }
-            Console.WriteLine("TEST THREE ***TEST THREE ***");
-            foreach(Spell added in availableSpells )
-            {
-                SpellAssoc a = new SpellAssoc(newPlayer, added);
-                _context.Spell_Associations.Add(a);
-                _context.SaveChanges();
-            }
 
+                Console.WriteLine("TEST TWO ***TEST TWO ***");
+                List<Spell> availableSpells = AvaialableSpellsWizard(allSpells, newPlayer);
+                Console.WriteLine("TEST THREE ***TEST THREE ***");
+                Console.WriteLine(availableSpells);
+                foreach (Spell spell in availableSpells)
+                {
+                    Console.WriteLine(spell.SpellName);
+                }
+                Console.WriteLine("TEST THREE ***TEST THREE ***");
+                foreach(Spell added in availableSpells )
+                {
+                    SpellAssoc a = new SpellAssoc(newPlayer, added);
+                    _context.Spell_Associations.Add(a);
+                    _context.SaveChanges();
+                }
             //Dynamic model with USer, Login, Character
             dynamic MyModel = new ExpandoObject();
             MyModel.User = SessionUser;
@@ -1960,21 +1960,30 @@ namespace CharacterGenerator.Controllers
                 {
                     for (int c = 4; c> -1; c--)
                     {
-                        availableSpells.Add(Cantrips[c]);
+                        if(availableSpells != null)
+                        {
+                            availableSpells.Add(Cantrips[c]);
+                        }
                     }
                 }
             else if (PC.Level >= 4)
                 {
                     for (int c = 3; c> -1; c--)
                     {
-                        availableSpells.Add(Cantrips[c]);
+                        if(availableSpells != null)
+                        {
+                            availableSpells.Add(Cantrips[c]);
+                        }
                     }
                 }
             else 
                 {
                     for (int c = 2; c> -1; c--)
                     {
-                        availableSpells.Add(Cantrips[c]);
+                        if(availableSpells != null)
+                        {
+                            availableSpells.Add(Cantrips[c]);
+                        }
                     }
                 }
 

@@ -88,6 +88,23 @@
         border-radius:5px;  
         text-align: left;
     }
+    .bigbox{
+        border: 2px solid black; 
+        background: white; 
+        border-radius:5px;  
+        text-align: left;
+        padding-top: 3%;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    #featbox{
+        border: 2px solid black; 
+        background: white; 
+        border-radius:5px;  
+        text-align: left;
+        padding-top: 3%;
+        padding-left: 20px;
+    }
     
 
     
@@ -154,10 +171,10 @@
         @* Column 1 *@
         <div class="col-sm-12 col-md-4 d-flex flex-md-column text-center">
             <div class="row equal p-2 flex-md-row" >
-                <div class="col-sm-6 text-center p-2">
+                <div class="col-sm-6 text-center">
                     <h5>Stats</h5>
                 </div>
-                <div class="col-sm-6 text-center p-2">
+                <div class="col-sm-6 text-center">
                     <h5>Modifiers</h5>
                 </div>
             </div>
@@ -224,89 +241,87 @@
         </div>
         
         @* Column 2 *@
-        <div class = "col-sm-12 col-md-4 text-center" style =" text-align: left; ">
-            <div class="row equal">
-                <h5 class="col-sm-12 text-center">Skills</h5>
-            </div>
-            <ul style ="text-align: left; border: 2px solid black; border-radius:5px; background: white; padding: 30px; ;">
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Acrobatics">
-                    Acrobatics
-                    <span class="profVals">@Model.Character.playerStat.Acrobatics</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "AnimalHandling ">
-                    Animal Handling 
-                    <span class="profVals">@Model.Character.playerStat.AnimalHandling</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Arcana">
-                    Arcana 
-                    <span class="profVals">@Model.Character.playerStat.Arcana</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Athletics">
-                    Athletics 
-                    <span class="profVals">@Model.Character.playerStat.Athletics</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Deception">
-                    Deception 
-                    <span class="profVals"> @Model.Character.playerStat.Deception</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "History">
-                    History 
-                    <span class="profVals">@Model.Character.playerStat.History</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Insight">
-                    Insight 
-                    <span class="profVals"> @Model.Character.playerStat.Insight</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Intimidation">
-                    Intimidation 
-                    <span class="profVals"> @Model.Character.playerStat.Intimidation</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Investigation">
-                    Investigation 
-                    <span class="profVals"> @Model.Character.playerStat.Investigation</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Medicine">
-                    Medicine 
-                    <span class="profVals"> @Model.Character.playerStat.Medicine</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Nature">
-                    Nature 
-                    <span class="profVals"> @Model.Character.playerStat.Nature</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Perception">
-                    Perception 
-                    <span class="profVals"> @Model.Character.playerStat.Perception</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Performance">
-                    Performance 
-                    <span class="profVals">@Model.Character.playerStat.Performance</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Persuasion">
-                    Persuasion 
-                    <span class="profVals">@Model.Character.playerStat.Persuasion</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Religion">
-                    Religion 
-                    <span class="profVals"> @Model.Character.playerStat.Religion</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Sleight">
-                    Sleight of Hand 
-                    <span class="profVals"> @Model.Character.playerStat.Sleight</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Stealth">
-                    Stealth 
-                    <span class="profVals"> @Model.Character.playerStat.Stealth</span>
-                </li>
-                <li class= "profcheck" onload=ProfCheck(this.id) id= "Survival">
-                    Survival 
-                    <span class="profVals"> @Model.Character.playerStat.Survival</span>
-                </li>
-            </ul>
+        <div class = "col-sm-12 col-md-4 text-center d-flex flex-md-column">
+                <h5>Skills</h5>
+                <ul class="col-sm statbox bigbox">
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Acrobatics">
+                        Acrobatics
+                        <span class="profVals">@Model.Character.playerStat.Acrobatics</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "AnimalHandling ">
+                        Animal Handling 
+                        <span class="profVals">@Model.Character.playerStat.AnimalHandling</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Arcana">
+                        Arcana 
+                        <span class="profVals">@Model.Character.playerStat.Arcana</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Athletics">
+                        Athletics 
+                        <span class="profVals">@Model.Character.playerStat.Athletics</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Deception">
+                        Deception 
+                        <span class="profVals"> @Model.Character.playerStat.Deception</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "History">
+                        History 
+                        <span class="profVals">@Model.Character.playerStat.History</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Insight">
+                        Insight 
+                        <span class="profVals"> @Model.Character.playerStat.Insight</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Intimidation">
+                        Intimidation 
+                        <span class="profVals"> @Model.Character.playerStat.Intimidation</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Investigation">
+                        Investigation 
+                        <span class="profVals"> @Model.Character.playerStat.Investigation</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Medicine">
+                        Medicine 
+                        <span class="profVals"> @Model.Character.playerStat.Medicine</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Nature">
+                        Nature 
+                        <span class="profVals"> @Model.Character.playerStat.Nature</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Perception">
+                        Perception 
+                        <span class="profVals"> @Model.Character.playerStat.Perception</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Performance">
+                        Performance 
+                        <span class="profVals">@Model.Character.playerStat.Performance</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Persuasion">
+                        Persuasion 
+                        <span class="profVals">@Model.Character.playerStat.Persuasion</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Religion">
+                        Religion 
+                        <span class="profVals"> @Model.Character.playerStat.Religion</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Sleight">
+                        Sleight of Hand 
+                        <span class="profVals"> @Model.Character.playerStat.Sleight</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Stealth">
+                        Stealth 
+                        <span class="profVals"> @Model.Character.playerStat.Stealth</span>
+                    </li>
+                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Survival">
+                        Survival 
+                        <span class="profVals"> @Model.Character.playerStat.Survival</span>
+                    </li>
+                </ul>
         </div>
         
         @* Column 3 *@
-        <div class="col-sm-12 col-md-4 text-center">
-            <div class="row equal" >
+        <div class="col-sm-12 col-md-4  d-flex flex-md-column text-center">
+            <div class="row equal p-2" >
                 <div class="col-sm-6 text-center">
                     <h5>Proficiency</h5>
                 </div>
@@ -314,7 +329,7 @@
                     <h5>Proficiency</h5>
                 </div>
             </div>
-            <div class="row equal" >
+            <div class="row equal p-2" >
                 <div class="col-sm-6 text-center statbox ">
                     <p>Hit Points</p>
                     <p>@Model.Character.playerStat.HitPoints</p>
@@ -324,7 +339,7 @@
                     <p>@Model.Character.playerStat.Proficiency</p>
                 </div>
             </div>
-            <div class="row equal" >
+            <div class="row equal p-2" >
                 <div class="col-sm-6 text-center statbox">
                     <p>Speed</p>
                     <p>@Model.Character.playerRace.Speed</p>
@@ -334,7 +349,7 @@
                     <p>0</p>
                 </div>
             </div>
-            <div class="row equal" >
+            <div class="row equal p-2" >
                 <div class="col-sm-6 text-center statbox">
                     <p>Base AC</p>
                     <p>0</p>
@@ -344,7 +359,7 @@
                     <p>0</p>
                 </div>
             </div>
-            <div class="row equal" >
+            <div class="row equal p-2" >
                 <div class="col-sm-6 text-center statbox">
                     <p>Strength Saving</p>
                     <p>@Model.Character.playerStat.StrMod</p>
@@ -354,7 +369,7 @@
                     <p>@Model.Character.playerStat.DexMod</p>
                 </div>
             </div>
-            <div class="row equal" >
+            <div class="row equal p-2" >
                 <div class="col-sm-6 text-center statbox">
                     <p>Constitution Saving</p>
                     <p>@Model.Character.playerStat.ConMod</p>
@@ -364,7 +379,7 @@
                     <p>@Model.Character.playerStat.IntMod</p>
                 </div>
             </div>
-            <div class="row equal" >
+            <div class="row equal p-2" >
                 <div class="col-sm-6 text-center statbox">
                     <p>Wisdom Saving</p>
                     <p>@Model.Character.playerStat.WisMod</p>
@@ -389,7 +404,7 @@
         @* Column 5 *@
         <div class = "col-sm-12 col-md-4 text-center" style =" text-align: left; ">
             <h5>Spells</h5>
-            <ul style ="text-align: left; border: 2px solid black; border-radius:5px; background: white; padding-top: 3%; padding-left: 10%; ;" class="col-sm">
+            <ul class="col-sm statbox bigbox">
                <li>Foreach spell in spell array</li>
                <li>print spells in a list</li>
                <li>if we get the details from the api</li>
@@ -412,7 +427,7 @@
         @* Column 6 *@
         <div class="col-sm-12 col-md-4 text-center">
             <h5>Notes</h5>
-            <ul style ="text-align: left; border: 2px solid black; border-radius:5px; background: white; padding-top: 3%; padding-left: 10%; ;" class="col-sm">
+            <ul class="col-sm statbox bigbox">
                <li></li>
                <li></li>
                <li>if we get the details from the api</li>
