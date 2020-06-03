@@ -154,6 +154,7 @@
         <br>
         <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href=>Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="dndbeyond.com">DnD Beyond</a> and purchase the materials there.</p>
     </div>
+    <button onclick="Generate(@Model.User)" href="" >Generate</button>
 </div>
 
 
@@ -511,6 +512,19 @@ function ProfCheck(ProfId, playerStatProf) {
     if(playerStats == true)
     {
         document.getElementById(ProfId).style.color = "yellow";
+    }
+}
+
+
+@* Generate an error and pass to login screen *@
+function Generate(user) {
+    preventDefault();
+    let User = user;
+    if( user.UserId != 1){
+        location.reload();
+    }
+    else{
+        document.getElementById(this).href = "/login"
     }
 }
 </script>
