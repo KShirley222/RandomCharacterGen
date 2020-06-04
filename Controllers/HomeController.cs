@@ -1644,6 +1644,301 @@ namespace CharacterGenerator.Controllers
                     }
             return availableSpells;
         }
+
+        public List<Spell> AvaialableSpellsDruid(List<Spell> fullListAvail, NewCharacter PC)
+        {
+            List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
+            RandomizeSpells(Cantrips, Cantrips.Count);
+            List<Spell> levelOne = fullListAvail.Where(s => s.SpellLevel == 1).ToList();
+            RandomizeSpells(levelOne, levelOne.Count);
+            Console.WriteLine("levelOne");
+            foreach(Spell spell in levelOne)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelTwo = fullListAvail.Where(s => s.SpellLevel == 2).ToList();
+            RandomizeSpells(levelTwo, levelTwo.Count);
+            Console.WriteLine("levelTwo");
+            foreach(Spell spell in levelTwo)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelThree = fullListAvail.Where(s => s.SpellLevel == 3).ToList();
+            RandomizeSpells(levelThree, levelThree.Count);
+            Console.WriteLine("levelThree");
+            foreach(Spell spell in fullListAvail)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelFour = fullListAvail.Where(s => s.SpellLevel == 4).ToList();
+            RandomizeSpells(levelFour, levelFour.Count);
+            Console.WriteLine("levelFour");
+            foreach(Spell spell in levelFour)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelFive = fullListAvail.Where(s => s.SpellLevel == 5).ToList();
+            RandomizeSpells(levelFive, levelFive.Count);
+            Console.WriteLine("levelFive");
+            foreach(Spell spell in levelFive)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelSix = fullListAvail.Where(s => s.SpellLevel == 6).ToList();
+            RandomizeSpells(levelSix, levelSix.Count);
+            Console.WriteLine("levelSix");
+            foreach(Spell spell in levelSix)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelSeven = fullListAvail.Where(s => s.SpellLevel == 7).ToList();
+            RandomizeSpells(levelSeven, levelSeven.Count);
+            Console.WriteLine("levelSeven");
+            foreach(Spell spell in levelSeven)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelEight = fullListAvail.Where(s => s.SpellLevel == 8).ToList();
+            RandomizeSpells(levelEight, levelEight.Count);
+            Console.WriteLine("levelEight");
+            foreach(Spell spell in levelEight)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelNine = fullListAvail.Where(s => s.SpellLevel == 9).ToList();
+            RandomizeSpells(levelNine, levelNine.Count);
+            Console.WriteLine("levelNine");
+            foreach(Spell spell in levelNine)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            Console.WriteLine("Full list section end ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+            List<Spell> availableSpells = new List<Spell>();
+
+
+            //Based on Character's level, determine what spells known are chosen from the list available to the character
+            //DetermineSpellLevel() can be modified to indicate access to spell tiers, using the Math.Ceiling functionality described there to determine spell level at the time that the spell could be chosen. Characters, through leveling progression, get access to different spells based upon their level and we can use that to determine what is added to their spells known.
+            //Currently, we can use a For Loop(for(int i=1; i>ClassLevel; i++)) to determine spells known for a Wizard, grabbing from the appropriate list and adding it to what they know
+            //Other classes will require some finangling, but the basic structure will be there once we understand how to implement it here.
+            //Structure for spells: Available Spells (AS), Spells Known (SK) is a subset of AS, Prepared Spells is a subset of SK.
+            //(A(S(PS)K)S) <- Loose diagram of the idea
+
+            for(int i=1; i<=PC.Level; i++) // I was thinking of while loops lol
+            {
+                //i is a representation of level, since Clerics/Druids/Paladins get access to all of the associated spells at a particular level, all we need to do is add each in particular when they hit the determined levels
+                switch(i)
+                {
+                    case 1:
+                    foreach (Spell s in levelOne)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 3:
+                    foreach (Spell s in levelTwo)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 5:
+                    foreach (Spell s in levelThree)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 7:
+                    foreach (Spell s in levelFour)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 9:
+                    foreach (Spell s in levelFive)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 11:
+                    foreach (Spell s in levelSix)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 13:
+                    foreach (Spell s in levelSeven)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 15:
+                    foreach (Spell s in levelEight)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 17:
+                    foreach (Spell s in levelNine)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                }
+            }
+            //Cantrips. Need to be specified for Sorcerer Cantrip requirements
+            if (PC.Level >= 10)
+                {
+                    for (int c = 3; c> -1; c--)
+                    {
+                        availableSpells.Add(Cantrips[c]);
+                    }
+                }
+            else if (PC.Level >= 4)
+                {
+                    for (int c = 2; c> -1; c--)
+                    {
+                        availableSpells.Add(Cantrips[c]);
+                    }
+                }
+                else 
+                    {
+                        for (int c = 1; c> -1; c--)
+                        {
+                            availableSpells.Add(Cantrips[c]);
+                        }
+                    }
+            if (PC.playerClass.SubClassName == "Circle of the Land: Arctic" ||
+                PC.playerClass.SubClassName == "Circle of the Land: Coast" ||
+                PC.playerClass.SubClassName == "Circle of the Land: Desert" ||
+                PC.playerClass.SubClassName == "Circle of the Land: Forest" ||
+                PC.playerClass.SubClassName == "Circle of the Land: Grassland" ||
+                PC.playerClass.SubClassName == "Circle of the Land: Mountain" ||
+                PC.playerClass.SubClassName == "Circle of the Land: Swamp" ||
+                PC.playerClass.SubClassName == "Circle of the Land: Underdark"
+                )
+                {
+                    availableSpells.Add(Cantrips[Cantrips.Count-1]);
+                }
+            return availableSpells;
+        }
+
+        public List<Spell> AvaialableSpellsPaladin(List<Spell> fullListAvail, NewCharacter PC)
+        {
+            List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
+            RandomizeSpells(Cantrips, Cantrips.Count);
+            List<Spell> levelOne = fullListAvail.Where(s => s.SpellLevel == 1).ToList();
+            RandomizeSpells(levelOne, levelOne.Count);
+            Console.WriteLine("levelOne");
+            foreach(Spell spell in levelOne)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelTwo = fullListAvail.Where(s => s.SpellLevel == 2).ToList();
+            RandomizeSpells(levelTwo, levelTwo.Count);
+            Console.WriteLine("levelTwo");
+            foreach(Spell spell in levelTwo)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelThree = fullListAvail.Where(s => s.SpellLevel == 3).ToList();
+            RandomizeSpells(levelThree, levelThree.Count);
+            Console.WriteLine("levelThree");
+            foreach(Spell spell in fullListAvail)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelFour = fullListAvail.Where(s => s.SpellLevel == 4).ToList();
+            RandomizeSpells(levelFour, levelFour.Count);
+            Console.WriteLine("levelFour");
+            foreach(Spell spell in levelFour)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelFive = fullListAvail.Where(s => s.SpellLevel == 5).ToList();
+            RandomizeSpells(levelFive, levelFive.Count);
+            Console.WriteLine("levelFive");
+            foreach(Spell spell in levelFive)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelSix = fullListAvail.Where(s => s.SpellLevel == 6).ToList();
+            RandomizeSpells(levelSix, levelSix.Count);
+            Console.WriteLine("levelSix");
+            foreach(Spell spell in levelSix)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelSeven = fullListAvail.Where(s => s.SpellLevel == 7).ToList();
+            RandomizeSpells(levelSeven, levelSeven.Count);
+            Console.WriteLine("levelSeven");
+            foreach(Spell spell in levelSeven)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelEight = fullListAvail.Where(s => s.SpellLevel == 8).ToList();
+            RandomizeSpells(levelEight, levelEight.Count);
+            Console.WriteLine("levelEight");
+            foreach(Spell spell in levelEight)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            List<Spell> levelNine = fullListAvail.Where(s => s.SpellLevel == 9).ToList();
+            RandomizeSpells(levelNine, levelNine.Count);
+            Console.WriteLine("levelNine");
+            foreach(Spell spell in levelNine)
+            {
+                Console.WriteLine(spell.SpellName);
+            }
+            Console.WriteLine("Full list section end ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+            List<Spell> availableSpells = new List<Spell>();
+
+
+            //Based on Character's level, determine what spells known are chosen from the list available to the character
+            //DetermineSpellLevel() can be modified to indicate access to spell tiers, using the Math.Ceiling functionality described there to determine spell level at the time that the spell could be chosen. Characters, through leveling progression, get access to different spells based upon their level and we can use that to determine what is added to their spells known.
+            //Currently, we can use a For Loop(for(int i=1; i>ClassLevel; i++)) to determine spells known for a Wizard, grabbing from the appropriate list and adding it to what they know
+            //Other classes will require some finangling, but the basic structure will be there once we understand how to implement it here.
+            //Structure for spells: Available Spells (AS), Spells Known (SK) is a subset of AS, Prepared Spells is a subset of SK.
+            //(A(S(PS)K)S) <- Loose diagram of the idea
+
+            for(int i=1; i<=PC.Level; i++) // I was thinking of while loops lol
+            {
+                //i is a representation of level, since Clerics/Druids/Paladins get access to all of the associated spells at a particular level, all we need to do is add each in particular when they hit the determined levels
+                switch(i)
+                {
+                    case 2:
+                    foreach (Spell s in levelOne)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 5:
+                    foreach (Spell s in levelTwo)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 9:
+                    foreach (Spell s in levelThree)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 13:
+                    foreach (Spell s in levelFour)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                    case 17:
+                    foreach (Spell s in levelFive)
+                    {
+                        availableSpells.Add(s);
+                    }
+                    break;
+                }
+            }
+            return availableSpells;
+        }
     }
 }
-  
