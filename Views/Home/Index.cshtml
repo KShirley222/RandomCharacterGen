@@ -405,23 +405,11 @@
         @* Column 5 *@
         <div class = "col-sm-12 col-md-4 text-center" style =" text-align: left; ">
             <h5>Spells</h5>
-            <ul class="col-sm statbox bigbox">
-               <li>Foreach spell in spell array</li>
-               <li>print spells in a list</li>
-               <li>if we get the details from the api</li>
-               <li>We can populate data in a popup on mouse over</li>
-               <li>Gonna need to make these flex containers so they all fit the same size all the time</li>
-               <li>Need to center all 4 columns</li>
-               <li>proficeney hgihlighting in js needs work</li>
-               <li>make all the boxes in each column the same fucking size</li>
-               <li>color, texture, shadows</li>
-               <li>get a better font</li>
-               <li>get a color scheme pallete</li>
-                <li>logo font too</li>
-                <li>give login and registration an x</li>
-                <li>do something with fatures</li>
-                <li>shirnk container and make two row equals of three columns??????</li>
-                <li>sixth column?????</li>
+            <ul class= "statbox">
+                @foreach(Spell s in Model.Spells)
+            {
+            <li>@s.SpellName</li>
+            }
             </ul>
         </div>
 
@@ -429,7 +417,7 @@
         <div class="col-sm-12 col-md-4 text-center">
             <h5>Notes</h5>
             <ul class="col-sm statbox bigbox">
-               <li></li>
+               <li> @Model.Character.playerClass.SubClassName</li>
                <li></li>
                <li>if we get the details from the api</li>
                <li>We can populate data in a popup on mouse over</li>
@@ -446,16 +434,6 @@
                 <li>shirnk container and make two row equals of three columns??????</li>
                 <li>sixth column?????</li>
             </ul>
-        </div>
-    </div>
-    <div class="row equal">
-        <div class="col">
-            <h5>Skills and Spells</h5>
-            <p>Spells</p>
-        </div>
-        <div class="col">
-            <h5>Notes</h5>
-            <p>notes?</p>
         </div>
     </div>
 </div>

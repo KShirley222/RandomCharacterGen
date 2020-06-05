@@ -93,12 +93,22 @@ namespace CharacterGenerator.Controllers
                     .OrderBy(f => f.FeatLevel)
                     .ToList();
 
+                List<Spell> Spells = GetPossibleSpells(test);
+                foreach(Spell s in Spells)
+                {
+                    SpellAssoc a = new SpellAssoc(test, s);
+                    _context.Spell_Associations.Add(a);
+                    _context.SaveChanges();
+                }
+
+
                 // Dynamic model to provide all available objects and data
                 dynamic MyModel = new ExpandoObject();
                 MyModel.User = userCheck;
                 MyModel.Login = new Login();
                 MyModel.Character = test; 
                 MyModel.Features = Feats;
+                MyModel.Spells = Spells;
 
                 return View("index", MyModel);
             } 
@@ -128,12 +138,21 @@ namespace CharacterGenerator.Controllers
                 .OrderBy(f => f.FeatLevel)
                 .ToList();
 
+            List<Spell> Spells = _context.NewCharacter
+                .Include(c => c.SpellList)
+                .ThenInclude(sa => sa.SpellA)
+                .FirstOrDefault(c => c.CharacterId == character.CharacterId)
+                .SpellList.Select(s => s.SpellA)
+                .OrderByDescending(f => f.SpellLevel)
+                .ToList();
+
             // Pass Model User, Character, Feats
             dynamic MyModel = new ExpandoObject();
             MyModel.User = SessionUser;
             MyModel.Login = new Login();
             MyModel.Character = character;
             MyModel.Features = Feats; 
+            MyModel.Spells = Spells;
             
             return View("index", MyModel);
             }
@@ -227,7 +246,21 @@ namespace CharacterGenerator.Controllers
             //         _context.SaveChanges();
             //     }
             
-            
+            List<Spell> availableSpells = GetPossibleSpells(newPlayer);
+            foreach(Spell s in availableSpells)
+            {
+                SpellAssoc a = new SpellAssoc(newPlayer, s);
+                _context.Spell_Associations.Add(a);
+                _context.SaveChanges();
+            }
+
+            List<Spell> Spells = _context.NewCharacter
+                .Include(c => c.SpellList)
+                .ThenInclude(sa => sa.SpellA)
+                .FirstOrDefault(c => c.CharacterId == newPlayer.CharacterId)
+                .SpellList.Select(s => s.SpellA)
+                .OrderBy(f => f.SpellLevel)
+                .ToList();
             
             //Dynamic model with USer, Login, Character
             dynamic MyModel = new ExpandoObject();
@@ -235,7 +268,7 @@ namespace CharacterGenerator.Controllers
             MyModel.Login = new Login();
             MyModel.Character = newPlayer;
             MyModel.Features = Feats;
-            // MyModel.Spells = availableSpells;
+            MyModel.Spells = Spells;
 
             return View("Index", MyModel);
         }
@@ -380,15 +413,21 @@ namespace CharacterGenerator.Controllers
        
         public List<Spell> GetPossibleSpells(NewCharacter PC)
         {
-            
+            string PlayerClass = PC.playerClass.ClassName;
+            if(PlayerClass == "Fighter" || PlayerClass == "Barbarian" || PlayerClass == "Rogue" || PlayerClass == "Monk")
+            {
+                List<Spell> noSpell = new List<Spell>();
+                return noSpell;
+            }
+
             List<Spell> A = _context.Spells.Where(s => 
-                              s.Source1 == PC.playerClass.ClassName
-                            ||s.Source2 == PC.playerClass.ClassName
-                            ||s.Source3 == PC.playerClass.ClassName
-                            ||s.Source4 == PC.playerClass.ClassName
-                            ||s.Source5 == PC.playerClass.ClassName
-                            ||s.Source6 == PC.playerClass.ClassName
-                            ||s.Source7 == PC.playerClass.ClassName
+                              s.Source1 == PlayerClass
+                            ||s.Source2 == PlayerClass
+                            ||s.Source3 == PlayerClass
+                            ||s.Source4 == PlayerClass
+                            ||s.Source5 == PlayerClass
+                            ||s.Source6 == PlayerClass
+                            ||s.Source7 == PlayerClass
                             ).ToList();
             Console.WriteLine("START Get Possible Spells A ++++++++++++++++++++++++++++++++++++++");
             Console.WriteLine(A);
@@ -397,6 +436,36 @@ namespace CharacterGenerator.Controllers
                 Console.WriteLine(s.SpellName);
             }
             Console.WriteLine("END Get Possible Spells A ++++++++++++++++++++++++++++++++++++++");
+
+
+            List<Spell> C = new List<Spell>();
+            switch(PlayerClass)
+            {
+                case "Bard":
+                    C = AvaialableSpellsBard(A, PC);
+                    return C;
+                case "Druid":
+                    C = AvaialableSpellsDruid(A, PC);
+                    return C;
+                case "Cleric":
+                    C = AvaialableSpellsCleric(A, PC);
+                    return C;
+                case "Ranger":
+                    C = AvaialableSpellsRanger(A, PC);
+                    return C;
+                case "Warlock":
+                    C = AvaialableSpellsWarlock(A, PC);
+                    return C;
+                case "Wizard":
+                    C = AvaialableSpellsWizard(A, PC);
+                    return C;
+                case "Paladin":
+                    C = AvaialableSpellsPaladin(A, PC);
+                    return C;
+                case "Sorcerer":
+                    C = AvaialableSpellsSorcerer(A,PC);
+                    return C;
+            }
             
             return A;
         }
@@ -926,26 +995,26 @@ namespace CharacterGenerator.Controllers
                                 break;
                             case 2:
                                 //Add level2 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelTwo[1]);
+                                availableSpells.Add(levelTwo[l2]);
                                 Console.WriteLine(Spell_Level_Available);
-                                Console.WriteLine(levelTwo[2]);
+                                Console.WriteLine(levelTwo[l2]);
                                 l2+=1;
                                 break;
                             case 3:
                                 //Add level3 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelThree[1]);
+                                availableSpells.Add(levelThree[l3]);
                                 Console.WriteLine(Spell_Level_Available);
                                 l3+=1;
                                 break;
                             case 4:
                                 //Add level4 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelFour[1]);
+                                availableSpells.Add(levelFour[l4]);
                                 Console.WriteLine(Spell_Level_Available);
                                 l4+=1;
                                 break;
                             case 5:
                                 //Add level5 association, twice to represent spells gained on level up
-                                availableSpells.Add(levelFive[1]);
+                                availableSpells.Add(levelFive[l5]);
                                 Console.WriteLine(Spell_Level_Available);
                                 l5+=1;
                                 break;
@@ -955,7 +1024,7 @@ namespace CharacterGenerator.Controllers
                                     {
                                         break;
                                     }
-                                availableSpells.Add(levelSix[1]);
+                                availableSpells.Add(levelSix[l6]);
                                 Console.WriteLine(Spell_Level_Available);
                                 l6+=1;
                                 break;
@@ -965,7 +1034,7 @@ namespace CharacterGenerator.Controllers
                                     {
                                         break;
                                     }
-                                availableSpells.Add(levelSeven[1]);
+                                availableSpells.Add(levelSeven[l7]);
                                 Console.WriteLine(Spell_Level_Available);
                                 l7+=1;
                                 break;
@@ -975,7 +1044,7 @@ namespace CharacterGenerator.Controllers
                                     {
                                         break;
                                     }
-                                availableSpells.Add(levelEight[1]);
+                                availableSpells.Add(levelEight[l8]);
                                 Console.WriteLine(Spell_Level_Available);
                                 l8+=1;
                                 break;
@@ -985,13 +1054,14 @@ namespace CharacterGenerator.Controllers
                                     {
                                         break;
                                     }
-                                availableSpells.Add(levelNine[1]);
+                                availableSpells.Add(levelNine[l9]);
                                 Console.WriteLine(Spell_Level_Available);
                                 l9+=1;
                                 break;
                             case 10:
                                 break;
                         }
+                }
             }
             //Cantrips. Need to be specified for Sorcerer Cantrip requirements
             if (PC.Level >= 10)
@@ -1015,7 +1085,6 @@ namespace CharacterGenerator.Controllers
                             availableSpells.Add(Cantrips[c]);
                         }
                     }
-                }
             return availableSpells;
         }
 
@@ -1317,6 +1386,7 @@ namespace CharacterGenerator.Controllers
                             case 10:
                                 break;
                         }
+                    }
             }
             //Cantrips. Made to insure that Eldritch Blast is included no matter what on the Warlock Spell list. Make sure to test this on Warlocks, as I am currently unsure if the wording is fully functional in regards to the Find calls below.
             availableSpells.Add(Cantrips.Find(s => s.SpellName == "Eldritch Blast"));
@@ -1342,7 +1412,6 @@ namespace CharacterGenerator.Controllers
                             availableSpells.Add(Cantrips[c]);
                         }
                     }
-                }
             return availableSpells;
         }
 
