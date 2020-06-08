@@ -38,7 +38,7 @@
     <h1 class= "col-sm-8 text-center"><a href="/">RPG Character Generator</a></h1>
     <div class="col-sm-4">
         @{
-            if(ViewBag.SessionId == null)
+            if(@Model.User == null)
             {
                 <div class="row">
                     <button class= "register-form col-sm-5 btn btn-primary btn-sm" onclick="openRegistration()" >Register</button>

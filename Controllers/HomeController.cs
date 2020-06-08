@@ -178,7 +178,7 @@ namespace CharacterGenerator.Controllers
         // Seperate generation and saving
         // saving requires userid in session, if not prompt for login register should kick in
         // would be cool if pop up happened so that character doesnt get removed
-        [HttpGet("/class")]
+        [HttpGet("/GenerateNew")]
         public IActionResult CharacterGenerator()
         {
             int? SessionId = HttpContext.Session.GetInt32("UserId");
@@ -259,7 +259,8 @@ namespace CharacterGenerator.Controllers
                             ).ToList(); 
                                       
                 Spell FetchSpell = new Spell();
-                List<Spell> availableSpells = FetchSpell.GetPossibleSpells(newPlayer, ClassAvailbleSpells, NonClassSpells);
+                List<Spell> availableSpells
+                 = FetchSpell.GetPossibleSpells(newPlayer, ClassAvailbleSpells, NonClassSpells);
             foreach(Spell s in availableSpells)
             {
                 SpellAssoc a = new SpellAssoc(newPlayer, s);
@@ -354,7 +355,7 @@ namespace CharacterGenerator.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return Redirect("/");
+            return RedirectToAction("Index");
         }
 
         // Profile Page and Character List
