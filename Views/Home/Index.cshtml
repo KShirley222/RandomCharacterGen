@@ -153,8 +153,12 @@
         <p class=" welcome">Otherwise, click <a href="/" id="refresh">here</a> for another Character! Thanks for Visiting!</p>
         <br>
         <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href=>Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="dndbeyond.com">DnD Beyond</a> and purchase the materials there.</p>
+        <a class = "btn btn primary" id="generate"  href="/class" >Generate</a>
+        @if(Model.User != null)
+        {
+            <p>@Model.User.UserId</p>
+        }
     </div>
-    <button onclick="Generate(@Model.User)" href="" >Generate</button>
 </div>
 
 
@@ -495,14 +499,13 @@ function ProfCheck(ProfId, playerStatProf) {
 
 
 @* Generate an error and pass to login screen *@
-function Generate(user) {
-    preventDefault();
+function Generate( user) {
     let User = user;
-    if( user.UserId != 1){
+    if( user.UserId != null){
         location.reload();
     }
     else{
-        document.getElementById(this).href = "/login"
+        document.getElementById(generate).href = "/class"
     }
 }
 </script>
