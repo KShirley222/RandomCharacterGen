@@ -152,11 +152,11 @@ namespace CharacterGenerator.Models
                 BuildFeatures.Add(new Feature("Druid", "Beast Spells", 18));
                 BuildFeatures.Add(new Feature("Druid", "Archdruid", 20));
                 //Circle of the Land - *If we can do a Linq Query for Contains on Circle of the Land, we can add all of these, I think. Then, when adding spells, we can do a similar function for the Land keywords (e.g. Arctic, Grassland, etc.)
-                BuildFeatures.Add(new Feature("Circle of the Land", "Bonus Cantrip (Any Druid Cantrip)", 2));
-                BuildFeatures.Add(new Feature("Circle of the Land", "Natural Recovery", 2));
-                BuildFeatures.Add(new Feature("Circle of the Land", "Land's Stride", 6));
-                BuildFeatures.Add(new Feature("Circle of the Land", "Nature's Ward", 10));
-                BuildFeatures.Add(new Feature("Circle of the Land", "Nature's Sanctuary", 14));
+                //Since all Druids are circle of the land under SRD, setting all of them to Druid currently makes more sense.
+                BuildFeatures.Add(new Feature("Druid", "Natural Recovery", 2));
+                BuildFeatures.Add(new Feature("Druid", "Land's Stride", 6));
+                BuildFeatures.Add(new Feature("Druid", "Nature's Ward", 10));
+                BuildFeatures.Add(new Feature("Druid", "Nature's Sanctuary", 14));
                 //Circle of the Moon
                 BuildFeatures.Add(new Feature("Circle of the Moon", "Combat Wild Shape", 2));
                 BuildFeatures.Add(new Feature("Circle of the Moon", "Circle Forms", 2));

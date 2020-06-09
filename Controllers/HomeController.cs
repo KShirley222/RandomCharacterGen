@@ -158,7 +158,7 @@ namespace CharacterGenerator.Controllers
                 .ThenInclude(sa => sa.SpellA)
                 .FirstOrDefault(c => c.CharacterId == character.CharacterId)
                 .SpellList.Select(s => s.SpellA)
-                .OrderByDescending(f => f.SpellLevel)
+                .OrderBy(f => f.SpellLevel)
                 .ToList();
 
             // Pass Model User, Character, Feats
@@ -220,7 +220,8 @@ namespace CharacterGenerator.Controllers
             _context.PlayerClasses.Add(playerClass);
             _context.PlayerRaces.Add(playerRace);
             _context.NewCharacter.Add(newPlayer);
-            _context.SaveChanges();
+            
+            // _context.SaveChanges(); //Is this necessary?
 
             // Feat Generation
             List<Feature> charFeatures = _context.Features.Where(f =>  ((f.FeatSource == playerClass.ClassName) && (f.FeatLevel <= Level)) || ((f.FeatSource == playerClass.SubClassName) && (f.FeatLevel <= Level))).ToList();
@@ -228,7 +229,7 @@ namespace CharacterGenerator.Controllers
             {
                 var Fassoc = new FeatureAssoc(newPlayer, feat); 
                 _context.Feature_Associations.Add(Fassoc);
-                _context.SaveChanges();
+                // _context.SaveChanges(); //Is this necessary?
             }
 
             List<Feature> Feats = _context.NewCharacter //Starting Construction from the character side
@@ -248,8 +249,9 @@ namespace CharacterGenerator.Controllers
                             ||s.Source6 == newPlayer.playerClass.ClassName
                             ||s.Source7 == newPlayer.playerClass.ClassName
                             ).ToList();
-                List<Spell> NonClassSpells = _context.Spells.Where(s => 
-                              s.Source1 != newPlayer.playerClass.ClassName
+                            
+            List<Spell> NonClassSpells = _context.Spells.Where(s => 
+                                s.Source1 != newPlayer.playerClass.ClassName
                             ||s.Source2 != newPlayer.playerClass.ClassName
                             ||s.Source3 != newPlayer.playerClass.ClassName
                             ||s.Source4 != newPlayer.playerClass.ClassName
@@ -258,14 +260,15 @@ namespace CharacterGenerator.Controllers
                             ||s.Source7 != newPlayer.playerClass.ClassName
                             ).ToList(); 
                                       
-                Spell FetchSpell = new Spell();
-                List<Spell> availableSpells
-                 = FetchSpell.GetPossibleSpells(newPlayer, ClassAvailbleSpells, NonClassSpells);
+            Spell FetchSpell = new Spell();
+            List<Spell> availableSpells = FetchSpell.GetPossibleSpells(newPlayer, ClassAvailbleSpells, NonClassSpells);
             foreach(Spell s in availableSpells)
             {
-                SpellAssoc a = new SpellAssoc(newPlayer, s);
+                // if subclass = X || Y || Z;
+                SpellAssoc a = new SpellAssoc(newPlayer, s);//always true
+                
                 _context.Spell_Associations.Add(a);
-                _context.SaveChanges();
+                // _context.SaveChanges();
             }
 
             List<Spell> Spells = _context.NewCharacter
@@ -273,9 +276,12 @@ namespace CharacterGenerator.Controllers
                 .ThenInclude(sa => sa.SpellA)
                 .FirstOrDefault(c => c.CharacterId == newPlayer.CharacterId)
                 .SpellList.Select(s => s.SpellA)
-                .OrderBy(f => f.SpellLevel)
+                .OrderByDescending(f => f.SpellLevel)
                 .ToList();
-            
+
+
+            _context.SaveChanges();
+
             //Dynamic model with USer, Login, Character
             dynamic MyModel = new ExpandoObject();
             MyModel.User = SessionUser;

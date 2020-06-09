@@ -48,7 +48,7 @@ namespace CharacterGenerator.Models
         }
 
 
-        public int ASIGen( int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat ASIGen( int level, PlayerStat stats, PlayerClass pClass)
         {
             int Level = level;
             PlayerStat Stats = stats;
@@ -82,8 +82,7 @@ namespace CharacterGenerator.Models
 
             for(int i =0; i < TargetLevels.Count; i++)
             {
-                ;
-                if(TargetLevels[i] < Level)
+                if(TargetLevels[i] <= Level)
                 {
                     ASILevel.Add(1);
                 }
@@ -163,7 +162,7 @@ namespace CharacterGenerator.Models
                             }
                 }
             }
-            return ASITotal;
+            return Stats;
         }
 
         public bool ProGen( int level, PlayerStat stats, int numOfPro, int[] skillList)
@@ -485,7 +484,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = {0, 1, 7, 10, 11, 17}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 12;
             int ConMod = Stats.ConMod;
@@ -504,7 +503,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}; 
             pClass.Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            pClass.ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -525,7 +524,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = {4, 6, 7, 9, 14}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -544,7 +543,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = {0, 5, 6, 9, 10, 11, 14, 17}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -562,7 +561,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = {2, 0, 1, 4, 6, 7, 11, 17}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 10;
             int ConMod = Stats.ConMod;
@@ -580,7 +579,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = {2, 1, 4, 6, 14, 15, 16}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -598,7 +597,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = {1, 6, 7, 9, 13, 14}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 10;
             int ConMod = Stats.ConMod;
@@ -616,7 +615,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = {0, 1, 6, 8, 10, 11, 16, 17}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 10;
             int ConMod = Stats.ConMod;
@@ -634,7 +633,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = { 2, 1, 3, 6, 7, 8, 11, 12, 13, 15, 16 }; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -652,7 +651,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = {5, 3, 6, 7, 13, 14}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 6;
             int ConMod = Stats.ConMod;
@@ -670,7 +669,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = { 5, 3, 4, 7, 8, 10, 14}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -688,7 +687,7 @@ namespace CharacterGenerator.Models
             int[] SkillList = { 5, 4, 6, 8, 9, 14}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
-            ASI = ASIGen(Level, Stats, pClass);
+            Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
             int Base = 6;
             int ConMod = Stats.ConMod;
@@ -778,7 +777,7 @@ namespace CharacterGenerator.Models
                         break;
 
                     case 1:
-                        int randruid = rand.Next(0,9);
+                        int randruid = rand.Next(0,8);
                         switch(randruid)
                         {
                             case 0:

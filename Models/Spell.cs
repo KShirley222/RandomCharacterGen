@@ -137,7 +137,7 @@ namespace CharacterGenerator.Models
                    ClassSelectedSpells = AvaialableSpellsBard(AllAvailableSpells, PC, UnavailableSpells);
                     return ClassSelectedSpells;
                 case "Druid":
-                    ClassSelectedSpells = AvaialableSpellsDruid(AllAvailableSpells, PC);
+                    ClassSelectedSpells = AvaialableSpellsDruid(AllAvailableSpells, PC, UnavailableSpells);
                     return ClassSelectedSpells;
                 case "Cleric":
                     ClassSelectedSpells = AvaialableSpellsCleric(AllAvailableSpells, PC);
@@ -463,7 +463,7 @@ namespace CharacterGenerator.Models
 
 
         /////////////////////////DRUID /////////////////////////////////////////////////////
-        public List<Spell> AvaialableSpellsDruid(List<Spell> fullListAvail, NewCharacter PC)
+        public List<Spell> AvaialableSpellsDruid(List<Spell> fullListAvail, NewCharacter PC, List<Spell> NonClassSpell)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
             RandomizeSpells(Cantrips, Cantrips.Count);
@@ -591,6 +591,105 @@ namespace CharacterGenerator.Models
                 {
                     availableSpells.Add(Cantrips[Cantrips.Count-1]);
                 }
+
+                //Subclass spells. Maybe there is a way to further optimize things? 
+                for (int j = 3; j<=9; j+=2)
+                {
+                    if(PC.Level >= j)
+                    {
+
+                        switch(PC.playerClass.SubClassName)
+                            {
+                                case "Circle of the Land: Arctic":
+                                    switch(j)
+                                    {
+                                        case 5:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Slow"));
+                                            break;
+                                        case 9:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Cone of Cold"));
+                                            break;
+                                    }
+                                    break;
+
+                                case "Circle of the Land: Coast":
+                                    switch(j)
+                                    {
+                                        case 5:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Slow"));
+                                            break;
+                                        case 9:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Cone of Cold"));
+                                            break;
+                                    }
+                                    break;
+
+                                case "Circle of the Land: Desert":
+                                    switch(j)
+                                    {
+                                        case 3:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Mirror Image"));
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Misty Step"));
+                                            break;
+                                        case 9:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Cone of Cold"));
+                                            break;
+                                    }
+                                break;
+
+                                case "Circle of the Land: Forest":
+                                    switch(j)
+                                    {
+                                        case 3:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Spider Climb"));
+                                            break;
+                                        case 7:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Divination"));
+                                            break;
+                                    }
+                                break;
+
+                                case "Circle of the Land: Grassland":
+                                    switch(j)
+                                    {
+                                        case 3:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Invisibility"));
+                                            break;
+                                        case 5: 
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Haste"));
+                                            break;
+                                        case 7:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Divination"));
+                                            break;
+                                    }
+                                break;
+
+                                    case "Circle of the Land: Mountain":
+                                        switch(j)
+                                        {
+                                            case 5:
+                                                availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Passwall"));
+                                                break;
+                                        }
+                                    break;
+
+                                    case "Circle of the Land: Swamp":
+                                    switch(j)
+                                    {
+                                        case 3:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Acid Arrow"));
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Darkness"));
+                                            break;
+                                        case 5:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Stinking Cloud"));
+                                            break;
+                                    }
+                                break;
+                            }
+
+                        }
+                    }
+
             return availableSpells;
         }
 
