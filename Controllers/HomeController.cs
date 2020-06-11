@@ -155,6 +155,10 @@ namespace CharacterGenerator.Controllers
 
             List<Spell> Spells = _context.NewCharacter
                 .Include(c => c.SpellList)
+                .ThenInclude(sa => sa.AlwaysPrepped)
+                .Include(c => c.SpellList)
+                .ThenInclude(sa => sa.Prepped)
+                .Include(c => c.SpellList)
                 .ThenInclude(sa => sa.SpellA)
                 .FirstOrDefault(c => c.CharacterId == character.CharacterId)
                 .SpellList.Select(s => s.SpellA)
@@ -168,6 +172,7 @@ namespace CharacterGenerator.Controllers
             MyModel.Character = character;
             MyModel.Features = Feats; 
             MyModel.Spells = Spells;
+            
             
             return View("index", MyModel);
             }
@@ -229,7 +234,6 @@ namespace CharacterGenerator.Controllers
             {
                 var Fassoc = new FeatureAssoc(newPlayer, feat); 
                 _context.Feature_Associations.Add(Fassoc);
-                // _context.SaveChanges(); //Is this necessary?
             }
 
             List<Feature> Feats = _context.NewCharacter //Starting Construction from the character side
@@ -264,11 +268,8 @@ namespace CharacterGenerator.Controllers
             List<Spell> availableSpells = FetchSpell.GetPossibleSpells(newPlayer, ClassAvailbleSpells, NonClassSpells);
             foreach(Spell s in availableSpells)
             {
-                // if subclass = X || Y || Z;
                 SpellAssoc a = new SpellAssoc(newPlayer, s);//always true
-                
                 _context.Spell_Associations.Add(a);
-                // _context.SaveChanges();
             }
 
             List<Spell> Spells = _context.NewCharacter
@@ -276,9 +277,8 @@ namespace CharacterGenerator.Controllers
                 .ThenInclude(sa => sa.SpellA)
                 .FirstOrDefault(c => c.CharacterId == newPlayer.CharacterId)
                 .SpellList.Select(s => s.SpellA)
-                .OrderByDescending(f => f.SpellLevel)
+                .OrderBy(f => f.SpellLevel)
                 .ToList();
-
 
             _context.SaveChanges();
 
@@ -289,6 +289,48 @@ namespace CharacterGenerator.Controllers
             MyModel.Character = newPlayer;
             MyModel.Features = Feats;
             MyModel.Spells = Spells;
+
+            return View("Index", MyModel);
+        }
+
+
+        [HttpGet("/view/{ID}")]
+        public IActionResult ViewCharacter(int ID)
+        {
+
+            NewCharacter character = _context.NewCharacter.Include( c => c.playerRace).Include( c => c.playerClass).Include(c => c.playerStat).Include(c => c.playerBG).FirstOrDefault( c => c.CharacterId == ID);
+
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+
+
+            List<Feature> Feats = _context.NewCharacter
+                    .Include(c => c.FeaturesList)
+                    .ThenInclude(fa => fa.FeatureA)
+                    .FirstOrDefault(c => c.CharacterId == character.CharacterId)
+                    .FeaturesList.Select(f => f.FeatureA)
+                    .OrderBy(f => f.FeatLevel)
+                    .ToList();
+            
+            List<Spell> Spells = _context.NewCharacter
+                .Include(c => c.SpellList)
+                .ThenInclude(sa => sa.AlwaysPrepped)
+                .Include(c => c.SpellList)
+                .ThenInclude(sa => sa.Prepped)
+                .Include(c => c.SpellList)
+                .ThenInclude(sa => sa.SpellA)
+                .FirstOrDefault(c => c.CharacterId == character.CharacterId)
+                .SpellList.Select(s => s.SpellA)
+                .OrderBy(f => f.SpellLevel)
+                .ToList();
+
+            dynamic MyModel = new ExpandoObject();
+            MyModel.User = SessionUser;
+            MyModel.Login = new Login();
+            MyModel.Character = character;
+            MyModel.Spells = Spells;
+            MyModel.Features = Feats;
 
             return View("Index", MyModel);
         }
@@ -384,33 +426,6 @@ namespace CharacterGenerator.Controllers
                 }
             return View("UserLogin");
         }
-
-        [HttpGet("/view/{ID}")]
-        public IActionResult ViewCharacter(int ID)
-        {
-
-            NewCharacter character = _context.NewCharacter.Include( c => c.playerRace).Include( c => c.playerClass).Include(c => c.playerStat).Include(c => c.playerBG).FirstOrDefault( c => c.CharacterId == ID);
-
-            int? SessionId = HttpContext.Session.GetInt32("UserId");
-            ViewBag.SessionId = SessionId;
-            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
-
-            dynamic MyModel = new ExpandoObject();
-            MyModel.User = SessionUser;
-            MyModel.Login = new Login();
-            MyModel.Character = character;
-            List<Feature> Feats = _context.NewCharacter
-                    .Include(c => c.FeaturesList)
-                    .ThenInclude(fa => fa.FeatureA)
-                    .FirstOrDefault(c => c.CharacterId == character.CharacterId)
-                    .FeaturesList.Select(f => f.FeatureA)
-                    .OrderBy(f => f.FeatLevel)
-                    .ToList();
-            
-            MyModel.Features = Feats;
-            return View("classes", MyModel);
-        }
-
 
 
         // Misc, delete?????

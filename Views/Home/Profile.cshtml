@@ -1,4 +1,39 @@
 @model dynamic
+<style>
+
+.btn{
+        background-color: #2d3142;
+        border: 1px solid #2d3142;
+        color: white;
+    }
+    .btn-primary:hover {
+        background-color: #3B0D11;
+        border: 1px solid #3B0D11;
+        color: white;
+        opacity: 1;
+    }
+    .btn-primary:active {
+        background-color: #3B0D11;
+        border: 1px solid #2d3142;
+        color: white;
+    }
+    .title {
+        color: #2D3142 ;
+        font-size: 3rem;
+        font-weight: bold;
+    }
+</style>
+
+<div class="row">
+    <h1 class= "col-sm-8 text center"><a href="/GenerateNew" class="title">DnD 5E Character Randomizer</a></h1>
+    <div class="col-sm-4">
+        <div class="row">
+            <a class="btn btn-primary btn-sm col-sm-5 logreg" href="/GenerateNew">Generate New Character</a>
+            <h5 class="col-sm-1">|</h5>
+            <a class="btn btn-primary btn-sm col-sm-5 logreg" href="/logout">Logout</a>
+        </div>
+    </div>
+</div>
 
 <p>Welcome @Model.User.UserName!</p>
 
@@ -13,7 +48,7 @@
                 <th scope="col">Subrace</th>
                 <th scope="col">Class</th>
                 <th scope="col">Background</th>
-                <th scope="col">Features & Spells</th>
+                <th scope="col">Notes</th>
                 <th scope="col">Actions</th>
             </thead>
             <tbody>
@@ -27,7 +62,7 @@
                         <td>@character.playerRace.Subrace</td>
                         <td>@character.playerClass.ClassName</td>
                         <td>@character.playerBG.Background</td>
-                        <td>View Ability List</td>
+                        <td>Hover to see note</td>
                         <td><a href="/view/@character.CharacterId">View</a> | <a href="#">Delete</a></td>
                     </tr>
                 }

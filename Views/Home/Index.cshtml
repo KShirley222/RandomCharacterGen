@@ -1,10 +1,5 @@
 ﻿<style>
-    *{
-        font-family: Verdana, Geneva, sans-serif;
-    }
-    .body{
-        font-family: Verdana, Geneva, sans-serif;
-    }
+    
     .form-popup{
         display: none;
         position: fixed;
@@ -48,7 +43,7 @@
         color: white;
         opacity: 1;
     }
-    .btn-sample:active {
+    .btn-primary:active:focus {
         background-color: #3B0D11;
         border: 1px solid #2d3142;
         color: white;
@@ -125,6 +120,9 @@
     .radioToggle{
 
     }
+    .logreg { 
+        margin-top: 10px;
+    }
 
 </style>
 
@@ -143,7 +141,7 @@
                         @* <partial Name="RegisterPartial"></partial> *@
                         @Html.Partial("RegisterPartial", (User) @Model.User)
                     </div>
-                    <h5 class="col-sm-1">|</h5>
+                    <h5 class="col-sm-1 logreg">|</h5>
                     <button class = "login-form col-sm-5 btn btn-primary btn-sm logreg" onclick="openLogin()">Login</button>
                     <div class="form-popup" id= "login">
                         @* <partial Name="LoginPartial"></partial> *@
@@ -154,9 +152,8 @@
             else
             {
                 <div class="row">
-
                     <a class="btn btn-primary btn-sm col-sm-5 logreg" href="/profile/@Model.User.UserId">Profile</a>
-                    <h5 class="col-sm-1">|</h5>
+                    <h5 class="col-sm-1 logreg">|</h5>
                     <a class="btn btn-primary btn-sm col-sm-5 logreg" href="/logout">Logout</a>
                 </div>
             }
@@ -167,11 +164,11 @@
 <div class="row welcome">
     <div class="col">
         <p class=" welcome">Welcome to our humble Character Randomizer!</p>
-        <p class=" welcome">If you would like to be a bit more precise, then please register and you will be able to save your characters!</p>
-        <p class=" welcome">Otherwise, click <a href="/" id="refresh">here</a> for another Character! Thanks for Visiting!</p>
+        <p class=" welcome">If you would like to save your generated, then please register or login!</p>
         <br>
         <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href=>Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="dndbeyond.com">DnD Beyond</a> and purchase the materials there.</p>
-        <a class = "btn btn primary" id="generate"  href="/GenerateNew" >Generate</a>
+        <a class = "btn btn-primary" id="generate"  href="/GenerateNew" >Generate</a>
+        <a class = "btn btn-primary" id="generate"  href="/GenerateNew" >Save</a>
         @if(Model.User != null)
         {
             <p>@Model.User.UserId</p>
@@ -398,8 +395,8 @@
             </div>
             <div class="row p-2" >
                 <div class="col-sm-6 text-center statbox">
-                    <p>Highest Spell Level</p>
-                    <p>@Model.Character.playerStat.Charisma</p>
+                    <p>???????????</p>
+                    <p>?????????????????</p>
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Charisma Save</p>
@@ -408,8 +405,8 @@
             </div>
             <div class="row p-2" >
                 <div class="col-sm-6 text-center statbox">
-                    <p>SubClass</p>
-                    <p>@Model.Character.playerStat.Intelligence</p>
+                    <p>Available Spell Slots</p>
+                    <p>???????????????</p>
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Intelligence Save</p>
@@ -439,19 +436,38 @@
                     @foreach(Spell s in Model.Spells)
                     {
                     <li>@s.SpellName</li> 
-
                     }
-                </ul> 
-                <ul class="prepSpell col-sm-4 text-center">
-                    <li><h5>Prepared</h5></li>
+                </ul>
+                <ul class= "prepSpell col-sm-2 text-center">
+                    <li><h5>Level</h5></li>
                     @foreach(Spell s in Model.Spells)
                     {
-                    <li><input name="@s.SpellName" type="checkbox"></li>
+                        if(s.SpellLevel == 0){
+                            <li>Cantrip</li>
+                        }else{
+                            <li>@s.SpellLevel</li> 
+                        }
                     }
                 </ul> 
+                <ul class="prepSpell col-sm-2 text-center">
+                    <li><h5>Prepared</h5></li>
+                        @foreach(Spell s in Model.Spells)
+                        {
+                            foreach(SpellAssoc p in s.Players)
+                            {
+                                if(p.CharacterId == Model.Character.CharacterId){
+                                    if(p.AlwaysPrepped == true || s.SpellLevel == 0){
+                                        <li><input name="@p.SpellA" type="checkbox" checked disabled></li>
+                                    }
+                                    else
+                                    {
+                                        <li><input name="@p.SpellA" type="checkbox"></li>
+                                    }
+                                }
+                            }
+                        }
+                </ul> 
             </div>
-            
-           
         </div>
 
         @* Column 6 *@
