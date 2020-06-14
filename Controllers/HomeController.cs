@@ -117,10 +117,145 @@ namespace CharacterGenerator.Controllers
                 foreach(Spell s in Spells)
                 {
                     SpellAssoc a = new SpellAssoc(test, s);
+                    
+
+                    if (test.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Hold Person"||
+                        test.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Spike Growth"||
+                        test.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Sleet Storm"||
+                        test.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Slow"||
+                        test.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Freedom of Movement"||
+                        test.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Ice Storm"||
+                        test.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Commune with Nature"||
+                        test.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Cone of Cold"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                    if (test.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Mirror Image"||
+                        test.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Misty Step"||
+                        test.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Water Breathing"||
+                        test.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Water Walk"||
+                        test.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Freedom of Movement"||
+                        test.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Control Water"||
+                        test.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Conjure Elemental"||
+                        test.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Scrying"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                    if (test.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Blur"||
+                        test.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Silence"||
+                        test.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Create Food and Water"||
+                        test.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Protection from Energy"||
+                        test.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Blight"||
+                        test.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Hallucinatory Terrain"||
+                        test.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Insect Plague"||
+                        test.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Wall of Stone"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                    if (test.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Barkskin"||
+                        test.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Spider Climb"||
+                        test.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Call Lightning"||
+                        test.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Plant Growth"||
+                        test.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Freedom of Movement"||
+                        test.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Divination"||
+                        test.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Commune with Nature"||
+                        test.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Tree Stride"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+                    
+                    if (test.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Invisibilty"||
+                        test.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Pass Without Trace"||
+                        test.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Daylight"||
+                        test.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Haste"||
+                        test.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Freedom of Movement"||
+                        test.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Divination"||
+                        test.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Dream"||
+                        test.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Insect Plague"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                    if (test.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Spider Climb"||
+                        test.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Spike Growth"||
+                        test.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Lightning Bolt"||
+                        test.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Meld into Stone"||
+                        test.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Stone Shape"||
+                        test.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Stoneskin"||
+                        test.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Passwall"||
+                        test.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Wall of Stone"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                    if (test.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Acid Arrow"||
+                        test.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Darkness"||
+                        test.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Water Walk"||
+                        test.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Stinking Cloud"||
+                        test.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Freedom of Movement"||
+                        test.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Locate Creature"||
+                        test.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Insect Plague"||
+                        test.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Scrying"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                    if (test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Bless"||
+                        test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Cure Wounds"||
+                        test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Lesser Restoration"||
+                        test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Spiritual Weapon"||
+                        test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Beacon of Hope"||
+                        test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Revivify"||
+                        test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Death Ward"||
+                        test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Guardian of Faith"||
+                        test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Mass Cure Wounds"||
+                        test.playerClass.SubClassName == "Life Domain" && s.SpellName == "Raise Dead"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                    if (test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Protection from Evil & Good"||
+                        test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Sanctuary"||
+                        test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Lesser Restoration"||
+                        test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Zone of Truth"||
+                        test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Beacon of Hope"||
+                        test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Dispel Magic"||
+                        test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Freedom of Movement"||
+                        test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Guardian of Faith"||
+                        test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Commune"||
+                        test.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Flame Strike"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                    if (test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Burning Hands"||
+                        test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Command"||
+                        test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Blindness/Deafness"||
+                        test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Scorching Ray"||
+                        test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Fireball"||
+                        test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Stinking Cloud"||
+                        test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Fire Shield"||
+                        test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Wall of Fire"||
+                        test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Flame Strike"||
+                        test.playerClass.SubClassName == "The Fiend" && s.SpellName == "Hallow"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                        if (test.playerClass.ClassName == "Sorcerer" ||
+                            test.playerClass.ClassName == "Warlock" ||
+                            test.playerClass.ClassName == "Bard")
+                            {
+                                a.AlwaysPrepped = true;
+                            }
+                    
                     _context.Spell_Associations.Add(a);
                     _context.SaveChanges();
                 }
-
+                int passiveperception = 10+test.playerStat.Perception;
 
                 // Dynamic model to provide all available objects and data
                 dynamic MyModel = new ExpandoObject();
@@ -129,6 +264,8 @@ namespace CharacterGenerator.Controllers
                 MyModel.Character = test; 
                 MyModel.Features = Feats;
                 MyModel.Spells = Spells;
+                MyModel.PassivePerception = passiveperception;
+                
 
                 return View("index", MyModel);
             } 
@@ -155,10 +292,6 @@ namespace CharacterGenerator.Controllers
 
             List<Spell> Spells = _context.NewCharacter
                 .Include(c => c.SpellList)
-                .ThenInclude(sa => sa.AlwaysPrepped)
-                .Include(c => c.SpellList)
-                .ThenInclude(sa => sa.Prepped)
-                .Include(c => c.SpellList)
                 .ThenInclude(sa => sa.SpellA)
                 .FirstOrDefault(c => c.CharacterId == character.CharacterId)
                 .SpellList.Select(s => s.SpellA)
@@ -166,12 +299,17 @@ namespace CharacterGenerator.Controllers
                 .ToList();
 
             // Pass Model User, Character, Feats
+            //passiveperception, because it hates trying to do it on the front end
+            int passiveperception = 10+character.playerStat.Perception;
+
             dynamic MyModel = new ExpandoObject();
             MyModel.User = SessionUser;
             MyModel.Login = new Login();
             MyModel.Character = character;
             MyModel.Features = Feats; 
             MyModel.Spells = Spells;
+            MyModel.PassivePerception = passiveperception;
+            
             
             
             return View("index", MyModel);
@@ -234,6 +372,7 @@ namespace CharacterGenerator.Controllers
             {
                 var Fassoc = new FeatureAssoc(newPlayer, feat); 
                 _context.Feature_Associations.Add(Fassoc);
+                _context.SaveChanges();
             }
 
             List<Feature> Feats = _context.NewCharacter //Starting Construction from the character side
@@ -269,7 +408,141 @@ namespace CharacterGenerator.Controllers
             foreach(Spell s in availableSpells)
             {
                 SpellAssoc a = new SpellAssoc(newPlayer, s);//always true
+                 if (newPlayer.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Hold Person"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Spike Growth"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Sleet Storm"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Slow"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Freedom of Movement"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Ice Storm"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Commune with Nature"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Arctic" && s.SpellName == "Cone of Cold"
+                    ){
+                        a.AlwaysPrepped = true;
+                    };
+
+                if (newPlayer.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Mirror Image"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Misty Step"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Water Breathing"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Water Walk"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Freedom of Movement"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Control Water"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Conjure Elemental"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Coast" && s.SpellName == "Scrying"
+                    ){
+                        a.AlwaysPrepped = true;
+                    };
+
+                if (newPlayer.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Blur"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Silence"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Create Food and Water"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Protection from Energy"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Blight"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Hallucinatory Terrain"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Insect Plague"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Desert" && s.SpellName == "Wall of Stone"
+                    ){
+                        a.AlwaysPrepped = true;
+                    };
+
+                if (newPlayer.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Barkskin"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Spider Climb"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Call Lightning"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Plant Growth"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Freedom of Movement"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Divination"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Commune with Nature"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Forest" && s.SpellName == "Tree Stride"
+                    ){
+                        a.AlwaysPrepped = true;
+                    };
+                
+                if (newPlayer.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Invisibilty"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Pass Without Trace"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Daylight"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Haste"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Freedom of Movement"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Divination"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Dream"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Grassland" && s.SpellName == "Insect Plague"
+                    ){
+                        a.AlwaysPrepped = true;
+                    };
+
+                if (newPlayer.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Spider Climb"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Spike Growth"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Lightning Bolt"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Meld into Stone"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Stone Shape"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Stoneskin"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Passwall"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Mountain" && s.SpellName == "Wall of Stone"
+                    ){
+                        a.AlwaysPrepped = true;
+                    };
+
+                if (newPlayer.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Acid Arrow"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Darkness"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Water Walk"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Stinking Cloud"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Freedom of Movement"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Locate Creature"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Insect Plague"||
+                    newPlayer.playerClass.SubClassName == "Circle of the Land: Swamp" && s.SpellName == "Scrying"
+                    ){
+                        a.AlwaysPrepped = true;
+                    };
+
+                if (newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Bless"||
+                    newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Cure Wounds"||
+                    newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Lesser Restoration"||
+                    newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Spiritual Weapon"||
+                    newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Beacon of Hope"||
+                    newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Revivify"||
+                    newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Death Ward"||
+                    newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Guardian of Faith"||
+                    newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Mass Cure Wounds"||
+                    newPlayer.playerClass.SubClassName == "Life Domain" && s.SpellName == "Raise Dead"
+                    ){
+                        a.AlwaysPrepped = true;
+                    };
+
+                if (newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Protection from Evil and Good"||
+                    newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Cure Wounds"||
+                    newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Lesser Restoration"||
+                    newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Spiritual Weapon"||
+                    newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Beacon of Hope"||
+                    newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Revivify"||
+                    newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Death Ward"||
+                    newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Guardian of Faith"||
+                    newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Mass Cure Wounds"||
+                    newPlayer.playerClass.SubClassName == "Oath of Devotion" && s.SpellName == "Raise Dead"
+                    ){
+                        a.AlwaysPrepped = true;
+                    };
+
+                if (newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Burning Hands"||
+                        newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Command"||
+                        newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Blindness/Deafness"||
+                        newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Scorching Ray"||
+                        newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Fireball"||
+                        newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Stinking Cloud"||
+                        newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Fire Shield"||
+                        newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Wall of Fire"||
+                        newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Flame Strike"||
+                        newPlayer.playerClass.SubClassName == "The Fiend" && s.SpellName == "Hallow"
+                        ){
+                            a.AlwaysPrepped = true;
+                        };
+
+                    if (newPlayer.playerClass.ClassName == "Sorcerer" ||
+                        newPlayer.playerClass.ClassName == "Warlock" ||
+                        newPlayer.playerClass.ClassName == "Bard")
+                        {
+                            a.AlwaysPrepped = true;
+                        }
+                    
                 _context.Spell_Associations.Add(a);
+                _context.SaveChanges();
             }
 
             List<Spell> Spells = _context.NewCharacter
@@ -282,6 +555,8 @@ namespace CharacterGenerator.Controllers
 
             _context.SaveChanges();
 
+            int passiveperception = 10+newPlayer.playerStat.Perception;
+
             //Dynamic model with USer, Login, Character
             dynamic MyModel = new ExpandoObject();
             MyModel.User = SessionUser;
@@ -289,7 +564,7 @@ namespace CharacterGenerator.Controllers
             MyModel.Character = newPlayer;
             MyModel.Features = Feats;
             MyModel.Spells = Spells;
-
+            MyModel.PassivePerception = passiveperception;
             return View("Index", MyModel);
         }
 

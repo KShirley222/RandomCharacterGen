@@ -5,12 +5,12 @@
         position: fixed;
         top: 0;
         right: 15px;
-        border: 3px solid #f1f1f1;
+        border: 3px solid #BFC0C0;
         z-index: 9;
     }
 
     .form-container .btn {
-        background-color: #4CAF50;
+        background-color: #2d3142;
         color: white;
         padding: 15px 20px;
         border: none;
@@ -130,7 +130,7 @@
 
 @* Header Login/Registration  *@
 <div class="row">
-    <h1 class= "col-sm-8 text center"><a href="/" class="title">DnD 5E Character Randomizer</a></h1>
+    <h1 class= "col-sm-8 text center"><a href="/" class="title" >DnD 5E Character Randomizer</a></h1>
     <div class="col-sm-4">
         @{
             if(@Model.User == null)
@@ -169,10 +169,6 @@
         <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href=>Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="dndbeyond.com">DnD Beyond</a> and purchase the materials there.</p>
         <a class = "btn btn-primary" id="generate"  href="/GenerateNew" >Generate</a>
         <a class = "btn btn-primary" id="generate"  href="/GenerateNew" >Save</a>
-        @if(Model.User != null)
-        {
-            <p>@Model.User.UserId</p>
-        }
     </div>
 </div>
 
@@ -360,7 +356,11 @@
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Strength Save</p>
-                    <p>@Model.Character.playerStat.StrMod</p>
+                    @if(@Model.Character.playerStat.StrSaveB == true){
+                        <p>@(@Model.Character.playerStat.StrMod + @Model.Character.playerStat.Proficiency)</p>
+                    }else{
+                        <p>@Model.Character.playerStat.StrMod</p>
+                    }
                 </div>
             </div>
             <div class="row p-2" >
@@ -370,17 +370,25 @@
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Dexterity Save</p>
-                    <p>@Model.Character.playerStat.DexMod</p>
+                    @if(@Model.Character.playerStat.DexSaveB == true){
+                        <p>@(@Model.Character.playerStat.DexMod + @Model.Character.playerStat.Proficiency)</p>
+                    }else{
+                        <p>@Model.Character.playerStat.DexMod</p>
+                    }
                 </div>
             </div>
             <div class="row p-2" >
                 <div class="col-sm-6 text-center statbox">
-                    <p>Proficency</p>
-                    <p>@Model.Character.playerStat.Constitution</p>
+                    <p>Proficiency</p>
+                    <p>@Model.Character.playerStat.Proficiency</p>
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Constitution Save</p>
-                    <p>@Model.Character.playerStat.ConMod</p>
+                    @if(@Model.Character.playerStat.ConSaveB == true){
+                        <p>@(@Model.Character.playerStat.ConMod + @Model.Character.playerStat.Proficiency)</p>
+                    }else{
+                        <p>@Model.Character.playerStat.ConMod</p>
+                    }
                 </div>
             </div>
             <div class="row p-2" >
@@ -390,17 +398,25 @@
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Wisdom Save</p>
-                    <p>@Model.Character.playerStat.WisMod</p>
+                    @if(@Model.Character.playerStat.WisSaveB == true){
+                        <p>@(@Model.Character.playerStat.WisMod + @Model.Character.playerStat.Proficiency)</p>
+                    }else{
+                        <p>@Model.Character.playerStat.WisMod</p>
+                    }
                 </div>
             </div>
             <div class="row p-2" >
                 <div class="col-sm-6 text-center statbox">
-                    <p>???????????</p>
-                    <p>?????????????????</p>
+                    <p>Passive Perception</p>
+                    <p>@Model.PassivePerception</p>
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Charisma Save</p>
-                    <p>@Model.Character.playerStat.ChaMod</p>
+                    @if(@Model.Character.playerStat.ChaSaveB == true){
+                        <p>@(@Model.Character.playerStat.ChaMod + @Model.Character.playerStat.Proficiency)</p>
+                    }else{
+                        <p>@Model.Character.playerStat.ChaMod</p>
+                    }
                 </div>
             </div>
             <div class="row p-2" >
@@ -410,7 +426,11 @@
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Intelligence Save</p>
-                    <p>@Model.Character.playerStat.IntMod</p>
+                    @if(@Model.Character.playerStat.IntSaveB == true){
+                        <p>@(@Model.Character.playerStat.IntMod + @Model.Character.playerStat.Proficiency)</p>
+                    }else{
+                        <p>@Model.Character.playerStat.IntMod</p>
+                    }
                 </div>
             </div>
         </div>

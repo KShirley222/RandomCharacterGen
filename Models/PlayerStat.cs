@@ -68,6 +68,15 @@ namespace CharacterGenerator.Models
         public bool SleightB { get; set; } = false;
         public bool StealthB { get; set; } = false;
         public bool SurvivalB { get; set; } = false;
+        
+
+        // Saves
+        public bool StrSaveB { get; set; } = false;
+        public bool DexSaveB { get; set; } = false;
+        public bool ConSaveB { get; set; } = false;
+        public bool IntSaveB { get; set; } = false;
+        public bool WisSaveB { get; set; } = false;
+        public bool ChaSaveB {get; set;} = false;
 
         //Languages
                 //Standard Languages
@@ -121,26 +130,6 @@ namespace CharacterGenerator.Models
             ArmorClass = 0;
             Proficiency = Math.Ceiling(1+(.25*Level));
             HitPoints = 0; 
-
-            // Skills - bool
-            // AcrobaticsB = false; 
-            // AnimalHandlingB = false;
-            // ArcanaB = false;
-            // AthleticsB = false;
-            // DeceptionB = false;
-            // HistoryB = false;
-            // IntimidationB = false; 
-            // InsightB = false;
-            // InvestigationB = false;
-            // MedicineB = false;
-            // NatureB = false;
-            // PerceptionB = false;
-            // PerformanceB = false;
-            // PersuasionB = false;
-            // ReligionB = false;
-            // SleightB = false;
-            // StealthB = false;
-            // SurvivalB = false;
             
         }
 

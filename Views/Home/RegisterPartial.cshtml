@@ -1,5 +1,22 @@
 @model User
-
+<style>
+    .btn{
+        background-color: #2d3142;
+        border: 1px solid #2d3142;
+        color: white;
+    }
+    .btn-primary:hover {
+        background-color: #3B0D11;
+        border: 1px solid #3B0D11;
+        color: white;
+        opacity: 1;
+    }
+    .btn-primary:active:focus {
+        background-color: #3B0D11;
+        border: 1px solid #2d3142;
+        color: white;
+    }
+</style>
 <div class="container">
     <h1 class="text-center">Register</h1>
     <form action="/register" method="post" class="form-container">

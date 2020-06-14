@@ -483,6 +483,8 @@ namespace CharacterGenerator.Models
             // Skills: { "AnimalHandling", "Athletics", "Intimidation", "Nature", "Perception", "Survivial" };
             int[] SkillList = {0, 1, 7, 10, 11, 17}; 
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
+            Stats.StrSaveB = true;
+            Stats.ConSaveB = true;
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
@@ -502,6 +504,8 @@ namespace CharacterGenerator.Models
             // Skills: Choose two fro{ "Acrobatics", "AnimalHandling", "Arcana", "Athletics", "Deception", "History","Insight","Intimidation","Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "SleightofHand", "Stealth", "Survival"};
             int[] SkillList = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}; 
             pClass.Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
+            Stats.DexSaveB = true;
+            Stats.ChaSaveB = true;
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
             // Hp Generation
@@ -525,6 +529,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.WisSaveB = true;
+            Stats.ChaSaveB = true;
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -544,6 +550,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.IntSaveB = true;
+            Stats.WisSaveB = true;
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -562,6 +570,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.StrSaveB = true;
+            Stats.ConSaveB = true;
             // Hp Generation
             int Base = 10;
             int ConMod = Stats.ConMod;
@@ -580,6 +590,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.StrSaveB = true;
+            Stats.DexSaveB = true;
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -598,6 +610,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.WisSaveB = true;
+            Stats.ChaSaveB = true;
             // Hp Generation
             int Base = 10;
             int ConMod = Stats.ConMod;
@@ -616,6 +630,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.StrSaveB = true;
+            Stats.DexSaveB =true;
             // Hp Generation
             int Base = 10;
             int ConMod = Stats.ConMod;
@@ -634,6 +650,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.IntSaveB = true;
+            Stats.DexSaveB =true;
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -652,6 +670,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.ConSaveB = true;
+            Stats.ChaSaveB =true;
             // Hp Generation
             int Base = 6;
             int ConMod = Stats.ConMod;
@@ -670,6 +690,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.WisSaveB = true;
+            Stats.ChaSaveB =true;
             // Hp Generation
             int Base = 8;
             int ConMod = Stats.ConMod;
@@ -688,6 +710,8 @@ namespace CharacterGenerator.Models
             Proficiencies = ProGen( Level, Stats, NumOfPro, SkillList);
             // ASI assignment
             Stats = ASIGen(Level, Stats, pClass);
+            Stats.IntSaveB = true;
+            Stats.WisSaveB =true;
             // Hp Generation
             int Base = 6;
             int ConMod = Stats.ConMod;

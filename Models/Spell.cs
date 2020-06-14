@@ -134,35 +134,35 @@ namespace CharacterGenerator.Models
             switch(PlayerClass)
             {
                 case "Bard":
-                   ClassSelectedSpells = AvaialableSpellsBard(AllAvailableSpells, PC, UnavailableSpells);
+                   ClassSelectedSpells = AvailableSpellsBard(AllAvailableSpells, PC, UnavailableSpells);
                     return ClassSelectedSpells;
                 case "Druid":
-                    ClassSelectedSpells = AvaialableSpellsDruid(AllAvailableSpells, PC, UnavailableSpells);
+                    ClassSelectedSpells = AvailableSpellsDruid(AllAvailableSpells, PC, UnavailableSpells);
                     return ClassSelectedSpells;
                 case "Cleric":
-                    ClassSelectedSpells = AvaialableSpellsCleric(AllAvailableSpells, PC);
+                    ClassSelectedSpells = AvailableSpellsCleric(AllAvailableSpells, PC);
                     return ClassSelectedSpells;
                 case "Ranger":
-                    ClassSelectedSpells = AvaialableSpellsRanger(AllAvailableSpells, PC);
+                    ClassSelectedSpells = AvailableSpellsRanger(AllAvailableSpells, PC);
                     return ClassSelectedSpells;
                 case "Warlock":
-                    ClassSelectedSpells = AvaialableSpellsWarlock(AllAvailableSpells, PC);
+                    ClassSelectedSpells = AvailableSpellsWarlock(AllAvailableSpells, PC, UnavailableSpells);
                     return ClassSelectedSpells;
                 case "Wizard":
-                    ClassSelectedSpells = AvaialableSpellsWizard(AllAvailableSpells, PC);
+                    ClassSelectedSpells = AvailableSpellsWizard(AllAvailableSpells, PC);
                     return ClassSelectedSpells;
                 case "Paladin":
-                    ClassSelectedSpells = AvaialableSpellsPaladin(AllAvailableSpells, PC);
+                    ClassSelectedSpells = AvailableSpellsPaladin(AllAvailableSpells, PC, UnavailableSpells);
                     return ClassSelectedSpells;
                 case "Sorcerer":
-                    ClassSelectedSpells = AvaialableSpellsSorcerer(AllAvailableSpells, PC);
+                    ClassSelectedSpells = AvailableSpellsSorcerer(AllAvailableSpells, PC);
                     return ClassSelectedSpells;
             }
             return AllAvailableSpells;
         }
 
             ///////////// BARD ///////////////////
-          public List<Spell> AvaialableSpellsBard(List<Spell> fullListAvail, NewCharacter PC, List<Spell> UnavailableSpells)
+          public List<Spell> AvailableSpellsBard(List<Spell> fullListAvail, NewCharacter PC, List<Spell> UnavailableSpells)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
             RandomizeSpells(Cantrips, Cantrips.Count);
@@ -342,7 +342,7 @@ namespace CharacterGenerator.Models
 
         //////////////////////////CLERIC /////////////////////////////////////////////
 
-         public List<Spell> AvaialableSpellsCleric(List<Spell> fullListAvail, NewCharacter PC)
+         public List<Spell> AvailableSpellsCleric(List<Spell> fullListAvail, NewCharacter PC)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
             RandomizeSpells(Cantrips, Cantrips.Count);
@@ -463,7 +463,7 @@ namespace CharacterGenerator.Models
 
 
         /////////////////////////DRUID /////////////////////////////////////////////////////
-        public List<Spell> AvaialableSpellsDruid(List<Spell> fullListAvail, NewCharacter PC, List<Spell> NonClassSpell)
+        public List<Spell> AvailableSpellsDruid(List<Spell> fullListAvail, NewCharacter PC, List<Spell> NonClassSpell)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
             RandomizeSpells(Cantrips, Cantrips.Count);
@@ -593,7 +593,7 @@ namespace CharacterGenerator.Models
                 }
 
                 //Subclass spells. Maybe there is a way to further optimize things? 
-                for (int j = 3; j<=9; j+=2)
+                for (int j = 3; j<=9; j+=2) //2nd level spells at 3, 3rd at 5, 4th at 7, 5th at 9
                 {
                     if(PC.Level >= j)
                     {
@@ -694,7 +694,7 @@ namespace CharacterGenerator.Models
         }
 
         // ///////////////////////////////////PALADIN////////////////////////////////////
-        public List<Spell> AvaialableSpellsPaladin(List<Spell> fullListAvail, NewCharacter PC)
+        public List<Spell> AvailableSpellsPaladin(List<Spell> fullListAvail, NewCharacter PC, List<Spell> NonClassSpell)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
             RandomizeSpells(Cantrips, Cantrips.Count);
@@ -764,12 +764,42 @@ namespace CharacterGenerator.Models
                     break;
                 }
             }
+            if (PC.playerClass.SubClassName == "Oath of Devotion")
+            {
+                for (int j = 3; j <= PC.Level; j+=4)
+                {
+                    switch(j)
+                    {
+                        case 3:
+                            j-=2;
+                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Sanctuary"));
+                            break;
+
+                        case 5:
+                            break;
+
+                        case 9:
+                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Beacon of Hope"));
+                            break;
+
+                        case 13:
+                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Freedom of Movement"));
+                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Guardian of Faith"));
+                            break;
+
+                        case 17:
+                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Commune"));
+                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Flame Strike"));
+                            break;
+                    }
+                }
+            }
             return availableSpells;
         }
 
         /////////////////RANGER////////////////////////////////////////////
 
-        public List<Spell> AvaialableSpellsRanger(List<Spell> fullListAvail, NewCharacter PC)
+        public List<Spell> AvailableSpellsRanger(List<Spell> fullListAvail, NewCharacter PC)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
             RandomizeSpells(Cantrips, Cantrips.Count);
@@ -873,7 +903,7 @@ namespace CharacterGenerator.Models
 
 
         /////////////////WARLOCK///////////////////////////////////
-        public List<Spell> AvaialableSpellsWarlock(List<Spell> fullListAvail, NewCharacter PC)
+        public List<Spell> AvailableSpellsWarlock(List<Spell> fullListAvail, NewCharacter PC, List<Spell> NonClassSpell)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
             RandomizeSpells(Cantrips, Cantrips.Count);
@@ -1144,11 +1174,46 @@ namespace CharacterGenerator.Models
                             availableSpells.Add(Cantrips[c]);
                         }
                     }
+
+            //Patron Spells
+            if (PC.playerClass.SubClassName == "The Fiend")
+                {
+                    for (int j = 1; j<= PC.Level; j+=2)
+                        {
+                            switch(j)
+                            {
+                                case 1:
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Burning Hands"));
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Command"));
+                                    break;
+                                
+                                case 3:
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Blindness/Deafness"));
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Scorching Ray"));
+                                    break;
+
+                                case 5:
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Fireball"));
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Stinking Cloud"));
+                                    break;
+
+                                case 7:
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Fire Shield"));
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Wall of Fire"));
+                                    break;
+
+                                case 9:
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Flame Strike"));
+                                    availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Hallow"));
+                                    break;
+                            }
+                        }
+                }
             return availableSpells;
         }
 
         ////////////// WIZARD ///////////////////////////////////
-         public List<Spell> AvaialableSpellsWizard(List<Spell> fullListAvail, NewCharacter PC)
+         public List<Spell> AvailableSpellsWizard(List<Spell> fullListAvail, NewCharacter PC)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
             RandomizeSpells(Cantrips, Cantrips.Count);
@@ -1297,7 +1362,7 @@ namespace CharacterGenerator.Models
         }
 
         /////////////SORCERER//////////////////////////
-         public List<Spell> AvaialableSpellsSorcerer(List<Spell> fullListAvail, NewCharacter PC)
+         public List<Spell> AvailableSpellsSorcerer(List<Spell> fullListAvail, NewCharacter PC)
         {
             List<Spell> Cantrips = fullListAvail.Where(s => s.SpellLevel == 0).ToList();
             RandomizeSpells(Cantrips, Cantrips.Count);
@@ -1480,7 +1545,7 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(0, "Spare the Dying", Cleric));
             BuildSpells.Add(new Spell(0, "Thaumaturgy", Cleric));
             BuildSpells.Add(new Spell(0, "True Strike", Bard, Sorcerer, Warlock, Wizard));
-            BuildSpells.Add(new Spell(0, "Viscious Mockery", Bard));
+            BuildSpells.Add(new Spell(0, "Vicious Mockery", Bard));
             //Level 1
             BuildSpells.Add(new Spell(1, "Alarm", Ranger, Wizard));
             BuildSpells.Add(new Spell(1, "Animal Friendship", Bard, Druid, Ranger));
@@ -1493,9 +1558,9 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(1, "Comprehend Languages", Bard, Sorcerer, Warlock, Wizard));
             BuildSpells.Add(new Spell(1, "Create or Destroy Water", Cleric, Druid));
             BuildSpells.Add(new Spell(1, "Cure Wounds", Bard, Cleric, Druid));
-            BuildSpells.Add(new Spell(1, "Detect Evil and Good", Cleric, Paladin));
+            BuildSpells.Add(new Spell(1, "Detect Evil & Good", Cleric, Paladin));
             BuildSpells.Add(new Spell(1, "Detect Magic", Bard, Cleric, Druid, Paladin, Ranger, Sorcerer, Wizard));
-            BuildSpells.Add(new Spell(1, "Detect Poison and Disease", Cleric, Druid, Paladin, Ranger));
+            BuildSpells.Add(new Spell(1, "Detect Poison & Disease", Cleric, Druid, Paladin, Ranger));
             BuildSpells.Add(new Spell(1, "Disguise Self", Bard, Sorcerer, Wizard));
             BuildSpells.Add(new Spell(1, "Divine Favor",Paladin));
             BuildSpells.Add(new Spell(1, "Entangle", Druid));
@@ -1521,8 +1586,8 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(1, "Longstrider", Bard, Druid, Ranger, Wizard));
             BuildSpells.Add(new Spell(1, "Mage Armor", Sorcerer, Wizard));
             BuildSpells.Add(new Spell(1, "Magic Missile", Sorcerer, Wizard));
-            BuildSpells.Add(new Spell(1, "Protection from Evil and Good", Cleric, Paladin, Warlock, Wizard));
-            BuildSpells.Add(new Spell(1, "Purify Food and Drink", Cleric, Druid, Paladin));
+            BuildSpells.Add(new Spell(1, "Protection - Good & Evil", Cleric, Paladin, Warlock, Wizard));
+            BuildSpells.Add(new Spell(1, "Purify Food & Drink", Cleric, Druid, Paladin));
             BuildSpells.Add(new Spell(1, "Sanctuary", Cleric));
             BuildSpells.Add(new Spell(1, "Shield", Sorcerer, Wizard));
             BuildSpells.Add(new Spell(1, "Shield of Faith", Cleric, Paladin));
@@ -1563,7 +1628,7 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(2, "Knock", Bard, Sorcerer, Wizard));
             BuildSpells.Add(new Spell(2, "Lesser Restoration", Bard, Cleric, Druid, Paladin, Ranger));
             BuildSpells.Add(new Spell(2, "Levitate", Sorcerer, Wizard));
-            BuildSpells.Add(new Spell(2, "Locate Animals or Plants", Druid,Ranger));
+            BuildSpells.Add(new Spell(2, "Locate Animals/Plants", Druid,Ranger));
             BuildSpells.Add(new Spell(2, "Locate Object", Bard,Cleric, Druid, Paladin, Ranger, Wizard));
             BuildSpells.Add(new Spell(2, "Magic Mouth", Bard, Wizard));
             BuildSpells.Add(new Spell(2, "Magic Weapon", Paladin, Wizard));
@@ -1595,7 +1660,7 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(3, "Clairvoyance", Bard, Cleric, Sorcerer, Wizard));
             BuildSpells.Add(new Spell(3, "Conjure Animals", Druid, Ranger));
             BuildSpells.Add(new Spell(3, "Counterspell", Warlock, Sorcerer, Wizard));
-            BuildSpells.Add(new Spell(3, "Create Food and Water", Paladin, Cleric, Sorcerer, Wizard));
+            BuildSpells.Add(new Spell(3, "Create Food & Water", Paladin, Cleric, Sorcerer, Wizard));
             BuildSpells.Add(new Spell(3, "Daylight", Druid, Cleric, Paladin, Ranger, Sorcerer));
             BuildSpells.Add(new Spell(3, "Dispel Magic", Bard, Cleric, Druid, Paladin, Sorcerer, Warlock, Wizard));
             BuildSpells.Add(new Spell(3, "Fear", Bard, Warlock, Sorcerer, Wizard));
@@ -1619,14 +1684,14 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(3, "Revivify", Cleric, Paladin));
             BuildSpells.Add(new Spell(3, "Sending", Cleric, Bard, Wizard));
             BuildSpells.Add(new Spell(3, "Sleet Storm", Druid, Sorcerer, Wizard));
-            BuildSpells.Add(new Spell(3, "Slow", "Srocerer", Wizard));
+            BuildSpells.Add(new Spell(3, "Slow", Sorcerer, Wizard));
             BuildSpells.Add(new Spell(3, "Speak with Dead", Cleric, Bard));
             BuildSpells.Add(new Spell(3, "Speak with Plants", Druid, Ranger));
             BuildSpells.Add(new Spell(3, "Spirit Gaurdians", Cleric));
             BuildSpells.Add(new Spell(3, "Stinking Cloud", Sorcerer, Wizard ));
             BuildSpells.Add(new Spell(3, "Tiny Hut", Wizard, Bard ));
             BuildSpells.Add(new Spell(3, "Tongues", Cleric, Warlock, Sorcerer, Wizard, Bard ));
-            BuildSpells.Add(new Spell(3, "Vampric Touch", Warlock, Wizard ));
+            BuildSpells.Add(new Spell(3, "Vampiric Touch", Warlock, Wizard ));
             BuildSpells.Add(new Spell(3, "Water Breathing", Druid, Ranger, Sorcerer, Wizard ));
             BuildSpells.Add(new Spell(3, "Water Walk", Cleric, Druid, Ranger, Sorcerer ));
             BuildSpells.Add(new Spell(3, "Wind Wall", Druid, Ranger));
@@ -1675,7 +1740,7 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(5, "Contact Other Plane", Warlock, Wizard));
             BuildSpells.Add(new Spell(5, "Contagion", Cleric, Druid));
             BuildSpells.Add(new Spell(5, "Creation", Sorcerer, Wizard));
-            BuildSpells.Add(new Spell(5, "Dispel Evil and Good", Cleric, Paladin));
+            BuildSpells.Add(new Spell(5, "Dispel Evil & Good", Cleric, Paladin));
             BuildSpells.Add(new Spell(5, "Dominate Person", Sorcerer, Bard, Wizard));
             BuildSpells.Add(new Spell(5, "Dream", Wizard, Warlock, Bard));
             BuildSpells.Add(new Spell(5, "Flame Strike", Cleric));
@@ -1714,12 +1779,12 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(6, "Forbiddance", Cleric));
             BuildSpells.Add(new Spell(6, "Freezing Sphere", Wizard));
             BuildSpells.Add(new Spell(6, "Globe of Invulnerability", Sorcerer, Wizard));
-            BuildSpells.Add(new Spell(6, "Guards and Wards", Bard, Wizard));
+            BuildSpells.Add(new Spell(6, "Guards & Wards", Bard, Wizard));
             BuildSpells.Add(new Spell(6, "Harm", Cleric));
             BuildSpells.Add(new Spell(6, "Heal", Cleric, Druid));
             BuildSpells.Add(new Spell(6, "Heroes' Feast", Cleric, Druid));
             BuildSpells.Add(new Spell(6, "Instant Summons", Wizard));
-            BuildSpells.Add(new Spell(6, "Irresistable Dance", Bard, Wizard));
+            BuildSpells.Add(new Spell(6, "Iresistable Dance", Bard, Wizard));
             BuildSpells.Add(new Spell(6, "Magic Jar", Wizard));
             BuildSpells.Add(new Spell(6, "Mass Suggestion", Bard, Sorcerer, Warlock, Wizard));
             BuildSpells.Add(new Spell(6, "Move Earth", Druid, Sorcerer, Wizard));
@@ -1765,7 +1830,7 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(8, "Feeblemind",Bard, Druid, Warlock, Wizard));
             BuildSpells.Add(new Spell(8, "Glibness", Bard, Warlock));
             BuildSpells.Add(new Spell(8, "Holy Aura", Cleric));
-            BuildSpells.Add(new Spell(8, "Incindiary Cloud", Sorcerer, Wizard));
+            BuildSpells.Add(new Spell(8, "Incendiary Cloud", Sorcerer, Wizard));
             BuildSpells.Add(new Spell(8, "Maze", Wizard));
             BuildSpells.Add(new Spell(8, "Mind Blank", Bard, Wizard));
             BuildSpells.Add(new Spell(8, "Power Word Stun", Bard, Sorcerer, Warlock, Wizard));
