@@ -1,0 +1,44 @@
+<!-- @Model setup -->
+<style>
+    .btn{
+        background-color: #2d3142;
+        border: 1px solid #2d3142;
+        color: white;
+    }
+    .btn-primary:hover {
+        background-color: #3B0D11;
+        border: 1px solid #3B0D11;
+        color: white;
+        opacity: 1;
+    }
+    .btn-primary:active:focus {
+        background-color: #3B0D11;
+        border: 1px solid #2d3142;
+        color: white;
+    }
+    span{
+        color: #3B0D11;
+    }
+</style>
+<div class="container">
+    <h1 class="text-center">Specific Generation</h1>
+    <form action="/{selectedrace}/{selectedclassname}/{selectedlevel}" method="get" class="form-container">
+        <div class="form-group">
+            <label asp-for="LoginEmail"></label>
+            <input asp-for="LoginEmail" class="form-control">
+            <span asp-validation-for="LoginEmail"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LoginPassword"></label>
+            <input asp-for="LoginPassword" class="form-control">
+            <span asp-validation-for="LoginPassword"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LoginPassword"></label>
+            <input asp-for="LoginPassword" class="form-control">
+            <span asp-validation-for="LoginPassword"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        @* <button type="button" class="btn btn-danger" onclick = "closeLogin()">Close</button> *@
+    </form>
+</div>
