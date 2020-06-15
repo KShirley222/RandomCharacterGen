@@ -138,13 +138,11 @@
                 <div class="row">
                     <button class= "register-form col-sm-5 btn btn-primary btn-sm logreg" onclick="openRegistration()" >Register</button>
                     <div class="form-popup" id="register">
-                        @* <partial Name="RegisterPartial"></partial> *@
                         @Html.Partial("RegisterPartial", (User) @Model.User)
                     </div>
                     <h5 class="col-sm-1 logreg">|</h5>
                     <button class = "login-form col-sm-5 btn btn-primary btn-sm logreg" onclick="openLogin()">Login</button>
                     <div class="form-popup" id= "login">
-                        @* <partial Name="LoginPartial"></partial> *@
                         @Html.Partial("LoginPartial", (Login) @Model.Login)
                     </div>
                 </div>
@@ -168,7 +166,7 @@
         <br>
         <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href=>Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="dndbeyond.com">DnD Beyond</a> and purchase the materials there.</p>
         <a class = "btn btn-primary" id="generate"  href="/GenerateNew" >Generate</a>
-        <a class = "btn btn-primary" id="generate"  href="/GenerateNew" >Save</a>
+        <a class = "btn btn-primary" id="save"  onclick="update(@Model.Character.CharacterId)" href="#">Save</a>
     </div>
 </div>
 
@@ -177,7 +175,7 @@
 @* Pull API from fantasy name generator for names *@
 <div class="container-lg" style="background: beige; border: 5px solid black; border-radius:10px; padding: 2%;">
     <div class="row">
-        <h5 class="col-sm-6 col-md-3 text-center  charBase" >Name: <input type="text" name="CharacterName"></h5>
+        <h5 class="col-sm-6 col-md-3 text-center  charBase" >Name: <input type="text" id ="CharacterName" name="CharacterName"></h5>
         <h5 class="col-sm-6 col-md-2 text-center  charBase" >Class: @Model.Character.playerClass.ClassName / @Model.Character.playerClass.SubClassName</h5>
         <h5 class="col-sm-6 col-md-2 text-center  charBase" >Race: @if(@Model.Character.playerRace.Subrace != null){@Model.Character.playerRace.Subrace} @Model.Character.playerRace.Race </h5>
         <h5 class="col-sm-6 col-md-3 text-center  charBase" >Background:@Model.Character.playerBG.Background</h5>
@@ -264,77 +262,149 @@
                     </div>
                 </div>
                 <ul class="col-sm statbox bigbox">
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Acrobatics">
+                    <li class= "profcheck" id= "Acrobatics">
                         Acrobatics
-                        <span class="profVals">@Model.Character.playerStat.Acrobatics</span>
+                        @if(@Model.Character.playerStat.AcrobaticsB == true){
+                           <span class="profVals" style="color:red;">@Model.Character.playerStat.Acrobatics</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Acrobatics</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "AnimalHandling ">
                         Animal Handling 
-                        <span class="profVals">@Model.Character.playerStat.AnimalHandling</span>
+                        @if(@Model.Character.playerStat.AnimalHandlingB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.AnimalHandling</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.AnimalHandling</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Arcana">
                         Arcana 
-                        <span class="profVals">@Model.Character.playerStat.Arcana</span>
+                        @if(@Model.Character.playerStat.ArcanaB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Arcana</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Arcana</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Athletics">
                         Athletics 
-                        <span class="profVals">@Model.Character.playerStat.Athletics</span>
+                        @if(@Model.Character.playerStat.AthleticsB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Athletics</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Athletics</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Deception">
                         Deception 
-                        <span class="profVals"> @Model.Character.playerStat.Deception</span>
+                        @if(@Model.Character.playerStat.DeceptionB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Deception</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Deception</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "History">
                         History 
-                        <span class="profVals">@Model.Character.playerStat.History</span>
+                        @if(@Model.Character.playerStat.HistoryB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.History</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.History</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Insight">
-                        Insight 
-                        <span class="profVals"> @Model.Character.playerStat.Insight</span>
+                        Insight
+                        @if(@Model.Character.playerStat.InsightB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Insight</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Insight</span>
+                        }; 
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Intimidation">
-                        Intimidation 
-                        <span class="profVals"> @Model.Character.playerStat.Intimidation</span>
+                        Intimidation
+                        @if(@Model.Character.playerStat.IntimidationB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Intimidation</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Intimidation</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Investigation">
-                        Investigation 
-                        <span class="profVals"> @Model.Character.playerStat.Investigation</span>
+                        Investigation
+                        @if(@Model.Character.playerStat.InvestigationB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Investigation</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Investigation</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Medicine">
-                        Medicine 
-                        <span class="profVals"> @Model.Character.playerStat.Medicine</span>
+                        Medicine
+                        @if(@Model.Character.playerStat.MedicineB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Medicine</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Medicine</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Nature">
-                        Nature 
-                        <span class="profVals"> @Model.Character.playerStat.Nature</span>
+                        Nature
+                        @if(@Model.Character.playerStat.NatureB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Nature</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Nature</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Perception">
-                        Perception 
-                        <span class="profVals"> @Model.Character.playerStat.Perception</span>
+                        Perception
+                        @if(@Model.Character.playerStat.PerceptionB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Perception</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Perception</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Performance">
-                        Performance 
-                        <span class="profVals">@Model.Character.playerStat.Performance</span>
+                        Performance
+                        @if(@Model.Character.playerStat.PerformanceB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Performance</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Performance</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Persuasion">
-                        Persuasion 
-                        <span class="profVals">@Model.Character.playerStat.Persuasion</span>
+                        Persuasion
+                        @if(@Model.Character.playerStat.PersuasionB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Persuasion</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Persuasion</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Religion">
-                        Religion 
-                        <span class="profVals"> @Model.Character.playerStat.Religion</span>
+                        Religion
+                        @if(@Model.Character.playerStat.ReligionB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Religion</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Religion</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Sleight">
-                        Sleight of Hand 
-                        <span class="profVals"> @Model.Character.playerStat.Sleight</span>
+                        Sleight of Hand
+                        @if(@Model.Character.playerStat.SleightB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Sleight</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Sleight</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Stealth">
-                        Stealth 
-                        <span class="profVals"> @Model.Character.playerStat.Stealth</span>
+                        Stealth
+                        @if(@Model.Character.playerStat.StealthB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Stealth</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Stealth</span>
+                        };
                     </li>
                     <li class= "profcheck" onload=ProfCheck(this.id) id= "Survival">
-                        Survival 
-                        <span class="profVals"> @Model.Character.playerStat.Survival</span>
+                        Survival
+                        @if(@Model.Character.playerStat.SurvivalB == true){
+                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Survival</span>
+                        }else{
+                            <span class="profVals">@Model.Character.playerStat.Survival</span>
+                        };
                     </li>
                 </ul>
         </div>
@@ -493,7 +563,7 @@
         @* Column 6 *@
         <div class="col-sm-12 col-md-4 text-center">
             <h5>Notes</h5>
-            <textarea class="col-sm statbox bigbox equal">
+            <textarea type="text" id="CharacterNotes" name="CharacterNotes" class="col-sm statbox bigbox equal">
             </textarea>
         </div>
     </div>
@@ -541,30 +611,9 @@ function closeLogin() {
 }
 
 
-//check to see if model prof bool is t/f ???????
-function ProfCheck(ProfId, playerStatProf) {
-    let profCheck = (ProfId + "B");
-    let playerStats = playerStatProf + "." + profCheck; 
-    Console.log(profCheck);
-    Console.log(playerStats);
-    Console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    if(playerStats == true)
-    {
-        document.getElementById(ProfId).style.color = "yellow";
+function update(CharacterId){
+    var notes = document.getElementById("CharacterNotes").value;
+    var name = document.getElementById("CharacterName").value;
+    document.getElementById('save').href = "/update/{CharacterId}/{name}/{notes}"
     }
-}
-
-
-@* Generate an error and pass to login screen *@
-function Generate( user) {
-    let User = user;
-    if( user.UserId != null){
-        location.reload();
-    }
-    else{
-        document.getElementById(generate).href = "/class"
-    }
-}
-</script>
-
 

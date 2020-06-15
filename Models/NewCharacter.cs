@@ -22,6 +22,8 @@ namespace CharacterGenerator.Models
         public List<SpellAssoc> SpellList { get; set; }
         public List<FeatureAssoc> FeaturesList { get; set; }
         public int Level { get; set; }
+        public string playerNotes { get; set; }
+        public string playerName { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
@@ -63,6 +65,8 @@ namespace CharacterGenerator.Models
             playerBG = pBG;
             user = pUser;
             UserId = pUser.UserId;
+            playerName = "";
+            playerNotes = "";
             
         }
         public NewCharacter(int level, PlayerStat pStat,  PlayerRace pRace, PlayerClass pClass, PlayerBG pBG)

@@ -364,9 +364,6 @@ namespace CharacterGenerator.Models
     
 
     // CLASS SELECTION - PICKS CLASS AND UPDATES PLAYER CLASS AND PLAYER STATS
-    //  TODO - Write the reamaining calls inside class selector
-    // TODO - write the remaining funtcions for each class
-    // TODO - organize SkillList for each class to reflect correct 
         public PlayerStat ClassSelector(int level, PlayerStat stats, PlayerClass playerClass)
         {
             int Level = level;
@@ -377,63 +374,50 @@ namespace CharacterGenerator.Models
             {
                 case 0:
                     Bard(Level, Stats, pClass);
-                    string Name = "Bard";
-                    pClass.ClassName = Name;
+                    pClass.ClassName = "Bard";
                     return Stats;
                 case 1:
                     Cleric(Level, Stats, pClass);
-                    Name = "Cleric";
                     pClass.ClassName = "Cleric";
                     return Stats;
                 case 2:
                     Barbarian(Level, Stats, pClass);
-                    Name = "Barbarian";
                     pClass.ClassName = "Barbarian";
-                    // FeatureGen(Level, pClass.ClassName, Stats);
                     return Stats;
                 case 3:
                     Druid(Level, Stats, pClass);
-                    Name = "Druid";
                     pClass.ClassName = "Druid";
                     return Stats;
                 case 4:
                     Fighter(Level, Stats, pClass);
-                    Name = "Fighter";
                     pClass.ClassName = "Fighter";
                     return Stats;
                 case 5:
                     Monk(Level, Stats, pClass);
-                    Name = "Monk";
                     pClass.ClassName = "Monk";
                     return Stats;
                 case 6:
                     Paladin(Level, Stats, pClass);
-                    Name = "Paladin";
                     pClass.ClassName = "Paladin";
                     return Stats;
                 case 7:
                     Ranger(Level, Stats, pClass);
-                    Name = "Ranger";
                     pClass.ClassName = "Ranger";
                     return Stats;
                 case 8:
                     Rogue(Level, Stats, pClass);
-                    Name = "Rogue";
                     pClass.ClassName = "Rogue";
                     return Stats;
                 case 9:
                     Sorcerer(Level, Stats, pClass);
-                    Name = "Sorcerer";
                     pClass.ClassName = "Sorcerer";
                     return Stats;
                 case 10:
                     Warlock(Level, Stats, pClass);
-                    Name = "Warlock";
                     pClass.ClassName = "Warlock";
                     return Stats;
                 case 11:
                     Wizard(Level, Stats, pClass);
-                    Name = "Wizard";
                     pClass.ClassName = "Wizard";
                     return Stats;
             }
@@ -450,26 +434,52 @@ namespace CharacterGenerator.Models
             {
                 case "Bard":
                     Bard(Level, Stats, pClass);
-                    string Name = "Bard";
-                    pClass.ClassName = Name;
+                    pClass.ClassName = "Bard";
                     return Stats;
                 case "Cleric":
                     Cleric(Level, Stats, pClass);
-                    Name = "Cleric";
                     pClass.ClassName = "Cleric";
                     return Stats;
                 case "Barbarian":
                     Barbarian(Level, Stats, pClass);
-                    Name = "Barbarian";
                     pClass.ClassName = "Barbarian";
-                    // FeatureGen(Level, Name, Stats);
                     return Stats;
                 case "Druid":
                     Druid(Level, Stats, pClass);
-                    Name = "Druid";
                     pClass.ClassName = "Druid";
                     return Stats;
-                
+                case "Fighter":
+                    Fighter(Level, Stats, pClass);
+                    pClass.ClassName = "Fighter";
+                    return Stats;
+                case "Monk":
+                    Monk(Level, Stats, pClass);
+                    pClass.ClassName = "Monk";
+                    return Stats;
+                case "Paladin":
+                    Paladin(Level, Stats, pClass);
+                    pClass.ClassName = "Paladin";
+                    return Stats;
+                case "Ranger":
+                    Ranger(Level, Stats, pClass);
+                    pClass.ClassName = "Ranger";
+                    return Stats;
+                case "Rogue":
+                    Rogue(Level, Stats, pClass);
+                    pClass.ClassName = "Rogue";
+                    return Stats;
+                case "Sorcerer":
+                    Sorcerer(Level, Stats, pClass);
+                    pClass.ClassName = "Sorcerer";
+                    return Stats;
+                case "Warlock":
+                    Warlock(Level, Stats, pClass);
+                    pClass.ClassName = "Warlock";
+                    return Stats;
+                case "Wizard":
+                    Wizard(Level, Stats, pClass);
+                    pClass.ClassName = "Wizard";
+                    return Stats;
             }
             return Stats;
         }

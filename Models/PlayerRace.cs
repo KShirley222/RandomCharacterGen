@@ -35,7 +35,7 @@ namespace CharacterGenerator.Models
             
         }
 
-        // Takes player Race obj and selects a specific Race and increases bonuses and detmines traits
+        // Takes player Race obj and selects a Race and increases bonuses and determines traits
         public PlayerStat RaceSelector(int Level, PlayerStat playerStat, PlayerRace playerRace)
         {
             Random rand = new Random();
@@ -82,6 +82,50 @@ namespace CharacterGenerator.Models
             return playerStat;
         }
 
+        public PlayerStat SpecificRaceSelector(int Level, PlayerStat playerStat, PlayerRace playerRace, string selection)
+        {
+            switch(selection)
+            {
+                case "DragonBorn":
+                    playerRace.Race = "DragonBorn";
+                    DragonBorn(Level, playerStat, playerRace);
+                    return playerStat;
+                case "Dwarf":
+                    playerRace.Race = "Dwarf";
+                    Dwarf(Level, playerStat, playerRace);
+                    return playerStat;
+                case "Elf":
+                    playerRace.Race = "Elf";
+                    Elf(Level, playerStat, playerRace);
+                    return playerStat;
+                case "Gnome":
+                    playerRace.Race = "Gnome";
+                    Gnome(Level, playerStat, playerRace);
+                    return playerStat;
+                case "Half Elf":
+                    playerRace.Race = "Half Elf";
+                    HalfElf(Level, playerStat, playerRace);
+                    return playerStat;
+                case "Half Orc":
+                    playerRace.Race = "Half Orc";
+                    HalfOrc(Level, playerStat, playerRace);
+                    return playerStat;
+                case "Halfling":
+                    playerRace.Race = "Halfling";
+                    Halfling(Level, playerStat, playerRace);
+                    return playerStat;
+                case "Human":
+                    playerRace.Race = "Human";
+                    Human(Level, playerStat, playerRace);
+                    return playerStat;
+                case "Tiefling":
+                    playerRace.Race = "Tiefling";
+                    Tiefling(Level, playerStat, playerRace);
+                    return playerStat;
+            }
+            return playerStat;
+        }
+
 
         // Dragonborn and Dragon Ancestry determine Dragonborn race
         public PlayerStat DragonBorn(int Level, PlayerStat playerStat, PlayerRace playerRace)
@@ -100,15 +144,6 @@ namespace CharacterGenerator.Models
             return playerStat;
             
         }
-        // public string DraconicAncestry(PlayerRace playerRace)
-        // {
-        //     Random rand = new Random();
-        //     int num = rand.Next(0,10);
-        //     string[] DragonType = {"Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White"};
-        //     string[] DamageType = {"Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold"};
-        //     playerRace.RacialTraits1 = DamageType[num] + " Dragon Breath";
-        //     return DragonType[num];
-        // }
 
         // Next race
         public PlayerStat Dwarf(int Level, PlayerStat playerStat, PlayerRace playerRace)
