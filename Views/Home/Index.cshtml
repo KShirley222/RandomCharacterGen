@@ -166,7 +166,8 @@
         <br>
         <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href=>Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="dndbeyond.com">DnD Beyond</a> and purchase the materials there.</p>
         <a class = "btn btn-primary" id="generate"  href="/GenerateNew" >Generate</a>
-        <a class = "btn btn-primary" id="save"  onclick="update(@Model.Character.CharacterId)" href="#">Save</a>
+        <a class = "btn btn-primary" id="save" href="#">Save</a>
+         <input type="hidden" id="CharacterId" name="CharacterId" value="@Model.Character.CharacterId">
     </div>
 </div>
 
@@ -175,7 +176,7 @@
 @* Pull API from fantasy name generator for names *@
 <div class="container-lg" style="background: beige; border: 5px solid black; border-radius:10px; padding: 2%;">
     <div class="row">
-        <h5 class="col-sm-6 col-md-3 text-center  charBase" >Name: <input type="text" id ="CharacterName" name="CharacterName"></h5>
+        <h5 class="col-sm-6 col-md-3 text-center  charBase" >Name: <input type="text" id ="CharacterName" name="CharacterName" value="@Model.Character.playerName"></h5>
         <h5 class="col-sm-6 col-md-2 text-center  charBase" >Class: @Model.Character.playerClass.ClassName / @Model.Character.playerClass.SubClassName</h5>
         <h5 class="col-sm-6 col-md-2 text-center  charBase" >Race: @if(@Model.Character.playerRace.Subrace != null){@Model.Character.playerRace.Subrace} @Model.Character.playerRace.Race </h5>
         <h5 class="col-sm-6 col-md-3 text-center  charBase" >Background:@Model.Character.playerBG.Background</h5>
@@ -268,143 +269,143 @@
                            <span class="profVals" style="color:red;">@Model.Character.playerStat.Acrobatics</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Acrobatics</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "AnimalHandling ">
+                    <li class= "profcheck" id= "AnimalHandling ">
                         Animal Handling 
                         @if(@Model.Character.playerStat.AnimalHandlingB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.AnimalHandling</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.AnimalHandling</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Arcana">
+                    <li class= "profcheck" id= "Arcana">
                         Arcana 
                         @if(@Model.Character.playerStat.ArcanaB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Arcana</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Arcana</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Athletics">
+                    <li class= "profcheck" id= "Athletics">
                         Athletics 
                         @if(@Model.Character.playerStat.AthleticsB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Athletics</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Athletics</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Deception">
+                    <li class= "profcheck" id= "Deception">
                         Deception 
                         @if(@Model.Character.playerStat.DeceptionB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Deception</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Deception</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "History">
+                    <li class= "profcheck" id= "History">
                         History 
                         @if(@Model.Character.playerStat.HistoryB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.History</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.History</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Insight">
+                    <li class= "profcheck" id= "Insight">
                         Insight
                         @if(@Model.Character.playerStat.InsightB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Insight</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Insight</span>
-                        }; 
+                        } 
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Intimidation">
+                    <li class= "profcheck" id= "Intimidation">
                         Intimidation
                         @if(@Model.Character.playerStat.IntimidationB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Intimidation</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Intimidation</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Investigation">
+                    <li class= "profcheck" id= "Investigation">
                         Investigation
                         @if(@Model.Character.playerStat.InvestigationB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Investigation</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Investigation</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Medicine">
+                    <li class= "profcheck" id= "Medicine">
                         Medicine
                         @if(@Model.Character.playerStat.MedicineB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Medicine</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Medicine</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Nature">
+                    <li class= "profcheck" id= "Nature">
                         Nature
                         @if(@Model.Character.playerStat.NatureB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Nature</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Nature</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Perception">
+                    <li class= "profcheck" id= "Perception">
                         Perception
                         @if(@Model.Character.playerStat.PerceptionB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Perception</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Perception</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Performance">
+                    <li class= "profcheck" id= "Performance">
                         Performance
                         @if(@Model.Character.playerStat.PerformanceB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Performance</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Performance</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Persuasion">
+                    <li class= "profcheck" id= "Persuasion">
                         Persuasion
                         @if(@Model.Character.playerStat.PersuasionB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Persuasion</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Persuasion</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Religion">
+                    <li class= "profcheck" id= "Religion">
                         Religion
                         @if(@Model.Character.playerStat.ReligionB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Religion</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Religion</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Sleight">
+                    <li class= "profcheck" id= "Sleight">
                         Sleight of Hand
                         @if(@Model.Character.playerStat.SleightB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Sleight</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Sleight</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Stealth">
+                    <li class= "profcheck" id= "Stealth">
                         Stealth
                         @if(@Model.Character.playerStat.StealthB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Stealth</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Stealth</span>
-                        };
+                        }
                     </li>
-                    <li class= "profcheck" onload=ProfCheck(this.id) id= "Survival">
+                    <li class= "profcheck" id= "Survival">
                         Survival
                         @if(@Model.Character.playerStat.SurvivalB == true){
                             <span class="profVals" style="color:red;">@Model.Character.playerStat.Survival</span>
                         }else{
                             <span class="profVals">@Model.Character.playerStat.Survival</span>
-                        };
+                        }
                     </li>
                 </ul>
         </div>
@@ -564,6 +565,7 @@
         <div class="col-sm-12 col-md-4 text-center">
             <h5>Notes</h5>
             <textarea type="text" id="CharacterNotes" name="CharacterNotes" class="col-sm statbox bigbox equal">
+            @Model.Character.playerNotes
             </textarea>
         </div>
     </div>
@@ -572,48 +574,50 @@
 
 
 <script>
-function openRegistration() {
-    if(document.getElementById("login").style.display == "block")
-    {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("register").style.display = "block";
+    function openRegistration() {
+        if(document.getElementById("login").style.display == "block")
+        {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("register").style.display = "block";
+        }
+        else if(document.getElementById("register").style.display == "block")
+        {
+            closeRegistration();
+        }
+        else{
+            document.getElementById("register").style.display = "block";
+        }
     }
-    else if(document.getElementById("register").style.display == "block")
-    {
-        closeRegistration();
-    }
-    else{
-        document.getElementById("register").style.display = "block";
-    }
-}
 
-function closeRegistration() {
-  document.getElementById("register").style.display = "none";
-}
-
-function openLogin() {
-    if(document.getElementById("register").style.display == "block")
-    {
-        document.getElementById("register").style.display = "none";
-        document.getElementById("login").style.display = "block";
+    function closeRegistration() {
+    document.getElementById("register").style.display = "none";
     }
-    else if(document.getElementById("login").style.display == "block")
-    {
-        document.getElementById("login").style.display = "none"
-    }
-    else{
-        document.getElementById("login").style.display = "block";
-    }
-}
 
-function closeLogin() {
-  document.getElementById("login").style.display = "none";
-}
-
-
-function update(CharacterId){
-    var notes = document.getElementById("CharacterNotes").value;
-    var name = document.getElementById("CharacterName").value;
-    document.getElementById('save').href = "/update/{CharacterId}/{name}/{notes}"
+    function openLogin() {
+        if(document.getElementById("register").style.display == "block")
+        {
+            document.getElementById("register").style.display = "none";
+            document.getElementById("login").style.display = "block";
+        }
+        else if(document.getElementById("login").style.display == "block")
+        {
+            document.getElementById("login").style.display = "none"
+        }
+        else{
+            document.getElementById("login").style.display = "block";
+        }
     }
+
+    function closeLogin() {
+    document.getElementById("login").style.display = "none";
+    }
+
+    document.getElementById("save").onclick = function(){
+        var id = document.getElementById("CharacterId").value;
+        var notes = document.getElementById("CharacterNotes").value;
+        var name = document.getElementById("CharacterName").value;
+        document.getElementById('save').setAttribute("href", `/update/${id}/${name}/${notes}`);
+        }
+
+</script>
 

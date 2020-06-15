@@ -328,15 +328,13 @@ namespace CharacterGenerator.Controllers
             
             List<Spell> Spells = _context.NewCharacter
                 .Include(c => c.SpellList)
-                .ThenInclude(sa => sa.AlwaysPrepped)
-                .Include(c => c.SpellList)
-                .ThenInclude(sa => sa.Prepped)
-                .Include(c => c.SpellList)
                 .ThenInclude(sa => sa.SpellA)
                 .FirstOrDefault(c => c.CharacterId == character.CharacterId)
                 .SpellList.Select(s => s.SpellA)
                 .OrderBy(f => f.SpellLevel)
                 .ToList();
+
+            int passiveperception = 10+character.playerStat.Perception;
 
             dynamic MyModel = new ExpandoObject();
             MyModel.User = SessionUser;
@@ -344,24 +342,31 @@ namespace CharacterGenerator.Controllers
             MyModel.Character = character;
             MyModel.Spells = Spells;
             MyModel.Features = Feats;
+            MyModel.PassivePerception = passiveperception;
 
             return View("Index", MyModel);
         }
 
         [HttpGet("/update/{characterId}/{name}/{notes}")]
-        public IActionResult Update(int characterId, string characterName, string characterNotes)
+        public IActionResult Update(int characterId, string name, string notes)
         {
             // User Check to make sure login is completed, if not theredirect to login
+            Console.WriteLine("********************************");
+            Console.WriteLine(characterId);
+            Console.WriteLine("********************************");
             int? SessionId = HttpContext.Session.GetInt32("UserId");
             User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
             if(SessionUser == null){
                 return View("UserLogin");
             }
             NewCharacter CharacterUpdate = _context.NewCharacter.FirstOrDefault( c => c.CharacterId == characterId);
-            CharacterUpdate.playerName = characterName;
-            CharacterUpdate.playerNotes = characterNotes;
+            Console.WriteLine("********************************");
+            Console.WriteLine(CharacterUpdate.CharacterId);
+            Console.WriteLine("********************************");
+            CharacterUpdate.playerName = name;
+            CharacterUpdate.playerNotes = notes;
             _context.SaveChanges();
-            return Redirect("/view/${characterId}");
+            return RedirectToAction("ViewCharacter",new {ID = characterId});
         }
         
         // ======================================================================
@@ -507,7 +512,7 @@ namespace CharacterGenerator.Controllers
             // Returns player Stat VVV
 
             // Determine Player Class and run playerStat
-            if (selectedrace != "")
+            if (selectedrace != "Random")
                 {
                     playerRace.SpecificRaceSelector(Level, playerStat, playerRace, selectedrace);
                 }
@@ -517,7 +522,7 @@ namespace CharacterGenerator.Controllers
                 }
             PlayerClass playerClass = new PlayerClass(Level, playerStat);
             // Returns player Stat VVV
-            if (selectedclassname != "")
+            if (selectedclassname != "Random")
                 {
                     playerClass.SpecClassSelector(Level, playerStat, playerClass, selectedclassname);
                 }

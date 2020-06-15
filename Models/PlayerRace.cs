@@ -43,7 +43,7 @@ namespace CharacterGenerator.Models
             switch(num)
             {
                 case 0:
-                    playerRace.Race = "DragonBorn";
+                    playerRace.Race = "Dragonborn";
                     DragonBorn(Level, playerStat, playerRace);
                     return playerStat;
                 case 1:
