@@ -70,6 +70,8 @@ namespace CharacterGenerator.Controllers
             if( characterCheck == null )
             {
                 NewCharacter test = new NewCharacter(1, userCheck);
+                test.isSaved = true;
+                test.playerName = "First Character Generated";
                 _context.PlayerStats.Add(test.playerStat); 
                 _context.PlayerBGs.Add(test.playerBG); 
                 _context.PlayerClasses.Add(test.playerClass);
@@ -148,7 +150,8 @@ namespace CharacterGenerator.Controllers
             // Get list of all Currently generated characters
             List<NewCharacter> CharacterList = _context.NewCharacter.ToList();
             // select random character and gather all stats, BG, Race and class
-            int characterNum = rand.Next(1,CharacterList.Count);
+            // random selection ight need tweaking
+            int characterNum = 1;
             NewCharacter character = _context.NewCharacter.Include( c => c.playerRace).Include( c => c.playerClass).Include(c => c.playerStat).Include(c => c.playerBG).FirstOrDefault( c => c.CharacterId == characterNum);
             // LINQ query all Feature Associations
             List<Feature> Feats = _context.NewCharacter
@@ -193,6 +196,7 @@ namespace CharacterGenerator.Controllers
         [HttpGet("/GenerateNew")]
         public IActionResult CharacterGenerator()
         {
+            AutoDelete();
             int? SessionId = HttpContext.Session.GetInt32("UserId");
             User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
             if(SessionUser == null){
@@ -351,139 +355,25 @@ namespace CharacterGenerator.Controllers
         public IActionResult Update(int characterId, string name, string notes)
         {
             // User Check to make sure login is completed, if not theredirect to login
-            Console.WriteLine("********************************");
-            Console.WriteLine(characterId);
-            Console.WriteLine("********************************");
             int? SessionId = HttpContext.Session.GetInt32("UserId");
             User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
             if(SessionUser == null){
                 return View("UserLogin");
             }
             NewCharacter CharacterUpdate = _context.NewCharacter.FirstOrDefault( c => c.CharacterId == characterId);
-            Console.WriteLine("********************************");
-            Console.WriteLine(CharacterUpdate.CharacterId);
-            Console.WriteLine("********************************");
             CharacterUpdate.playerName = name;
             CharacterUpdate.playerNotes = notes;
+            //isSaved Bool now in use v
+            CharacterUpdate.isSaved = true;
+            //isSaved Bool now in use ^
             _context.SaveChanges();
             return RedirectToAction("ViewCharacter",new {ID = characterId});
         }
-        
-        // ======================================================================
-        // User Login, Registration and Logout
 
-        [HttpPost("/register")]
-        public IActionResult Register(User newUser)
-        {
-            if(ModelState.IsValid)
-            {
-                if(_context.Users.Any( u => u.Email == newUser.Email))
-                {
-                    ModelState.AddModelError("Email", "Email is already in use.");
-                    return View("UserLogin");
-                }
-                if(_context.Users.Any( u => u.UserName == newUser.UserName))
-                {
-                    ModelState.AddModelError("UserName", "User Name is already in use.");
-                    return View("UserLogin");
-                }
-                
-                PasswordHasher<User> Hasher = new PasswordHasher<User>();
-                newUser.Password = Hasher.HashPassword( newUser, newUser.Password);
-
-                _context.Users.Add(newUser);
-                _context.SaveChanges();
-
-                HttpContext.Session.SetInt32("UserId", newUser.UserId);
-                int id = newUser.UserId;
-                return RedirectToAction("CharacterGenerator");
-            }
-            return View("UserLogin");
-        }
-
-        [HttpPost("/login")]
-        public IActionResult Login(Login LoginUser)
-        {
-            if( LoginUser == null)
-            {
-                return View("UserLogin");
-            }
-            else if(ModelState.IsValid)
-            {
-                var userInDb = _context.Users.FirstOrDefault(u => u.Email == LoginUser.LoginEmail);
-                if(userInDb == null)
-                {
-                    ModelState.AddModelError("Email", "Invalid Email/Password");
-                    return View("UserLogin");
-                }
-                else{
-                    var hasher = new PasswordHasher<Login>();
-                    var result = hasher.VerifyHashedPassword(LoginUser, userInDb.Password, LoginUser.LoginPassword);
-                    if(result ==0)
-                    {
-                        ModelState.AddModelError("Email", "Invalid Email/Password");
-                        return View("UserLogin");
-                    }
-                    else{
-                        HttpContext.Session.SetInt32("UserId", userInDb.UserId);
-                        return RedirectToAction("CharacterGenerator");
-                    }
-                }
-            }
-            return View("UserLogin");
-        }
-
-        [HttpGet("/logout")]
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index");
-        }
-
-        // Profile Page and Character List
-        [HttpGet("/profile/{ID}")]
-        public IActionResult Profile(int ID)
-        {
-            int? SessionId = HttpContext.Session.GetInt32("UserId");
-            if(SessionId == null)
-                {
-                    return View("UserLogin");
-                }
-            else if (ID == SessionId)
-                {
-                    User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == ID);
-                    List<NewCharacter> Characters = _context.NewCharacter.Where(c => c.UserId == SessionUser.UserId).Include( c => c.playerRace).Include( c => c.playerClass).Include(c => c.playerStat).Include(c => c.playerBG).ToList();
-                    dynamic MyModel = new ExpandoObject();
-                    MyModel.Characters = Characters;
-                    MyModel.User = SessionUser; 
-                    return View("profile", MyModel);
-                }
-            return View("UserLogin");
-        }
-
-
-        // Misc, delete?????
-        [HttpGet("/test")]
-        public IActionResult Test()
-        {
-            int? SessionId = HttpContext.Session.GetInt32("UserId");
-            ViewBag.SessionId = SessionId;
-            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
-            return View ("test");
-        }
-
-        [HttpGet("/user")]
-        public IActionResult UserLogin()
-        {
-            int? SessionId = HttpContext.Session.GetInt32("UserId");
-            ViewBag.SessionId = SessionId;
-            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
-            return View();
-        }
-
-        [HttpGet("/{selectedrace}/{selectedclassname}/{selectedlevel}")]
+        [HttpGet("/Race:{selectedrace}/Class:{selectedclassname}/Level:{selectedlevel}")]
         public IActionResult SpecificGeneration(string selectedrace, string selectedclassname, int selectedlevel)
         {
+            AutoDelete();
             int? SessionId = HttpContext.Session.GetInt32("UserId");
             User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
             if(SessionUser == null){
@@ -613,5 +503,152 @@ namespace CharacterGenerator.Controllers
             return View("Index", MyModel);
         }
 
+        public void AutoDelete()
+        {
+            NewCharacter CharToDelete = _context.NewCharacter.FirstOrDefault(ctd => ctd.isSaved == false && ctd.CreatedAt < DateTime.Now.AddMinutes(-1));
+            if (CharToDelete != null)
+                {
+                //Need to unravel the new character object and delete the character objects connected to it
+                //Spell Associations - check
+                //Feature Associations - check
+                //playerClass - check
+                //playerRace - check
+                //playerStat - check
+                //playerBG - check
+                List<SpellAssoc> SpellsAssocToDelete = _context.Spell_Associations.Where(sa => sa.CharacterId == CharToDelete.CharacterId).ToList();
+                    foreach (SpellAssoc sa in SpellsAssocToDelete)
+                    {
+                        _context.Spell_Associations.Remove(sa);
+                    }
+                List<FeatureAssoc> FeatAssocToDelete = _context.Feature_Associations.Where(fa => fa.CharacterId == CharToDelete.CharacterId).ToList();
+                    foreach (FeatureAssoc fa in FeatAssocToDelete)
+                    {
+                        _context.Feature_Associations.Remove(fa);
+                    }
+                PlayerClass PClassToDelete = _context.PlayerClasses.FirstOrDefault(pc => pc.PlayerClassId == CharToDelete.playerClassId);
+                    _context.PlayerClasses.Remove(PClassToDelete);
+                PlayerRace PRaceToDelete = _context.PlayerRaces.FirstOrDefault(pr => pr.PlayerRaceId == CharToDelete.playerRaceId);
+                    _context.PlayerRaces.Remove(PRaceToDelete);
+                PlayerStat PStatToDelete = _context.PlayerStats.FirstOrDefault(ps => ps.PlayerStatId == CharToDelete.playerStatId);
+                    _context.PlayerStats.Remove(PStatToDelete);
+                PlayerBG PGBToDelete = _context.PlayerBGs.FirstOrDefault(pbg => pbg.PlayerBGId == CharToDelete.playerBGId);
+                    _context.PlayerBGs.Remove(PGBToDelete);
+
+                _context.NewCharacter.Remove(CharToDelete);
+                }
+        }
+        
+        // ===================
+        // ===================================================
+        // User Login, Registration and Logout
+
+        [HttpPost("/register")]
+        public IActionResult Register(User newUser)
+        {
+            if(ModelState.IsValid)
+            {
+                if(_context.Users.Any( u => u.Email == newUser.Email))
+                {
+                    ModelState.AddModelError("Email", "Email is already in use.");
+                    return View("UserLogin");
+                }
+                if(_context.Users.Any( u => u.UserName == newUser.UserName))
+                {
+                    ModelState.AddModelError("UserName", "User Name is already in use.");
+                    return View("UserLogin");
+                }
+                
+                PasswordHasher<User> Hasher = new PasswordHasher<User>();
+                newUser.Password = Hasher.HashPassword( newUser, newUser.Password);
+
+                _context.Users.Add(newUser);
+                _context.SaveChanges();
+
+                HttpContext.Session.SetInt32("UserId", newUser.UserId);
+                int id = newUser.UserId;
+                return RedirectToAction("CharacterGenerator");
+            }
+            return View("UserLogin");
+        }
+
+        [HttpPost("/login")]
+        public IActionResult Login(Login LoginUser)
+        {
+            if( LoginUser == null)
+            {
+                return View("UserLogin");
+            }
+            else if(ModelState.IsValid)
+            {
+                var userInDb = _context.Users.FirstOrDefault(u => u.Email == LoginUser.LoginEmail);
+                if(userInDb == null)
+                {
+                    ModelState.AddModelError("Email", "Invalid Email/Password");
+                    return View("UserLogin");
+                }
+                else{
+                    var hasher = new PasswordHasher<Login>();
+                    var result = hasher.VerifyHashedPassword(LoginUser, userInDb.Password, LoginUser.LoginPassword);
+                    if(result ==0)
+                    {
+                        ModelState.AddModelError("Email", "Invalid Email/Password");
+                        return View("UserLogin");
+                    }
+                    else{
+                        HttpContext.Session.SetInt32("UserId", userInDb.UserId);
+                        return RedirectToAction("CharacterGenerator");
+                    }
+                }
+            }
+            return View("UserLogin");
+        }
+
+        [HttpGet("/logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
+        }
+
+        // Profile Page and Character List
+        [HttpGet("/profile/{ID}")]
+        public IActionResult Profile(int ID)
+        {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            if(SessionId == null)
+                {
+                    return View("UserLogin");
+                }
+            else if (ID == SessionId)
+                {
+                    User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == ID);
+                    List<NewCharacter> Characters = _context.NewCharacter.Where(c => c.UserId == SessionUser.UserId).Include( c => c.playerRace).Include( c => c.playerClass).Include(c => c.playerStat).Include(c => c.playerBG).ToList();
+                    dynamic MyModel = new ExpandoObject();
+                    MyModel.Characters = Characters;
+                    MyModel.User = SessionUser; 
+                    return View("profile", MyModel);
+                }
+            return View("UserLogin");
+        }
+
+
+        // Misc, delete?????
+        [HttpGet("/test")]
+        public IActionResult Test()
+        {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+            return View ("test");
+        }
+
+        [HttpGet("/user")]
+        public IActionResult UserLogin()
+        {
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.SessionId = SessionId;
+            User SessionUser = _context.Users.FirstOrDefault( u => u.UserId == SessionId);
+            return View();
+        }
     }
 }

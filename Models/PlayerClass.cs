@@ -803,7 +803,7 @@ namespace CharacterGenerator.Models
         public void DruidSubGen(PlayerClass pc, PlayerStat ps)
         {
             Random rand = new Random();
-            int subclassnum = rand.Next(1,2);
+            int subclassnum = 1;
             switch(subclassnum)
                 {
                     case 0:

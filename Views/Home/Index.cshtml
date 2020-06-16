@@ -138,12 +138,12 @@
                 <div class="row">
                     <button class= "register-form col-sm-5 btn btn-primary btn-sm logreg" onclick="openRegistration()" >Register</button>
                     <div class="form-popup" id="register">
-                        @Html.Partial("RegisterPartial", (User) @Model.User)
+                        <partial>@Html.Partial("RegisterPartial", (User) @Model.User)</partial>
                     </div>
                     <h5 class="col-sm-1 logreg">|</h5>
                     <button class = "login-form col-sm-5 btn btn-primary btn-sm logreg" onclick="openLogin()">Login</button>
                     <div class="form-popup" id= "login">
-                        @Html.Partial("LoginPartial", (Login) @Model.Login)
+                        <partial>@Html.Partial("LoginPartial", (Login) @Model.Login)</partial>
                     </div>
                 </div>
             }
@@ -564,8 +564,14 @@
         @* Column 6 *@
         <div class="col-sm-12 col-md-4 text-center">
             <h5>Notes</h5>
-            <textarea type="text" id="CharacterNotes" name="CharacterNotes" class="col-sm statbox bigbox equal">
-            @Model.Character.playerNotes
+                @if(@Model.Character.playerNotes == "")
+                    {
+                        <input type="text" rows = "6" id="CharacterNotes" name="CharacterNotes" class="col-sm statbox bigbox equal" value = "@Model.Character.playerNotes">
+                    }
+                else
+                    {
+                        <input type="text" id="CharacterNotes" name="CharacterNotes" class="col-sm statbox bigbox equal"value = "Notes@Model.Character.playerNotes">
+                    }
             </textarea>
         </div>
     </div>
@@ -616,6 +622,9 @@
         var id = document.getElementById("CharacterId").value;
         var notes = document.getElementById("CharacterNotes").value;
         var name = document.getElementById("CharacterName").value;
+        if(name === ""){
+            name = "Name";
+        }
         document.getElementById('save').setAttribute("href", `/update/${id}/${name}/${notes}`);
         }
 

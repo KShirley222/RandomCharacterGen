@@ -15,7 +15,7 @@ namespace CharacterGenerator.Models
         public PlayerClass playerClass { get; set; }
         public int playerRaceId { get; set; }
         public PlayerRace playerRace { get; set; }
-        public int BGId { get; set; }
+        public int playerBGId { get; set; }
         public PlayerBG playerBG { get; set; }
         public int playerStatId { get; set; }
         public PlayerStat playerStat { get; set; }
@@ -24,6 +24,7 @@ namespace CharacterGenerator.Models
         public int Level { get; set; }
         public string playerNotes { get; set; }
         public string playerName { get; set; }
+        public bool isSaved {get; set;} = false;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
@@ -40,7 +41,7 @@ namespace CharacterGenerator.Models
 
             playerBG = new PlayerBG();
             playerBG.BGSelector(playerStat, playerBG);
-            BGId = playerBG.PlayerBGId;
+            playerBGId = playerBG.PlayerBGId;
 
             playerRace = new PlayerRace();
             playerRace.RaceSelector(Level, playerStat, playerRace);
@@ -61,7 +62,7 @@ namespace CharacterGenerator.Models
             playerClass = pClass;
             playerRaceId = pRace.PlayerRaceId;
             playerRace = pRace;
-            BGId = pBG.PlayerBGId;
+            playerBGId = pBG.PlayerBGId;
             playerBG = pBG;
             user = pUser;
             UserId = pUser.UserId;
@@ -78,7 +79,7 @@ namespace CharacterGenerator.Models
             playerClass = pClass;
             playerRaceId = pRace.PlayerRaceId;
             playerRace = pRace;
-            BGId = pBG.PlayerBGId;
+            playerBGId = pBG.PlayerBGId;
             playerBG = pBG;
             UserId = 1;
             
