@@ -22,8 +22,8 @@ namespace CharacterGenerator.Models
         public List<SpellAssoc> SpellList { get; set; }
         public List<FeatureAssoc> FeaturesList { get; set; }
         public int Level { get; set; }
-        public string playerNotes { get; set; }
-        public string playerName { get; set; }
+        public string playerNotes { get; set; } = "Notes";
+        public string playerName { get; set; } ="Name";
         public bool isSaved {get; set;} = false;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
