@@ -162,9 +162,9 @@
 <div class="row welcome">
     <div class="col">
         <p class=" welcome">Welcome to our humble Character Randomizer!</p>
-        <p class=" welcome">If you would like to save your generated, then please register or login!</p>
+        <p class=" welcome">This tool is made for creating randomized characters, from levels one to twenty. Hit Points, Spell selection, and Stat Arrays are randomly generated for your use. Register or Login to begin generating characters!</p>
         <br>
-        <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href=>Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="dndbeyond.com">DnD Beyond</a> and purchase the materials there.</p>
+        <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href="https://dnd.wizards.com/articles/features/systems-reference-document-srd">Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="https://www.dndbeyond.com/">DnD Beyond</a> and purchase the materials there.</p>
         <a class = "btn btn-primary" id="generate"  href="/GenerateNew" >Generate</a>
         <a class = "btn btn-primary" id="save" href="#">Save</a>
          <input type="hidden" id="CharacterId" name="CharacterId" value="@Model.Character.CharacterId">
@@ -425,7 +425,7 @@
             <div class="row p-2" >
                 <div class="col-sm-6 text-center statbox" >
                     <p>Hit Points</p>
-                    <p>@Model.Character.playerStat.Strength</p>
+                    <p>@Model.Character.playerStat.HitPoints</p>
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Strength Save</p>
@@ -617,6 +617,9 @@
         var id = document.getElementById("CharacterId").value;
         var notes = document.getElementById("CharacterNotes").value;
         var name = document.getElementById("CharacterName").value;
+        if(name === "" || name === null){
+            name = "Name";
+        }
         if(notes === "" || notes === null){
             notes = "Notes";
         }

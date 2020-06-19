@@ -19,7 +19,7 @@ namespace CharacterGenerator.Models
         // Some other stuff
         public int ArmorClass { get; set; }
         public double Proficiency { get; set; }
-        public int HitPoints { get; set; }
+        public int HitPoints { get; set; } =0;
         
         // Modifiiers
         public int StrMod { get; set; }

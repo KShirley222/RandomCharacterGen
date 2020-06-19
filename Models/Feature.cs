@@ -179,11 +179,11 @@ namespace CharacterGenerator.Models
                 BuildFeatures.Add(new Feature("Champion", "Improved Critical", 3));
                 BuildFeatures.Add(new Feature("Champion", "Remarkable Athlete", 7));
                 BuildFeatures.Add(new Feature("Champion", "Additional Fighting Style", 10));
-                BuildFeatures.Add(new Feature("Champion", "Superior Critical Critical", 15));
+                BuildFeatures.Add(new Feature("Champion", "Superior Critical", 15));
                 BuildFeatures.Add(new Feature("Champion", "Survivor", 18));
                 //Battle Master
                 BuildFeatures.Add(new Feature("Battle Master", "Combat Superiority", 3));
-                BuildFeatures.Add(new Feature("Battle Master", "Combat Student of War", 3));
+                BuildFeatures.Add(new Feature("Battle Master", "Student of War", 3));
                 BuildFeatures.Add(new Feature("Battle Master", "Student of War", 7));
                 BuildFeatures.Add(new Feature("Battle Master", "Improved Combat Superiority", 10));
                 BuildFeatures.Add(new Feature("Battle Master", "Relentless", 15));

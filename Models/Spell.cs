@@ -26,6 +26,7 @@ namespace CharacterGenerator.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+        Random rand = new Random();
         public Spell(){}
         public Spell(int SPL_LVL, string name, string source1)
         {
@@ -1003,7 +1004,6 @@ namespace CharacterGenerator.Models
                                     {
                                         //Need to randomly implement level of spells chosen due to the unique nature of Warlock spellcasting, insuring that their limited selection of level 4 and 5 spells doesn't cause an Out of Bounds Error.
                                         //Can be refactored into it's own function
-                                        Random rand = new Random();
                                         int randomspellselector = rand.Next(2,6);
                                         switch (randomspellselector)
                                             {
@@ -1041,7 +1041,6 @@ namespace CharacterGenerator.Models
                                 if (i == 15)
                                     {
                                         //Can be refactored into it's own function
-                                        Random rand = new Random();
                                         int randomspellselector = rand.Next(2,6);
                                         switch (randomspellselector)
                                             {
@@ -1079,7 +1078,6 @@ namespace CharacterGenerator.Models
                                 if (i == 17)
                                     {
                                         //Can be refactored into it's own function
-                                        Random rand = new Random();
                                         int randomspellselector = rand.Next(2,6);
                                         switch (randomspellselector)
                                             {
@@ -1114,7 +1112,6 @@ namespace CharacterGenerator.Models
                                 if (i == 19)
                                 {
                                     //Can be refactored into it's own function
-                                        Random rand = new Random();
                                         int randomspellselector = rand.Next(2,6);
                                         switch (randomspellselector)
                                             {

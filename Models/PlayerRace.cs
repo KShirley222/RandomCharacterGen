@@ -34,11 +34,11 @@ namespace CharacterGenerator.Models
         {
             
         }
-
+        Random rand = new Random();
         // Takes player Race obj and selects a Race and increases bonuses and determines traits
         public PlayerStat RaceSelector(int Level, PlayerStat playerStat, PlayerRace playerRace)
         {
-            Random rand = new Random();
+            
             int num = rand.Next(0,9);
             switch(num)
             {
@@ -130,7 +130,6 @@ namespace CharacterGenerator.Models
         // Dragonborn and Dragon Ancestry determine Dragonborn race
         public PlayerStat DragonBorn(int Level, PlayerStat playerStat, PlayerRace playerRace)
         {
-            Random rand = new Random();
             int num = rand.Next(0,10);
             string[] DragonType = {"Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White"};
             string[] DamageType = {"Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold"};
@@ -152,7 +151,6 @@ namespace CharacterGenerator.Models
                 playerStat.Constitution += 2;
 
                 //Creating for subraces
-                Random rand = new Random();
                 int num = rand.Next(0,1);
                 switch(num)
                     {
@@ -161,6 +159,7 @@ namespace CharacterGenerator.Models
                             playerStat.Wisdom +=1;
                             playerRace.SubRacialTraits1 = "Dwarven Toughness";
                             playerStat.HitPoints += Level;
+                            Console.WriteLine(playerStat.HitPoints);
                             break;
                         case 1: 
                             playerRace.Subrace = "Mountain";
@@ -183,7 +182,6 @@ namespace CharacterGenerator.Models
                 //base elf ASI
                 playerStat.Dexterity += 2;
                 //Creating for subraces
-                Random rand = new Random();
                 int num = rand.Next(0,1);
                 switch(num)
                     {
@@ -221,7 +219,6 @@ namespace CharacterGenerator.Models
             playerRace.Speed = 25;
             playerRace.RacialTraits1 = "Darkvision (60 ft)";
             playerRace.RacialTraits2 ="Gnome Cunning";
-             Random rand = new Random();
                 int num = rand.Next(1,2);
                 switch(num)
                 {
@@ -281,7 +278,6 @@ namespace CharacterGenerator.Models
 
             int[] SkillList = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
             Randomize(SkillList, SkillList.Length);
-            Random rand = new Random();
             int NumOfPro = 2;
             for(int i =0; i<NumOfPro; i++)
             {
@@ -635,7 +631,6 @@ namespace CharacterGenerator.Models
         public PlayerStat Halfling(int Level, PlayerStat playerStat, PlayerRace playerRace)
         {
             playerStat.Dexterity += 2;
-            Random rand = new Random();
             int num = rand.Next(0,1);
             switch (num)
                 {

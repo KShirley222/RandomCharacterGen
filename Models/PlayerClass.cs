@@ -47,11 +47,10 @@ namespace CharacterGenerator.Models
             ClassHP = 0;
         }
 
-
-        public PlayerStat ASIGen( int level, PlayerStat stats, PlayerClass pClass)
+        Random rand = new Random();
+        public PlayerStat ASIGen( int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             // Levels player earns +2 so a certain skill
             // This works for every class except Fighter and Rogue
             // Fighter = {4,6,8,12,14,16,19}
@@ -90,7 +89,7 @@ namespace CharacterGenerator.Models
             // for each value pushed into ASILevel, Select random Stat and assign value increase
             foreach(int ASI in ASILevel)
             {
-                Random rand = new Random();
+                
                 int skill = rand.Next(0,6);
                 switch (skill)
                 {
@@ -165,13 +164,12 @@ namespace CharacterGenerator.Models
             return Stats;
         }
 
-        public bool ProGen( int level, PlayerStat stats, int numOfPro, int[] skillList)
+        public bool ProGen( int level, PlayerStat Stats, int numOfPro, int[] skillList)
         {
             // Based on bard because of high count of pros and entire list selection
             // Modify for child class by changing available cases and modify rand.
-            Random rand = new Random();
+            
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = numOfPro;
             int[] SkillList = skillList;
 
@@ -353,7 +351,7 @@ namespace CharacterGenerator.Models
 
         public int HPCalc(int level, int HitDie, int ConMod)
         {
-            Random rand = new Random();
+            
             int total = HitDie + ConMod;
             for (int i = 1; i<level; i++)
                 {
@@ -364,12 +362,13 @@ namespace CharacterGenerator.Models
     
 
     // CLASS SELECTION - PICKS CLASS AND UPDATES PLAYER CLASS AND PLAYER STATS
-        public PlayerStat ClassSelector(int level, PlayerStat stats, PlayerClass playerClass)
+        public PlayerStat ClassSelector(int level, PlayerStat Stats, PlayerClass playerClass)
         {
+            Console.WriteLine("Within Class Selector, checking for Dwarven Toughness bonus");
+            Console.WriteLine(Stats.HitPoints);
             int Level = level;
-            PlayerStat Stats = stats;
             PlayerClass pClass = playerClass;
-            Random rand = new Random();
+            
             switch(rand.Next(0,12))
             {
                 case 0:
@@ -421,15 +420,15 @@ namespace CharacterGenerator.Models
                     pClass.ClassName = "Wizard";
                     return Stats;
             }
+            Console.WriteLine("Finished with Class Selector");
             return Stats;
         }
 
-        public PlayerStat SpecClassSelector(int level, PlayerStat stats, PlayerClass playerClass, string selection)
+        public PlayerStat SpecClassSelector(int level, PlayerStat Stats, PlayerClass playerClass, string selection)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             PlayerClass pClass = playerClass;
-            Random rand = new Random();
+            
             switch(selection)
             {
                 case "Bard":
@@ -484,11 +483,10 @@ namespace CharacterGenerator.Models
             return Stats;
         }
 
-        public PlayerStat Barbarian(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Barbarian(int level, PlayerStat Stats, PlayerClass pClass)
         {
             ClassName = "Barbarian";
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 2;
             // Skills: { "AnimalHandling", "Athletics", "Intimidation", "Nature", "Perception", "Survivial" };
             int[] SkillList = {0, 1, 7, 10, 11, 17}; 
@@ -501,15 +499,14 @@ namespace CharacterGenerator.Models
             int Base = 12;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            BarbSubGen(pClass, stats);
+            Stats.HitPoints += ClassHP;
+            BarbSubGen(pClass, Stats);
             return Stats; 
         }
-        public PlayerStat Bard(int level, PlayerStat stats, PlayerClass pClass) 
+        public PlayerStat Bard(int level, PlayerStat Stats, PlayerClass pClass) 
         {
             ClassName = "Bard";
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 3;
             // Skills: Choose two fro{ "Acrobatics", "AnimalHandling", "Arcana", "Athletics", "Deception", "History","Insight","Intimidation","Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "SleightofHand", "Stealth", "Survival"};
             int[] SkillList = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}; 
@@ -522,17 +519,16 @@ namespace CharacterGenerator.Models
             int Base = 8;
             int ConMod = Stats.ConMod;
             pClass.ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            BardSubGen(pClass, stats); 
+            Stats.HitPoints += ClassHP;
+            BardSubGen(pClass, Stats); 
             return Stats;
         }
 
 
 
-        public PlayerStat Cleric(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Cleric(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 2;
             // Skills:{"History", "Insight", "Medicine", "Religion"};
             int[] SkillList = {4, 6, 7, 9, 14}; 
@@ -545,15 +541,14 @@ namespace CharacterGenerator.Models
             int Base = 8;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            ClericSubGen(pClass, stats);
+            Stats.HitPoints += ClassHP;
+            ClericSubGen(pClass, Stats);
             return Stats; 
         }
 
-        public PlayerStat Druid(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Druid(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 2;
             // Skills: Choose { "AnimalHandling", "Arcana", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"};
             int[] SkillList = {0, 5, 6, 9, 10, 11, 14, 17}; 
@@ -566,14 +561,13 @@ namespace CharacterGenerator.Models
             int Base = 8;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            DruidSubGen(pClass, stats);
+            Stats.HitPoints += ClassHP;
+            DruidSubGen(pClass, Stats);
             return Stats; 
         }
-        public PlayerStat Fighter(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Fighter(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 2;
             // Skills: Choose{ "Acrobatics", "AnimalHandling","Athletics","History","Insight","Intimidation","Perception", "Survival"};
             int[] SkillList = {2, 0, 1, 4, 6, 7, 11, 17}; 
@@ -586,14 +580,13 @@ namespace CharacterGenerator.Models
             int Base = 10;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            FighterSubGen( pClass, stats);
+            Stats.HitPoints += ClassHP;
+            FighterSubGen( pClass, Stats);
             return Stats; 
         }
-        public PlayerStat Monk(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Monk(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 2;
             // Skills: Choose  { "Acrobatics","Athletics","History","Insight","Religion", "SleightofHand", "Stealth"}
             int[] SkillList = {2, 1, 4, 6, 14, 15, 16}; 
@@ -606,14 +599,13 @@ namespace CharacterGenerator.Models
             int Base = 8;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            MonkSubGen( pClass, stats);
+            Stats.HitPoints += ClassHP;
+            MonkSubGen( pClass, Stats);
             return Stats; 
         }
-        public PlayerStat Paladin(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Paladin(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 2;
             // Skills: Choose { "Athletics","Insight","Intimidation","Medicine", "Persuasion", "Religion"};
             int[] SkillList = {1, 6, 7, 9, 13, 14}; 
@@ -626,14 +618,13 @@ namespace CharacterGenerator.Models
             int Base = 10;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            PaladinSubGen( pClass, stats);
+            Stats.HitPoints += ClassHP;
+            PaladinSubGen( pClass, Stats);
             return Stats; 
         }
-        public PlayerStat Ranger(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Ranger(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 3;
             // Skills: Choose {"AnimalHandling","Athletics","Insight","Investigation","Nature", "Perception", "Stealth", "Survival"};
             int[] SkillList = {0, 1, 6, 8, 10, 11, 16, 17}; 
@@ -646,14 +637,13 @@ namespace CharacterGenerator.Models
             int Base = 10;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            RangerSubGen(pClass, stats);
+            Stats.HitPoints += ClassHP;
+            RangerSubGen(pClass, Stats);
             return Stats; 
         }
-        public PlayerStat Rogue(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Rogue(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 4;
             // Skills: Choose { "Acrobatics", "Athletics", "Deception","Insight","Intimidation","Investigation", "Perception", "Performance", "Persuasion", "SleightofHand", "Stealth"};
             int[] SkillList = { 2, 1, 3, 6, 7, 8, 11, 12, 13, 15, 16 }; 
@@ -666,14 +656,13 @@ namespace CharacterGenerator.Models
             int Base = 8;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            RogueSubGen( pClass, stats);
+            Stats.HitPoints += ClassHP;
+            RogueSubGen( pClass, Stats);
             return Stats; 
         }
-        public PlayerStat Sorcerer(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Sorcerer(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 2;
             // Skills: Choose {"Arcana","Deception","Insight","Intimidation", "Persuasion", "Religion"};
             int[] SkillList = {5, 3, 6, 7, 13, 14}; 
@@ -686,14 +675,13 @@ namespace CharacterGenerator.Models
             int Base = 6;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            SorcSubGen( pClass, stats);
+            Stats.HitPoints += ClassHP;
+            SorcSubGen( pClass, Stats);
             return Stats; 
         }
-        public PlayerStat Warlock(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Warlock(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 2;
             // Skills: Choose { "Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature",  "Religion"};
             int[] SkillList = { 5, 3, 4, 7, 8, 10, 14}; 
@@ -706,14 +694,13 @@ namespace CharacterGenerator.Models
             int Base = 8;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            WarlockSubGen( pClass, stats );
+            Stats.HitPoints += ClassHP;
+            WarlockSubGen( pClass, Stats);
             return Stats; 
         }
-        public PlayerStat Wizard(int level, PlayerStat stats, PlayerClass pClass)
+        public PlayerStat Wizard(int level, PlayerStat Stats, PlayerClass pClass)
         {
             int Level = level;
-            PlayerStat Stats = stats;
             int NumOfPro = 2;
             // Skills: Choose { "Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"};
             int[] SkillList = { 5, 4, 6, 8, 9, 14}; 
@@ -726,15 +713,15 @@ namespace CharacterGenerator.Models
             int Base = 6;
             int ConMod = Stats.ConMod;
             ClassHP = HPCalc(Level, Base, ConMod);
-            Stats.HitPoints = Stats.HitPoints + ClassHP;
-            WizSubGen( pClass, stats );
+            Stats.HitPoints += ClassHP;
+            WizSubGen( pClass, Stats );
             return Stats; 
         }
         
         //passing in Playerclass to assign the subclassname, and the PlayerStat to assign features/spells once those are implemented in PlayerClass
         public void BarbSubGen(PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(0,1);
             switch(subclassnum)
                 {
@@ -750,7 +737,7 @@ namespace CharacterGenerator.Models
 
         public void BardSubGen(PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(0,1);
             switch(subclassnum)
                 {
@@ -766,7 +753,7 @@ namespace CharacterGenerator.Models
 
         public void ClericSubGen(PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(1,2);
             //KnowledgePHB LifePHB LightPHB NaturePHB TempestPHB TrickeryPHB WarPHB
             switch(subclassnum)
@@ -802,7 +789,7 @@ namespace CharacterGenerator.Models
         }
         public void DruidSubGen(PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = 1;
             switch(subclassnum)
                 {
@@ -845,7 +832,7 @@ namespace CharacterGenerator.Models
 
         public void FighterSubGen(PlayerClass pc,PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
@@ -862,7 +849,7 @@ namespace CharacterGenerator.Models
         }
         public void MonkSubGen (PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
@@ -880,7 +867,7 @@ namespace CharacterGenerator.Models
 
         public void PaladinSubGen (PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
@@ -898,7 +885,7 @@ namespace CharacterGenerator.Models
 
         public void RangerSubGen (PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
@@ -913,7 +900,7 @@ namespace CharacterGenerator.Models
 
         public void RogueSubGen (PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
@@ -931,7 +918,7 @@ namespace CharacterGenerator.Models
 
         public void SorcSubGen (PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(0,1);
             switch(subclassnum)
             {
@@ -946,7 +933,7 @@ namespace CharacterGenerator.Models
 
         public void WarlockSubGen (PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(2,3);
             switch(subclassnum)
             {
@@ -964,7 +951,7 @@ namespace CharacterGenerator.Models
 
         public void WizSubGen (PlayerClass pc, PlayerStat ps)
         {
-            Random rand = new Random();
+            
             int subclassnum = rand.Next(4,5);
             switch(subclassnum)
             {

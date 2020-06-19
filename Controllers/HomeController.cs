@@ -24,11 +24,10 @@ namespace CharacterGenerator.Controllers
             _context = context;
         }
         
-
+        Random rand = new Random();
         [HttpGet("")]
         public IActionResult Index()
         {
-            Random rand = new Random();
             // Check for features, if null populate DB
             Feature featTest = _context.Features.FirstOrDefault( f => f.FeatureId == 1);
             if( featTest == null)
@@ -203,7 +202,6 @@ namespace CharacterGenerator.Controllers
                 return View("UserLogin");
             }
 
-            Random rand = new Random();
             int Level = rand.Next(1,21);
 
             //creating input for creation and modification of base in other functions
@@ -227,6 +225,12 @@ namespace CharacterGenerator.Controllers
 
             // reruns numbers based on updated proficiencies and skill increases
             playerStat.UpdatePro(playerStat);
+
+            //***Investigated PlayerClass and PlayerRace, for some reason the Hill Dwarf Subrace Trait, Dwarven Toughness was not being applied correctly, this is overt but should amend the issue.
+            if(playerRace.Subrace == "Hill")
+                {
+                    playerStat.HitPoints += Level;
+                }
 
             // create connection to all character objects within the character
             NewCharacter newPlayer = new NewCharacter(Level, playerStat,playerRace,playerClass, playerBG, SessionUser);
@@ -383,7 +387,7 @@ namespace CharacterGenerator.Controllers
             
             if (Level == 0) //Assign the base choice value as == 0
                 {
-                    Random rand = new Random();
+    
                     Level = rand.Next(1,21);
                 }
             //creating input for creation and modification of base in other functions
@@ -419,6 +423,12 @@ namespace CharacterGenerator.Controllers
                 }
             // reruns numbers based on updated proficiencies and skill increases
             playerStat.UpdatePro(playerStat);
+
+            //* Copied from /GenerateNew with similar reasoning to the comment. Dwarven Toughness isn't being applied correctly.
+            if(playerRace.Subrace == "Hill")
+                {
+                    playerStat.HitPoints += Level;
+                }
 
             // create connection to all character objects within the character
             NewCharacter newPlayer = new NewCharacter(Level, playerStat,playerRace,playerClass, playerBG, SessionUser);
