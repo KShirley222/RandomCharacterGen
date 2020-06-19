@@ -21,7 +21,7 @@ namespace CharacterGenerator.Models
         public PlayerStat BGSelector(PlayerStat playerStat, PlayerBG playerBG)
         {
             Random rand = new Random();
-            int num = rand.Next(0,15);
+            int num = rand.Next(0,1);
             switch(num)
             {
                 case 0:
@@ -30,7 +30,7 @@ namespace CharacterGenerator.Models
                     playerStat.ReligionB = true;
                     LangGenerator(2,playerStat);
                     playerBG.Proficiencies = true;
-                    playerBG.Feature = "Shelter of the Fainthful"; 
+                    playerBG.Feature = "Shelter of the Faithful"; 
                     return playerStat;
                 case 1:
                     playerBG.Background = "Charlatan"; // Prof in Disguise and Forgery Kit

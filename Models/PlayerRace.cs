@@ -86,8 +86,8 @@ namespace CharacterGenerator.Models
         {
             switch(selection)
             {
-                case "DragonBorn":
-                    playerRace.Race = "DragonBorn";
+                case "Dragonborn":
+                    playerRace.Race = "Dragonborn";
                     DragonBorn(Level, playerStat, playerRace);
                     return playerStat;
                 case "Dwarf":

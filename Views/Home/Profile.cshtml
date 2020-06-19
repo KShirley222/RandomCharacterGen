@@ -48,7 +48,7 @@
                 <th scope="col">Subrace</th>
                 <th scope="col">Class</th>
                 <th scope="col">Background</th>
-                <th scope="col">Notes</th>
+                @* <th scope="col">Notes</th> *@
                 <th scope="col">Actions</th>
             </thead>
             <tbody>
@@ -56,14 +56,14 @@
                 @foreach(NewCharacter character in Model.Characters)
                 {
                     <tr>
-                        <td>Name</td>
+                        <td>@character.playerName</td>
                         <td>@character.Level</td>
                         <td>@character.playerRace.Race</td>
                         <td>@character.playerRace.Subrace</td>
                         <td>@character.playerClass.ClassName</td>
                         <td>@character.playerBG.Background</td>
-                        <td>Hover to see note</td>
-                        <td><a href="/view/@character.CharacterId">View</a> | <a href="#">Delete</a></td>
+                        @* <td>Hover to see note</td> *@
+                        <td><a href="/view/@character.CharacterId">View</a> | <a href="/delete/@character.CharacterId">Delete</a></td>
                     </tr>
                 }
             </tbody>

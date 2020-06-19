@@ -150,7 +150,7 @@ namespace CharacterGenerator.Controllers
             // Get list of all Currently generated characters
             List<NewCharacter> CharacterList = _context.NewCharacter.ToList();
             // select random character and gather all stats, BG, Race and class
-            // random selection ight need tweaking
+            // random selection might need tweaking
             int characterNum = 1;
             NewCharacter character = _context.NewCharacter.Include( c => c.playerRace).Include( c => c.playerClass).Include(c => c.playerStat).Include(c => c.playerBG).FirstOrDefault( c => c.CharacterId == characterNum);
             // LINQ query all Feature Associations
@@ -352,7 +352,7 @@ namespace CharacterGenerator.Controllers
         }
 
         [HttpGet("/update/{characterId}/{name}/{notes}")]
-        public IActionResult Update(int characterId, string name, string notes)
+        public IActionResult UpdateNote(int characterId, string name, string notes)
         {
             // User Check to make sure login is completed, if not theredirect to login
             int? SessionId = HttpContext.Session.GetInt32("UserId");
@@ -370,8 +370,8 @@ namespace CharacterGenerator.Controllers
             return RedirectToAction("ViewCharacter",new {ID = characterId});
         }
 
-        [HttpGet("/Race:{selectedrace}/Class:{selectedclassname}/Level:{selectedlevel}")]
-        public IActionResult SpecificGeneration(string selectedrace, string selectedclassname, int selectedlevel)
+        [HttpGet("/specific")]
+        public IActionResult SpecificGeneration(string selectedrace, string selectedclass, string selectedlevel)
         {
             AutoDelete();
             int? SessionId = HttpContext.Session.GetInt32("UserId");
@@ -379,15 +379,12 @@ namespace CharacterGenerator.Controllers
             if(SessionUser == null){
                 return View("UserLogin");
             }
-            int Level = 0;
-            if (selectedlevel == 0) //Assign the base choice value as == 0
+            int Level = Int32.Parse(selectedlevel);
+            
+            if (Level == 0) //Assign the base choice value as == 0
                 {
                     Random rand = new Random();
                     Level = rand.Next(1,21);
-                }
-            else
-                {
-                    Level = selectedlevel;
                 }
             //creating input for creation and modification of base in other functions
             PlayerStat playerStat = new PlayerStat(Level);
@@ -412,9 +409,9 @@ namespace CharacterGenerator.Controllers
                 }
             PlayerClass playerClass = new PlayerClass(Level, playerStat);
             // Returns player Stat VVV
-            if (selectedclassname != "Random")
+            if (selectedclass != "Random")
                 {
-                    playerClass.SpecClassSelector(Level, playerStat, playerClass, selectedclassname);
+                    playerClass.SpecClassSelector(Level, playerStat, playerClass, selectedclass);
                 }
             else
                 {
@@ -441,14 +438,14 @@ namespace CharacterGenerator.Controllers
                 _context.SaveChanges();
             }
 
-            List<Feature> Feats = _context.NewCharacter //Starting Construction from the character side
-                        .Include(c => c.FeaturesList) // Including The Association Table List in construction
-                        .ThenInclude(fa => fa.FeatureA) //Including items within the Association Table
-                        .FirstOrDefault(c => c.CharacterId == newPlayer.CharacterId) // Selecting the character themselves
-                        .FeaturesList.Select(f => f.FeatureA) // Selecting the Feats
-                        .OrderBy(f => f.FeatLevel) // Ascending order for Feats
+            List<Feature> Feats = _context.NewCharacter.Include(c => c.FeaturesList) 
+                        .ThenInclude(fa => fa.FeatureA) 
+                        .FirstOrDefault(c => c.CharacterId == newPlayer.CharacterId) 
+                        .FeaturesList.Select(f => f.FeatureA)
+                        .OrderBy(f => f.FeatLevel)
                         .ToList();
-            
+
+
             List<Spell> ClassAvailbleSpells = _context.Spells.Where(s => 
                               s.Source1 == newPlayer.playerClass.ClassName
                             ||s.Source2 == newPlayer.playerClass.ClassName
@@ -505,7 +502,7 @@ namespace CharacterGenerator.Controllers
 
         public void AutoDelete()
         {
-            NewCharacter CharToDelete = _context.NewCharacter.FirstOrDefault(ctd => ctd.isSaved == false && ctd.CreatedAt < DateTime.Now.AddMinutes(-1));
+            NewCharacter CharToDelete = _context.NewCharacter.FirstOrDefault(ctd => ctd.isSaved == false && ctd.CreatedAt < DateTime.Now.AddHours(-24));
             if (CharToDelete != null)
                 {
                 //Need to unravel the new character object and delete the character objects connected to it
@@ -536,6 +533,38 @@ namespace CharacterGenerator.Controllers
 
                 _context.NewCharacter.Remove(CharToDelete);
                 }
+        }
+
+        [HttpGet("/delete/{characterid}")]
+        public IActionResult deleteChar(int characterid)
+        {
+            NewCharacter CharToDelete = _context.NewCharacter.FirstOrDefault(ctd => ctd.CharacterId == characterid);
+            if (CharToDelete != null)
+                {
+                List<SpellAssoc> SpellsAssocToDelete = _context.Spell_Associations.Where(sa => sa.CharacterId == CharToDelete.CharacterId).ToList();
+                    foreach (SpellAssoc sa in SpellsAssocToDelete)
+                    {
+                        _context.Spell_Associations.Remove(sa);
+                    }
+                List<FeatureAssoc> FeatAssocToDelete = _context.Feature_Associations.Where(fa => fa.CharacterId == CharToDelete.CharacterId).ToList();
+                    foreach (FeatureAssoc fa in FeatAssocToDelete)
+                    {
+                        _context.Feature_Associations.Remove(fa);
+                    }
+                PlayerClass PClassToDelete = _context.PlayerClasses.FirstOrDefault(pc => pc.PlayerClassId == CharToDelete.playerClassId);
+                    _context.PlayerClasses.Remove(PClassToDelete);
+                PlayerRace PRaceToDelete = _context.PlayerRaces.FirstOrDefault(pr => pr.PlayerRaceId == CharToDelete.playerRaceId);
+                    _context.PlayerRaces.Remove(PRaceToDelete);
+                PlayerStat PStatToDelete = _context.PlayerStats.FirstOrDefault(ps => ps.PlayerStatId == CharToDelete.playerStatId);
+                    _context.PlayerStats.Remove(PStatToDelete);
+                PlayerBG PGBToDelete = _context.PlayerBGs.FirstOrDefault(pbg => pbg.PlayerBGId == CharToDelete.playerBGId);
+                    _context.PlayerBGs.Remove(PGBToDelete);
+
+                _context.NewCharacter.Remove(CharToDelete);
+                }
+                _context.SaveChanges();
+            int? SessionId = HttpContext.Session.GetInt32("UserId");
+            return RedirectToAction("Profile", new {ID = SessionId});
         }
         
         // ===================

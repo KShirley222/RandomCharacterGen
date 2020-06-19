@@ -811,7 +811,7 @@ namespace CharacterGenerator.Models
                         break;
 
                     case 1:
-                        int randruid = rand.Next(0,8);
+                        int randruid = rand.Next(0,9);
                         switch(randruid)
                         {
                             case 0:

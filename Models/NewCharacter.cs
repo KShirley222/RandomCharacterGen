@@ -22,7 +22,7 @@ namespace CharacterGenerator.Models
         public List<SpellAssoc> SpellList { get; set; }
         public List<FeatureAssoc> FeaturesList { get; set; }
         public int Level { get; set; }
-        public string playerNotes { get; set; } = "Notes";
+        public string playerNotes { get; set; } = "";
         public string playerName { get; set; } ="Name";
         public bool isSaved {get; set;} = false;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
@@ -52,6 +52,8 @@ namespace CharacterGenerator.Models
             playerClassId = playerClass.PlayerClassId;
 
             playerStat.UpdatePro(playerStat);
+            playerName = "Name";
+            playerNotes = "";
         }
         public NewCharacter(int level, PlayerStat pStat,  PlayerRace pRace, PlayerClass pClass, PlayerBG pBG, User pUser)
         {
@@ -66,7 +68,7 @@ namespace CharacterGenerator.Models
             playerBG = pBG;
             user = pUser;
             UserId = pUser.UserId;
-            playerName = "";
+            playerName = "Name";
             playerNotes = "";
             
         }
@@ -82,7 +84,8 @@ namespace CharacterGenerator.Models
             playerBGId = pBG.PlayerBGId;
             playerBG = pBG;
             UserId = 1;
-            
+            playerName = "Name";
+            playerNotes = "Notes";
         }
     }
 }
