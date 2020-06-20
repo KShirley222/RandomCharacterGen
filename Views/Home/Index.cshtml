@@ -162,15 +162,14 @@
 <div class="row welcome">
     <div class="col">
         <p class=" welcome">Welcome to our humble Character Randomizer!</p>
-        <p class=" welcome">This tool is made for creating randomized characters, from levels one to twenty. Hit Points, Spell selection, and Stat Arrays are randomly generated for your use. Register or Login to begin generating characters!</p>
+        <p class=" welcome">This tool is made for creating randomized characters, from levels one to twenty, and designed to be used in conjunction with the 5e SRD or 5th Edition Player's Handbook. Hit Points, Spell selection, and Stat Arrays are randomly generated for your use. Additional modifications to Stat Arrays from Features must be done manually. Register or Login to begin generating characters!</p>
         <br>
         <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href="https://dnd.wizards.com/articles/features/systems-reference-document-srd">Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="https://www.dndbeyond.com/">DnD Beyond</a> and purchase the materials there.</p>
-        <a class = "btn btn-primary" id="generate"  href="/GenerateNew" >Generate</a>
         <a class = "btn btn-primary" id="save" href="#">Save</a>
          <input type="hidden" id="CharacterId" name="CharacterId" value="@Model.Character.CharacterId">
     </div>
 </div>
-<div class="row">
+<div class="row" class="form-popup" id="specGen">
     <partial>@Html.Partial("SpecGenPartial")</partial>
 </div>
 
@@ -439,7 +438,7 @@
             <div class="row p-2" >
                 <div class="col-sm-6 text-center statbox">
                     <p>Speed</p>
-                    <p>@Model.Character.playerStat.Dexterity</p>
+                    <p>@Model.Character.playerRace.Speed</p>
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Dexterity Save</p>
@@ -512,6 +511,30 @@
             <h5>Features</h5>
             <div class="col-sm statbox bigbox equal">
                 <ul>
+                    @if(@Model.Character.playerRace.RacialTraits1 != null){
+                        <li>@Model.Character.playerRace.RacialTraits1</li>
+                    }
+                    @if(@Model.Character.playerRace.RacialTraits2 != null){
+                        <li>@Model.Character.playerRace.RacialTraits2</li>
+                    }
+                    @if(@Model.Character.playerRace.RacialTraits3 != null){
+                        <li>@Model.Character.playerRace.RacialTraits3</li>
+                    }
+                    @if(@Model.Character.playerRace.RacialTraits4 != null){
+                        <li>@Model.Character.playerRace.RacialTraits4</li>
+                    }
+                    @if(@Model.Character.playerRace.RacialTraits5 != null){
+                        <li>@Model.Character.playerRace.RacialTraits5</li>
+                    }
+                    @if(@Model.Character.playerRace.SubRacialTraits1 != null){
+                        <li>@Model.Character.playerRace.SubRacialTraits1</li>
+                    }
+                    @if(@Model.Character.playerRace.SubRacialTraits2 != null){
+                        <li>@Model.Character.playerRace.SubRacialTraits2</li>
+                    }
+                    @if(@Model.Character.playerRace.SubRacialTraits3 != null){
+                        <li>@Model.Character.playerRace.SubRacialTraits3</li>
+                    }
                     @foreach(Feature feat in Model.Features)
                     {
                     <li>@feat.FeatureName</li>
@@ -625,6 +648,5 @@
         }
         document.getElementById('save').setAttribute("href", `/update/${id}/${name}/${notes}`);
         }
-
 </script>
 

@@ -226,12 +226,6 @@ namespace CharacterGenerator.Controllers
             // reruns numbers based on updated proficiencies and skill increases
             playerStat.UpdatePro(playerStat);
 
-            //***Investigated PlayerClass and PlayerRace, for some reason the Hill Dwarf Subrace Trait, Dwarven Toughness was not being applied correctly, this is overt but should amend the issue.
-            if(playerRace.Subrace == "Hill")
-                {
-                    playerStat.HitPoints += Level;
-                }
-
             // create connection to all character objects within the character
             NewCharacter newPlayer = new NewCharacter(Level, playerStat,playerRace,playerClass, playerBG, SessionUser);
 
@@ -423,12 +417,6 @@ namespace CharacterGenerator.Controllers
                 }
             // reruns numbers based on updated proficiencies and skill increases
             playerStat.UpdatePro(playerStat);
-
-            //* Copied from /GenerateNew with similar reasoning to the comment. Dwarven Toughness isn't being applied correctly.
-            if(playerRace.Subrace == "Hill")
-                {
-                    playerStat.HitPoints += Level;
-                }
 
             // create connection to all character objects within the character
             NewCharacter newPlayer = new NewCharacter(Level, playerStat,playerRace,playerClass, playerBG, SessionUser);
