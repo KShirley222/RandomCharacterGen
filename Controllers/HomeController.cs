@@ -167,6 +167,7 @@ namespace CharacterGenerator.Controllers
                 .FirstOrDefault(c => c.CharacterId == character.CharacterId)
                 .SpellList.Select(s => s.SpellA)
                 .OrderBy(f => f.SpellLevel)
+                .ThenBy(f => f.SpellName)
                 .ToList();
 
             // Pass Model User, Character, Feats
@@ -291,6 +292,7 @@ namespace CharacterGenerator.Controllers
                 .FirstOrDefault(c => c.CharacterId == newPlayer.CharacterId)
                 .SpellList.Select(s => s.SpellA)
                 .OrderBy(f => f.SpellLevel)
+                .ThenBy(f => f.SpellName)
                 .ToList();
 
             _context.SaveChanges();
@@ -481,6 +483,7 @@ namespace CharacterGenerator.Controllers
                 .FirstOrDefault(c => c.CharacterId == newPlayer.CharacterId)
                 .SpellList.Select(s => s.SpellA)
                 .OrderBy(f => f.SpellLevel)
+                .ThenBy(f => f.SpellName)
                 .ToList();
 
             _context.SaveChanges();
@@ -500,7 +503,7 @@ namespace CharacterGenerator.Controllers
 
         public void AutoDelete()
         {
-            NewCharacter CharToDelete = _context.NewCharacter.FirstOrDefault(ctd => ctd.isSaved == false && ctd.CreatedAt < DateTime.Now.AddHours(-24));
+            NewCharacter CharToDelete = _context.NewCharacter.FirstOrDefault(ctd => ctd.isSaved == false && ctd.CreatedAt < DateTime.Now.AddHours(-6));
             if (CharToDelete != null)
                 {
                 //Need to unravel the new character object and delete the character objects connected to it

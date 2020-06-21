@@ -161,6 +161,7 @@ namespace CharacterGenerator.Models
                             }
                 }
             }
+            pClass.ASI = ASILevel.Count;
             return Stats;
         }
 
@@ -798,7 +799,7 @@ namespace CharacterGenerator.Models
                         break;
 
                     case 1:
-                        int randruid = rand.Next(0,9);
+                        int randruid = rand.Next(0,7);
                         switch(randruid)
                         {
                             case 0:
@@ -819,10 +820,10 @@ namespace CharacterGenerator.Models
                             case 5:
                                 pc.SubClassName = "Circle of the Land: Mountain";
                                 break;
-                            case 7:
+                            case 6:
                                 pc.SubClassName = "Circle of the Land: Swamp";
                                 break;
-                            case 8:
+                            case 7:
                                 pc.SubClassName = "Circle of the Land: Underdark";
                                 break;
                         }

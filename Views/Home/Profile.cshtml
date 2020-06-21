@@ -36,6 +36,8 @@
 </div>
 
 <p>Welcome @Model.User.UserName!</p>
+<br>
+<p>Characters that are <b>Not Saved</b> after generation have a time limit of 6 Hours from creation before they are marked for deletion.</p>
 
 
 <div class="row">
@@ -50,6 +52,7 @@
                 <th scope="col">Background</th>
                 @* <th scope="col">Notes</th> *@
                 <th scope="col">Actions</th>
+                <th scope="col">Saved?</th>
             </thead>
             <tbody>
 
@@ -64,6 +67,7 @@
                         <td>@character.playerBG.Background</td>
                         @* <td>Hover to see note</td> *@
                         <td><a href="/view/@character.CharacterId">View</a> | <a href="/delete/@character.CharacterId">Delete</a></td>
+                        <td>@if(character.isSaved){<b>Saved</b>}else{<p>Not Saved</p>}</td>
                     </tr>
                 }
             </tbody>

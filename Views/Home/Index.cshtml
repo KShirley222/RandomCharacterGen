@@ -101,6 +101,19 @@
         padding-left: 10%;
         padding-right: 10%;
     }
+    .statboxSpell{
+        border: 2px solid black; 
+        background: white; 
+        border-radius:5px;  
+    }
+    .bigboxSpell{
+        border: 2px solid black; 
+        background: white; 
+        border-radius:5px;  
+        padding-top: 3%;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
     #featbox{
         border: 2px solid black; 
         background: white; 
@@ -165,11 +178,10 @@
         <p class=" welcome">This tool is made for creating randomized characters, from levels one to twenty, and designed to be used in conjunction with the 5e SRD or 5th Edition Player's Handbook. Hit Points, Spell selection, and Stat Arrays are randomly generated for your use. Additional modifications to Stat Arrays from Features must be done manually. Register or Login to begin generating characters!</p>
         <br>
         <p class=" welcome">This Randomizer tool is made by fans, for fans, using references to the <a href="https://dnd.wizards.com/articles/features/systems-reference-document-srd">Standard Reference Document 5.1</a>. If you're interested in additional options not found in the Standard Reference Document, please buy a copy of the 5th Edition Player's Handbook or use <a href="https://www.dndbeyond.com/">DnD Beyond</a> and purchase the materials there.</p>
-        <a class = "btn btn-primary" id="save" href="#">Save</a>
          <input type="hidden" id="CharacterId" name="CharacterId" value="@Model.Character.CharacterId">
     </div>
 </div>
-<div class="row" class="form-popup" id="specGen">
+<div class="row justify-content-center" class="form-popup" id="specGen">
     <partial>@Html.Partial("SpecGenPartial")</partial>
 </div>
 
@@ -180,7 +192,7 @@
         <h5 class="col-sm-6 col-md-3 text-center  charBase" >Name: <input type="text" id ="CharacterName" name="CharacterName" value="@Model.Character.playerName"></h5>
         <h5 class="col-sm-6 col-md-2 text-center  charBase" >Class: @Model.Character.playerClass.ClassName / @Model.Character.playerClass.SubClassName</h5>
         <h5 class="col-sm-6 col-md-2 text-center  charBase" >Race: @if(@Model.Character.playerRace.Subrace != null){@Model.Character.playerRace.Subrace} @Model.Character.playerRace.Race </h5>
-        <h5 class="col-sm-6 col-md-3 text-center  charBase" >Background:@Model.Character.playerBG.Background</h5>
+        <h5 class="col-sm-6 col-md-3 text-center  charBase" >Background: @Model.Character.playerBG.Background</h5>
         <h5 class="col-sm-6 col-md-2 text-center  charBase" >Level:@Model.Character.Level</h5>
     </div>
     <div class="row equal">
@@ -465,8 +477,8 @@
             </div>
             <div class="row p-2" >
                 <div class="col-sm-6 text-center statbox">
-                    <p>Iniative</p>
-                    <p>@Model.Character.playerStat.Wisdom</p>
+                    <p>Initiative Bonus</p>
+                    <p>@Model.Character.playerStat.DexMod</p>
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Wisdom Save</p>
@@ -493,8 +505,8 @@
             </div>
             <div class="row p-2" >
                 <div class="col-sm-6 text-center statbox">
-                    <p>Available Spell Slots</p>
-                    <p>???????????????</p>
+                    <p>Number of ASIs</p>
+                    <p>@Model.Character.playerClass.ASI</p>
                 </div>
                 <div class="col-sm-6 text-center statbox" >
                     <p>Intelligence Save</p>
@@ -538,61 +550,158 @@
                     @foreach(Feature feat in Model.Features)
                     {
                     <li>@feat.FeatureName</li>
+                    }   
+                    @if(@Model.Character.playerStat.LangCommon == true){
+                    <li>Speaks - Common Language</li>
+                    }
+                    @if(@Model.Character.playerStat.LangDwarvish){
+                    <li>Speaks - Dwarvish</li>
+                    }
+                    @if(@Model.Character.playerStat.LangElvish){
+                    <li>Speaks - Elvish </li>
+                    }
+                    @if(@Model.Character.playerStat.LangGiant){
+                    <li>Speaks - Giant</li>
+                    }
+                    @if(@Model.Character.playerStat.LangGnomish){
+                    <li>Speaks - Gnomish</li>
+                    }
+                    @if(@Model.Character.playerStat.LangGoblin){
+                    <li>Speaks - Goblin</li>
+                    }
+                    @if(@Model.Character.playerStat.LangHalfling){
+                    <li>Speaks - Halfling</li>
+                    }
+                    @if(@Model.Character.playerStat.LangOrcish){
+                    <li>Speaks - Orcish</li>
+                    }
+                    @if(@Model.Character.playerStat.LangAbyssal){
+                    <li>Speaks - Abyssal</li>
+                    }
+                    @if(@Model.Character.playerStat.LangCelestial){
+                    <li>Speaks - Celestial</li>
+                    }
+                    @if(@Model.Character.playerStat.LangDraconic){
+                    <li>Speaks - Draconic</li>
+                    }
+                    @if(@Model.Character.playerStat.LangDeepSpeech){
+                    <li>Speaks - Deep Speech</li>
+                    }
+                    @if(@Model.Character.playerStat.LangInfernal){
+                    <li>Speaks - Infernal</li>
+                    }
+                    @if(@Model.Character.playerStat.LangPrimordial){
+                    <li>Speaks - Primordial</li>
+                    }
+                    @if(@Model.Character.playerStat.LangSylvan){
+                    <li>Speaks - Sylvan</li>
+                    }
+                    @if(@Model.Character.playerStat.LangUndercommon){
+                    <li>Speaks - Undercommon</li>
                     }
                 </ul>
             </div>
         </div>
 
         @* Column 5 *@
-        <div class = "col-sm-12 col-md-4 text-center" style =" text-align: left; ">
-            <h5>Spells</h5>
-            <div class="col-sm statbox bigbox equal">
-                <ul class= "col-sm-8">
-                    <li style="list-style: none;"><h5>Available</h5></li>
-                    @foreach(Spell s in Model.Spells)
+        <div class = "col-sm-12 col-md-4 text-center" >
+            <h5>Spells, Cantrips - Level 4</h5>
+            <div class="col-sm statboxSpell bigboxSpell equal">
+                <table style="table-layout: auto; width: 100%">
+                    <thead>
+                        <th>Name</th>
+                        <th>Level</th>
+                        <th>Prepared</th>
+                    </thead>
+                    @foreach (Spell s in Model.Spells)
                     {
-                    <li>@s.SpellName</li> 
-                    }
-                </ul>
-                <ul class= "prepSpell col-sm-2 text-center">
-                    <li><h5>Level</h5></li>
-                    @foreach(Spell s in Model.Spells)
-                    {
-                        if(s.SpellLevel == 0){
-                            <li>Cantrip</li>
-                        }else{
-                            <li>@s.SpellLevel</li> 
-                        }
-                    }
-                </ul> 
-                <ul class="prepSpell col-sm-2 text-center">
-                    <li><h5>Prepared</h5></li>
-                        @foreach(Spell s in Model.Spells)
+                        @if(s.SpellLevel <= 4)
                         {
-                            foreach(SpellAssoc p in s.Players)
+                        <tr>
+                        <td >@s.SpellName</td>
+                        <td class="text-center">
+                            @if(s.SpellLevel == 0)
+                                {
+                                <p>Cantrip</p>
+                                }else
+                                {
+                                <p>@s.SpellLevel</p> 
+                                }
+                        </td>
+                        <td class="text-center">
+                            @foreach(SpellAssoc p in s.Players)
                             {
-                                if(p.CharacterId == Model.Character.CharacterId){
+                                if(p.CharacterId == Model.Character.CharacterId && s.SpellLevel <= 4){
                                     if(p.AlwaysPrepped == true || s.SpellLevel == 0){
-                                        <li><input name="@p.SpellA" type="checkbox" checked disabled></li>
+                                        <input name="@p.SpellA" type="checkbox" checked disabled >
                                     }
                                     else
                                     {
-                                        <li><input name="@p.SpellId" type="checkbox" value="p.SpellId"></li>
+                                        <input name="@p.SpellId" type="checkbox" value="p.SpellId">
                                     }
                                 }
                             }
+                        </td>
+                        </tr>
                         }
-                </ul> 
+                    }
+                    
+                </table>
             </div>
         </div>
 
         @* Column 6 *@
-        <div class="col-sm-12 col-md-4 text-center">
-            <h5>Notes</h5>
-                <textarea id="CharacterNotes" name="CharacterNotes" class="col-sm statbox bigbox equal">@Model.Character.playerNotes</textarea>
+         <div class = "col-sm-12 col-md-4 text-center" >
+            <h5>Spells, Level 5 - Level 9</h5>
+            <div class="col-sm statboxSpell bigboxSpell equal">
+                <table style="table-layout: auto; width: 100%">
+                    <thead>
+                        <th>Name</th>
+                        <th>Level</th>
+                        <th>Prepared</th>
+                    </thead>
+                    @foreach (Spell s in Model.Spells)
+                    {
+                        @if(s.SpellLevel > 4)
+                        {
+                        <tr>
+                        <td >@s.SpellName</td>
+                        <td class="text-center">
+                            @if(s.SpellLevel == 0)
+                                {
+                                <p>Cantrip</p>
+                                }else
+                                {
+                                <p>@s.SpellLevel</p> 
+                                }
+                        </td>
+                        <td class="text-center">
+                            @foreach(SpellAssoc p in s.Players)
+                            {
+                                if(p.CharacterId == Model.Character.CharacterId && s.SpellLevel > 4){
+                                    if(p.AlwaysPrepped == true || s.SpellLevel == 0){
+                                        <input name="@p.SpellA" type="checkbox" checked disabled >
+                                    }
+                                    else
+                                    {
+                                        <input name="@p.SpellId" type="checkbox" value="p.SpellId">
+                                    }
+                                }
+                            }
+                        </td>
+                        </tr>
+                        }
+                    }
+                    
+                </table>
+            </div>
         </div>
     </div>
     </form>
+    <br>
+    <div class = "text-center">
+    <a class = "btn btn-primary" id="save" href="#">Save</a>
+    </div>
 </div>
 
 
@@ -638,13 +747,10 @@
 
     document.getElementById("save").onclick = function(){
         var id = document.getElementById("CharacterId").value;
-        var notes = document.getElementById("CharacterNotes").value;
+        var notes = "Notes" //Changed the getElementByID, was otherwise not allowing Character name to save.
         var name = document.getElementById("CharacterName").value;
         if(name === "" || name === null){
             name = "Name";
-        }
-        if(notes === "" || notes === null){
-            notes = "Notes";
         }
         document.getElementById('save').setAttribute("href", `/update/${id}/${name}/${notes}`);
         }

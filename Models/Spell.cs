@@ -616,11 +616,9 @@ namespace CharacterGenerator.Models
                                 case "Circle of the Land: Coast":
                                     switch(j)
                                     {
-                                        case 5:
-                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Slow"));
-                                            break;
-                                        case 9:
-                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Cone of Cold"));
+                                        case 3:
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Misty Step"));
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Mirror Image"));
                                             break;
                                     }
                                     break;
@@ -629,11 +627,8 @@ namespace CharacterGenerator.Models
                                     switch(j)
                                     {
                                         case 3:
-                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Mirror Image"));
-                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Misty Step"));
-                                            break;
-                                        case 9:
-                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Cone of Cold"));
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Blur"));
+                                            availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Silence"));
                                             break;
                                     }
                                 break;
@@ -668,6 +663,9 @@ namespace CharacterGenerator.Models
                                     case "Circle of the Land: Mountain":
                                         switch(j)
                                         {
+                                            case 3:
+                                                availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Spider Climb"));
+                                                break;
                                             case 5:
                                                 availableSpells.Add(NonClassSpell.Find(s => s.SpellName == "Passwall"));
                                                 break;
@@ -1707,7 +1705,7 @@ namespace CharacterGenerator.Models
             BuildSpells.Add(new Spell(4, "Divination", Cleric));
             BuildSpells.Add(new Spell(4, "Dominate Beast", Druid, Sorcerer));
             BuildSpells.Add(new Spell(4, "Fabricate", Wizard));
-            BuildSpells.Add(new Spell(4, "Faithel Hound", Wizard));
+            BuildSpells.Add(new Spell(4, "Faithful Hound", Wizard));
             BuildSpells.Add(new Spell(4, "Fire Shield", Wizard));
             BuildSpells.Add(new Spell(4, "Freedom of Movement", Bard, Cleric, Druid, Ranger));
             BuildSpells.Add(new Spell(4, "Giant Insect", Druid));

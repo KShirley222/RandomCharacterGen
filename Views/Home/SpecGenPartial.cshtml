@@ -21,11 +21,13 @@
     }
 </style>
 <div class="container">
-    <h1 class="text-center">Specific Generation</h1>
+    <h1 class="text-center">Generate A Character</h1>
     <form action="/specific" method="get" class="form-container row">
-        <div class="form-group col row">
-            <label class="col-form-label col">Character Race</label>
-                <select name = "selectedrace" class="col">
+        <div class="form-group col-sm-1"> 
+        </div>
+        <div class="form-group col-sm-3">
+            <label class="form-label">Character Race</label>
+                <select name = "selectedrace" class="">
                     <option value = "Random"> Random </option>
                     <option value = "Dragonborn">Dragonborn </option>
                     <option value = "Dwarf"> Dwarf </option>
@@ -38,9 +40,9 @@
                     <option value = "Tiefling"> Tiefling </option>
                 </select>
         </div>
-        <div class="form-group col row">
-            <label class="col-form-label col">Character Class</label>
-                <select name = "selectedclass" class="col">
+        <div class="form-group col-sm-3">
+            <label class="form-label">Character Class</label>
+                <select name = "selectedclass" class="">
                     <option value = "Random"> Random </option>
                     <option value = "Barbarian" name="Barbarian">Barbarian </option>
                     <option value = "Bard" name="Bard"> Bard </option>
@@ -56,9 +58,9 @@
                     <option value = "Wizard"> Wizard </option>
                 </select>
         </div>
-        <div class="form-group col row">
-            <label class="col-form-label col">Level</label>
-            <select name = "selectedlevel" class="col">
+        <div class="form-group col-sm-3">
+            <label class="form-label">Character Level</label>
+            <select name = "selectedlevel" class="">
                     <option value = "0"> Random </option>
                     <option value = "1"> 1 </option>
                     <option value = "2"> 2 </option>
@@ -82,7 +84,8 @@
                     <option value = "20"> 20 </option>
                 </select>
         </div>
-        <button type="submit" class="btn btn-primary col">Generate</button>
-        @* <button type="button" class="btn btn-danger" onclick = "closeLogin()">Close</button> *@
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary">Generate</button>
+        </div>
     </form>
 </div>
